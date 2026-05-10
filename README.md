@@ -37,35 +37,6 @@ This repository focuses on:
 
 ---
 
-# 📚 Table Of Contents
-
-- [01 Fundamentals](./01-Fundamentals/01-notes.md)
-- [02 Scope & Hoisting](./02-Scope-Hoisting/01-notes.md)
-- [03 Closures](./03-Closures/01-notes.md)
-- [04 This & Binding](./04-This-And-Binding/01-notes.md)
-- [05 Execution Context](./05-Execution-Context/01-notes.md)
-- [06 Async JavaScript](./06-Async-JavaScript/01-notes.md)
-- [07 Type Coercion](./07-Type-Coercion/01-notes.md)
-- [08 Functions](./08-Functions/01-notes.md)
-- [09 Arrays & Objects](./09-Arrays-And-Objects/01-notes.md)
-- [10 Prototypes & Inheritance](./10-Prototypes-And-Inheritance/01-notes.md)
-- [11 OOP & Classes](./11-OOP-And-Classes/01-notes.md)
-- [12 ES6+ Features](./12-ES6-Plus/01-notes.md)
-- [13 DOM Manipulation](./13-DOM-Manipulation/01-notes.md)
-- [14 Event System](./14-Event-System/01-notes.md)
-- [15 Browser APIs](./15-Browser-APIs/01-notes.md)
-- [16 Storage & Caching](./16-Storage-And-Caching/01-notes.md)
-- [17 Networking](./17-Networking/01-notes.md)
-- [18 Error Handling](./18-Error-Handling/01-notes.md)
-- [19 Polyfills](./19-Polyfills/01-notes.md)
-- [20 Utility Functions](./20-Utility-Functions/01-notes.md)
-- [21 Memory Management](./21-Memory-Management/01-notes.md)
-- [22 Browser Internals](./22-Browser-Internals/01-notes.md)
-- [23 Performance Optimization](./23-Performance-Optimization/01-notes.md)
-- [24 JavaScript Security](./24-JavaScript-Security/01-notes.md)
-
----
-
 # 📚 JavaScript Topics Covered
 
 | No | Topic | Notes | Tricky Output Questions |
@@ -103,7 +74,6 @@ This repository focuses on:
 Topic/
 │
 ├── 01-notes.md
-├── 02-interview-questions.md
 └── 03-tricky-output-questions.md
 ```
 
