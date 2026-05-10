@@ -7,51 +7,50 @@
 
 # 📑 Table of Contents
 
-1. What is `this`?
-2. Why `this` Exists
-3. How `this` is Determined
-4. Global Context
-5. Function Context
-6. Method Context
-7. Object Method vs Regular Function
-8. `this` in Strict Mode
-9. `this` in Browser vs Node.js
-10. `this` inside Arrow Functions
-11. Arrow Function vs Regular Function
-12. `this` in Event Listeners
-13. `this` in Classes
-14. `this` in Constructor Functions
-15. `new` Keyword and `this`
-16. Explicit Binding
-17. Implicit Binding
-18. Default Binding
-19. Hard Binding
-20. Lexical Binding
-21. `call()`
-22. `apply()`
-23. `bind()`
-24. `call()` vs `apply()` vs `bind()`
-25. Losing `this`
-26. Nested Functions and `this`
-27. `this` in Callbacks
-28. `this` in setTimeout
-29. `this` in Object Destructuring
-30. `this` in DOM
-31. `this` with Prototype Methods
-32. `this` inside IIFE
-33. `this` in ES Modules
-34. `this` in CommonJS
-35. `super` and `this`
-36. `this` in Getter & Setter
-37. `this` in Static Methods
-38. `this` in Closures
-39. `this` in Functional Programming
-40. Interview Edge Cases
-41. Common Mistakes
-42. Best Practices
-43. Summary
+1. [What is `this`?](#1-what-is-this)
+2. [Why `this` Exists](#2-why-this-exists)
+3. [How `this` is Determined](#3-how-this-is-determined)
+4. [Global Context](#4-global-context)
+5. [Function Context](#5-function-context)
+6. [Method Context](#6-method-context)
+7. [Object Method vs Regular Function](#7-object-method-vs-regular-function)
+8. [`this` in Strict Mode](#8-this-in-strict-mode)
+9. [`this` in Browser vs Node.js](#9-this-in-browser-vs-nodejs)
+10. [`this` inside Arrow Functions](#10-this-inside-arrow-functions)
+11. [Arrow Function vs Regular Function](#11-arrow-function-vs-regular-function)
+12. [`this` in Event Listeners](#12-this-in-event-listeners)
+13. [`this` in Classes](#13-this-in-classes)
+14. [`this` in Constructor Functions](#14-this-in-constructor-functions)
+15. [`new` Keyword and `this`](#15-new-keyword-and-this)
+16. [Explicit Binding](#16-explicit-binding)
+17. [Implicit Binding](#17-implicit-binding)
+18. [Default Binding](#18-default-binding)
+19. [Hard Binding](#19-hard-binding)
+20. [Lexical Binding](#20-lexical-binding)
+21. [`call()`](#21-call)
+22. [`apply()`](#22-apply)
+23. [`bind()`](#23-bind)
+24. [`call()` vs `apply()` vs `bind()`](#24-call-vs-apply-vs-bind)
+25. [Losing `this`](#25-losing-this)
+26. [Nested Functions and `this`](#26-nested-functions-and-this)
+27. [`this` in Callbacks](#27-this-in-callbacks)
+28. [`this` in setTimeout](#28-this-in-settimeout)
+29. [`this` in Object Destructuring](#29-this-in-object-destructuring)
+30. [`this` in DOM](#30-this-in-dom)
+31. [`this` with Prototype Methods](#31-this-with-prototype-methods)
+32. [`this` inside IIFE](#32-this-inside-iife)
+33. [`this` in ES Modules](#33-this-in-es-modules)
+34. [`this` in CommonJS](#34-this-in-commonjs)
+35. [`super` and `this`](#35-super-and-this)
+36. [`this` in Getter & Setter](#36-this-in-getter--setter)
+37. [`this` in Static Methods](#37-this-in-static-methods)
+38. [`this` in Closures](#38-this-in-closures)
+39. [`this` in Functional Programming](#39-this-in-functional-programming)
+40. [Interview Edge Cases](#40-interview-edge-cases)
+41. [Common Mistakes](#41-common-mistakes)
+42. [Best Practices](#42-best-practices)
+43. [Summary](#43-summary)
 
----
 
 # 1. What is `this`?
 
