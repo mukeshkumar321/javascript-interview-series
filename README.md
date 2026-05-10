@@ -68,32 +68,32 @@ This repository focuses on:
 
 # 📚 JavaScript Topics Covered
 
-| No | Topic | Notes | Interview Questions | Tricky Outputs |
-|----|-------|-------|----------------------|----------------|
-| 01 | Fundamentals | [Notes](./01-Fundamentals/01-notes.md) | [Questions](./01-Fundamentals/02-interview-questions.md) | [Outputs](./01-Fundamentals/03-tricky-output-questions.md) |
-| 02 | Scope & Hoisting | [Notes](./02-Scope-Hoisting/01-notes.md) | [Questions](./02-Scope-Hoisting/02-interview-questions.md) | [Outputs](./02-Scope-Hoisting/03-tricky-output-questions.md) |
-| 03 | Closures | [Notes](./03-Closures/01-notes.md) | [Questions](./03-Closures/02-interview-questions.md) | [Outputs](./03-Closures/03-tricky-output-questions.md) |
-| 04 | This & Binding | [Notes](./04-This-And-Binding/01-notes.md) | [Questions](./04-This-And-Binding/02-interview-questions.md) | [Outputs](./04-This-And-Binding/03-tricky-output-questions.md) |
-| 05 | Execution Context | [Notes](./05-Execution-Context/01-notes.md) | [Questions](./05-Execution-Context/02-interview-questions.md) | [Outputs](./05-Execution-Context/03-tricky-output-questions.md) |
-| 06 | Async JavaScript | [Notes](./06-Async-JavaScript/01-notes.md) | [Questions](./06-Async-JavaScript/02-interview-questions.md) | [Outputs](./06-Async-JavaScript/03-tricky-output-questions.md) |
-| 07 | Type Coercion | [Notes](./07-Type-Coercion/01-notes.md) | [Questions](./07-Type-Coercion/02-interview-questions.md) | [Outputs](./07-Type-Coercion/03-tricky-output-questions.md) |
-| 08 | Functions | [Notes](./08-Functions/01-notes.md) | [Questions](./08-Functions/02-interview-questions.md) | [Outputs](./08-Functions/03-tricky-output-questions.md) |
-| 09 | Arrays & Objects | [Notes](./09-Arrays-And-Objects/01-notes.md) | [Questions](./09-Arrays-And-Objects/02-interview-questions.md) | [Outputs](./09-Arrays-And-Objects/03-tricky-output-questions.md) |
-| 10 | Prototypes & Inheritance | [Notes](./10-Prototypes-And-Inheritance/01-notes.md) | [Questions](./10-Prototypes-And-Inheritance/02-interview-questions.md) | [Outputs](./10-Prototypes-And-Inheritance/03-tricky-output-questions.md) |
-| 11 | OOP & Classes | [Notes](./11-OOP-And-Classes/01-notes.md) | [Questions](./11-OOP-And-Classes/02-interview-questions.md) | [Outputs](./11-OOP-And-Classes/03-tricky-output-questions.md) |
-| 12 | ES6+ Features | [Notes](./12-ES6-Plus/01-notes.md) | [Questions](./12-ES6-Plus/02-interview-questions.md) | [Outputs](./12-ES6-Plus/03-tricky-output-questions.md) |
-| 13 | DOM Manipulation | [Notes](./13-DOM-Manipulation/01-notes.md) | [Questions](./13-DOM-Manipulation/02-interview-questions.md) | [Outputs](./13-DOM-Manipulation/03-tricky-output-questions.md) |
-| 14 | Event System | [Notes](./14-Event-System/01-notes.md) | [Questions](./14-Event-System/02-interview-questions.md) | [Outputs](./14-Event-System/03-tricky-output-questions.md) |
-| 15 | Browser APIs | [Notes](./15-Browser-APIs/01-notes.md) | [Questions](./15-Browser-APIs/02-interview-questions.md) | [Outputs](./15-Browser-APIs/03-tricky-output-questions.md) |
-| 16 | Storage & Caching | [Notes](./16-Storage-And-Caching/01-notes.md) | [Questions](./16-Storage-And-Caching/02-interview-questions.md) | [Outputs](./16-Storage-And-Caching/03-tricky-output-questions.md) |
-| 17 | Networking | [Notes](./17-Networking/01-notes.md) | [Questions](./17-Networking/02-interview-questions.md) | [Outputs](./17-Networking/03-tricky-output-questions.md) |
-| 18 | Error Handling | [Notes](./18-Error-Handling/01-notes.md) | [Questions](./18-Error-Handling/02-interview-questions.md) | [Outputs](./18-Error-Handling/03-tricky-output-questions.md) |
-| 19 | Polyfills | [Notes](./19-Polyfills/01-notes.md) | [Questions](./19-Polyfills/02-interview-questions.md) | [Outputs](./19-Polyfills/03-tricky-output-questions.md) |
-| 20 | Utility Functions | [Notes](./20-Utility-Functions/01-notes.md) | [Questions](./20-Utility-Functions/02-interview-questions.md) | [Outputs](./20-Utility-Functions/03-tricky-output-questions.md) |
-| 21 | Memory Management | [Notes](./21-Memory-Management/01-notes.md) | [Questions](./21-Memory-Management/02-interview-questions.md) | [Outputs](./21-Memory-Management/03-tricky-output-questions.md) |
-| 22 | Browser Internals | [Notes](./22-Browser-Internals/01-notes.md) | [Questions](./22-Browser-Internals/02-interview-questions.md) | [Outputs](./22-Browser-Internals/03-tricky-output-questions.md) |
-| 23 | Performance Optimization | [Notes](./23-Performance-Optimization/01-notes.md) | [Questions](./23-Performance-Optimization/02-interview-questions.md) | [Outputs](./23-Performance-Optimization/03-tricky-output-questions.md) |
-| 24 | JavaScript Security | [Notes](./24-JavaScript-Security/01-notes.md) | [Questions](./24-JavaScript-Security/02-interview-questions.md) | [Outputs](./24-JavaScript-Security/03-tricky-output-questions.md) |
+| No | Topic | Notes | Tricky Output Questions |
+|----|-------|-------|--------------------------|
+| 01 | Fundamentals | [Notes](./01-Fundamentals/01-notes.md) | [Tricky Output Questions](./01-Fundamentals/03-tricky-output-questions.md) |
+| 02 | Scope & Hoisting | [Notes](./02-Scope-Hoisting/01-notes.md) | [Tricky Output Questions](./02-Scope-Hoisting/03-tricky-output-questions.md) |
+| 03 | Closures | [Notes](./03-Closures/01-notes.md) | [Tricky Output Questions](./03-Closures/03-tricky-output-questions.md) |
+| 04 | This & Binding | [Notes](./04-This-And-Binding/01-notes.md) | [Tricky Output Questions](./04-This-And-Binding/03-tricky-output-questions.md) |
+| 05 | Execution Context | [Notes](./05-Execution-Context/01-notes.md) | [Tricky Output Questions](./05-Execution-Context/03-tricky-output-questions.md) |
+| 06 | Async JavaScript | [Notes](./06-Async-JavaScript/01-notes.md) | [Tricky Output Questions](./06-Async-JavaScript/03-tricky-output-questions.md) |
+| 07 | Type Coercion | [Notes](./07-Type-Coercion/01-notes.md) | [Tricky Output Questions](./07-Type-Coercion/03-tricky-output-questions.md) |
+| 08 | Functions | [Notes](./08-Functions/01-notes.md) | [Tricky Output Questions](./08-Functions/03-tricky-output-questions.md) |
+| 09 | Arrays & Objects | [Notes](./09-Arrays-And-Objects/01-notes.md) | [Tricky Output Questions](./09-Arrays-And-Objects/03-tricky-output-questions.md) |
+| 10 | Prototypes & Inheritance | [Notes](./10-Prototypes-And-Inheritance/01-notes.md) | [Tricky Output Questions](./10-Prototypes-And-Inheritance/03-tricky-output-questions.md) |
+| 11 | OOP & Classes | [Notes](./11-OOP-And-Classes/01-notes.md) | [Tricky Output Questions](./11-OOP-And-Classes/03-tricky-output-questions.md) |
+| 12 | ES6+ Features | [Notes](./12-ES6-Plus/01-notes.md) | [Tricky Output Questions](./12-ES6-Plus/03-tricky-output-questions.md) |
+| 13 | DOM Manipulation | [Notes](./13-DOM-Manipulation/01-notes.md) | [Tricky Output Questions](./13-DOM-Manipulation/03-tricky-output-questions.md) |
+| 14 | Event System | [Notes](./14-Event-System/01-notes.md) | [Tricky Output Questions](./14-Event-System/03-tricky-output-questions.md) |
+| 15 | Browser APIs | [Notes](./15-Browser-APIs/01-notes.md) | [Tricky Output Questions](./15-Browser-APIs/03-tricky-output-questions.md) |
+| 16 | Storage & Caching | [Notes](./16-Storage-And-Caching/01-notes.md) | [Tricky Output Questions](./16-Storage-And-Caching/03-tricky-output-questions.md) |
+| 17 | Networking | [Notes](./17-Networking/01-notes.md) | [Tricky Output Questions](./17-Networking/03-tricky-output-questions.md) |
+| 18 | Error Handling | [Notes](./18-Error-Handling/01-notes.md) | [Tricky Output Questions](./18-Error-Handling/03-tricky-output-questions.md) |
+| 19 | Polyfills | [Notes](./19-Polyfills/01-notes.md) | [Tricky Output Questions](./19-Polyfills/03-tricky-output-questions.md) |
+| 20 | Utility Functions | [Notes](./20-Utility-Functions/01-notes.md) | [Tricky Output Questions](./20-Utility-Functions/03-tricky-output-questions.md) |
+| 21 | Memory Management | [Notes](./21-Memory-Management/01-notes.md) | [Tricky Output Questions](./21-Memory-Management/03-tricky-output-questions.md) |
+| 22 | Browser Internals | [Notes](./22-Browser-Internals/01-notes.md) | [Tricky Output Questions](./22-Browser-Internals/03-tricky-output-questions.md) |
+| 23 | Performance Optimization | [Notes](./23-Performance-Optimization/01-notes.md) | [Tricky Output Questions](./23-Performance-Optimization/03-tricky-output-questions.md) |
+| 24 | JavaScript Security | [Notes](./24-JavaScript-Security/01-notes.md) | [Tricky Output Questions](./24-JavaScript-Security/03-tricky-output-questions.md) |
 
 ---
 
