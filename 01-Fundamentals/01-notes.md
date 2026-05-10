@@ -1,78 +1,45 @@
 # JavaScript Fundamentals
 
-JavaScript Fundamentals are the core building blocks of the language.  
-Before learning advanced topics like closures, async programming, React, Node.js, or performance optimization, every developer should have a strong understanding of these basics.
-
-This section covers:
-
-- Variables and Data Types
-- Scope and Hoisting
-- Operators
-- Functions
-- Arrays and Objects
-- Loops and Conditions
-- Type Conversion
-- Truthy & Falsy Values
-- Equality Comparisons
-- Basic Memory Concepts
-- Execution Context Basics
+> Core JavaScript concepts every developer must understand before moving to advanced topics.
 
 ---
 
 # Table of Contents
 
-- [Why JavaScript Fundamentals Matter](#why-javascript-fundamentals-matter)
-- [JavaScript Basics](#javascript-basics)
-- [JavaScript Engine](#javascript-engine)
-- [Is JavaScript Compiled or Interpreted?](#is-javascript-compiled-or-interpreted)
-- [Strict Mode](#strict-mode)
-- [Variables in JavaScript](#variables-in-javascript)
-- [Difference Between var, let, and const](#difference-between-var-let-and-const)
-- [Data Types](#data-types)
-- [typeof Operator](#typeof-operator)
-- [Hoisting](#hoisting)
-- [Temporal Dead Zone (TDZ)](#temporal-dead-zone-tdz)
-- [Scope](#scope)
-- [Functions in JavaScript](#functions-in-javascript)
-- [Parameters vs Arguments](#parameters-vs-arguments)
-- [Operators](#operators)
-- [== vs ===](#-vs-)
-- [Truthy and Falsy Values](#truthy-and-falsy-values)
-- [Conditionals](#conditionals)
-- [Loops](#loops)
-- [Arrays](#arrays)
-- [Objects](#objects)
-- [Destructuring](#destructuring)
-- [Spread Operator](#spread-operator)
-- [Rest Operator](#rest-operator)
-- [Type Conversion](#type-conversion)
-- [null vs undefined](#null-vs-undefined)
-- [NaN](#nan)
-- [Template Literals](#template-literals)
-- [Optional Chaining](#optional-chaining)
-- [Nullish Coalescing Operator](#nullish-coalescing-operator)
-- [Execution Context](#execution-context-basic-idea)
-- [Stack and Heap Memory](#stack-and-heap-memory)
-- [Primitive vs Reference Types](#primitive-vs-reference-types)
-- [Pass by Value vs Pass by Reference](#pass-by-value-vs-pass-by-reference)
-- [Naming Conventions](#naming-conventions)
-- [Best Practices](#best-practices)
-- [Common Beginner Mistakes](#common-beginner-mistakes)
-- [Summary](#summary)
+1. [Introduction](#introduction)
+2. [What is JavaScript?](#what-is-javascript)
+3. [History of JavaScript](#history-of-javascript)
+4. [JavaScript vs ECMAScript](#javascript-vs-ecmascript)
+5. [Features of JavaScript](#features-of-javascript)
+6. [How JavaScript Runs](#how-javascript-runs)
+7. [JavaScript Engine](#javascript-engine)
+8. [Variables](#variables)
+9. [Data Types](#data-types)
+10. [Operators](#operators)
+11. [Type Conversion](#type-conversion)
+12. [Truthy and Falsy Values](#truthy-and-falsy-values)
+13. [Control Flow](#control-flow)
+14. [Functions Basics](#functions-basics)
+15. [Template Literals](#template-literals)
+16. [Comments in JavaScript](#comments-in-javascript)
+17. [Strict Mode](#strict-mode)
+18. [Conclusion](#conclusion)
 
 ---
 
-# Why JavaScript Fundamentals Matter
+# Introduction
 
-Strong fundamentals help developers:
+JavaScript is one of the most widely used programming languages in the world.
 
-- Write clean and predictable code
-- Debug issues faster
-- Understand advanced concepts easily
-- Perform better in interviews
-- Build scalable frontend and backend applications
+It is mainly used to build:
 
-Most advanced JavaScript interview questions are built on top of fundamental concepts.
+- Interactive websites
+- Web applications
+- Mobile applications
+- Backend services
+- Desktop applications
+
+JavaScript works directly inside browsers and is also used outside browsers using environments like Node.js.
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -80,22 +47,147 @@ Most advanced JavaScript interview questions are built on top of fundamental con
 
 ---
 
-# JavaScript Basics
+# What is JavaScript?
 
 JavaScript is a:
 
 - High-level programming language
-- Interpreted language
-- Single-threaded language
 - Dynamically typed language
-- Prototype-based language
+- Interpreted language
+- Lightweight scripting language
+- Multi-paradigm language
 
-JavaScript runs in:
+JavaScript allows developers to:
+
+- Add interactivity to web pages
+- Handle user events
+- Manipulate HTML and CSS
+- Communicate with servers
+- Build full-stack applications
+
+Example:
+
+```js
+console.log("Hello JavaScript");
+```
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+# History of JavaScript
+
+JavaScript was created by **Brendan Eich** in **1995**.
+
+Initial names:
+
+1. Mocha
+2. LiveScript
+3. JavaScript
+
+JavaScript was developed in just **10 days**.
+
+Later, JavaScript was standardized under:
+
+- ECMAScript (ES)
+
+Important versions:
+
+| Version | Features |
+|---|---|
+| ES5 | Strict mode, JSON support |
+| ES6 | let/const, arrow functions, classes |
+| ES7+ | async/await, optional chaining |
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+# JavaScript vs ECMAScript
+
+| JavaScript | ECMAScript |
+|---|---|
+| Programming language | Specification/standard |
+| Used by developers | Defines rules for JS |
+| Runs in browsers | Defines language features |
+
+ECMAScript defines the standard, while JavaScript is the implementation of that standard.
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+# Features of JavaScript
+
+## 1. Dynamic Typing
+
+Variable types can change during execution.
+
+```js
+let value = 10;
+
+value = "Hello";
+```
+
+---
+
+## 2. Lightweight
+
+JavaScript is designed to execute quickly inside browsers.
+
+---
+
+## 3. Cross Platform
+
+Runs on:
 
 - Browsers
-- Servers using Node.js
-- Mobile applications
+- Servers
+- Mobile devices
 - Desktop applications
+
+---
+
+## 4. Event Driven
+
+JavaScript reacts to user interactions like:
+
+- Clicks
+- Keyboard input
+- Mouse events
+
+---
+
+## 5. Interpreted Language
+
+JavaScript code executes directly without manual compilation.
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+# How JavaScript Runs
+
+When JavaScript code executes:
+
+1. Browser reads the code
+2. JavaScript engine parses the code
+3. Code gets converted into machine-readable instructions
+4. Browser executes the code
+
+Basic Flow:
+
+```text
+Code → Parse → Execute
+```
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -105,40 +197,22 @@ JavaScript runs in:
 
 # JavaScript Engine
 
-JavaScript code is executed by JavaScript engines.
+A JavaScript engine is responsible for executing JavaScript code.
 
 Popular engines:
 
-| Engine | Platform |
+| Engine | Browser |
 |---|---|
-| V8 | Chrome, Node.js |
+| V8 | Google Chrome |
 | SpiderMonkey | Firefox |
 | JavaScriptCore | Safari |
 
-The engine:
+## Responsibilities of JS Engine
 
-1. Parses code
-2. Compiles code
-3. Executes code
-4. Performs memory management
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Is JavaScript Compiled or Interpreted?
-
-JavaScript is technically both compiled and interpreted.
-
-Modern JavaScript engines:
-
-1. Parse the code
-2. Compile it into machine code using Just-In-Time (JIT) compilation
-3. Execute it immediately
-
-This improves performance significantly.
+- Parsing code
+- Optimizing code
+- Executing code
+- Managing memory
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -146,50 +220,49 @@ This improves performance significantly.
 
 ---
 
-# Strict Mode
+# Variables
 
-Strict mode helps write safer JavaScript.
+Variables store data values.
+
+JavaScript provides three keywords:
+
+| Keyword | Scope | Reassign | Redeclare |
+|---|---|---|---|
+| var | Function | Yes | Yes |
+| let | Block | Yes | No |
+| const | Block | No | No |
+
+Examples:
 
 ```js
-"use strict";
-```
+var city = "Mumbai";
 
-Benefits:
-
-- Prevents accidental global variables
-- Throws more errors
-- Improves code quality
-- Makes debugging easier
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Variables in JavaScript
-
-Variables are used to store data.
-
-JavaScript provides 3 ways to declare variables:
-
-```js
-var name = "John";
 let age = 25;
+
 const country = "India";
 ```
 
----
+## Naming Rules
 
-# Difference Between var, let, and const
+- Cannot start with numbers
+- Cannot use reserved keywords
+- Case-sensitive
+- Can contain `_` and `$`
 
-| Feature | var | let | const |
-|---|---|---|---|
-| Scope | Function Scoped | Block Scoped | Block Scoped |
-| Re-declaration | Allowed | Not Allowed | Not Allowed |
-| Re-assignment | Allowed | Allowed | Not Allowed |
-| Hoisted | Yes | Yes (TDZ) | Yes (TDZ) |
-| Preferred Usage | Avoid | Use | Use by default |
+Valid:
+
+```js
+let userName;
+let $price;
+let _count;
+```
+
+Invalid:
+
+```js
+let 1name;
+let var;
+```
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -199,44 +272,35 @@ const country = "India";
 
 # Data Types
 
-JavaScript has two categories of data types.
+JavaScript data types are divided into two categories.
 
 ## Primitive Data Types
 
-These are immutable values.
+- String
+- Number
+- Boolean
+- Undefined
+- Null
+- Symbol
+- BigInt
+
+Examples:
 
 ```js
-String
-Number
-Boolean
-Undefined
-Null
-BigInt
-Symbol
-```
+let name = "John";
 
-Example:
+let age = 25;
 
-```js
-const name = "JavaScript";
-const age = 25;
-const isDeveloper = true;
+let isAdmin = true;
 ```
 
 ---
 
 ## Non-Primitive Data Types
 
-These are reference types.
-
-```js
-Object
-Array
-Function
-Date
-Map
-Set
-```
+- Object
+- Array
+- Function
 
 Example:
 
@@ -247,186 +311,19 @@ const user = {
 };
 ```
 
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
 ---
 
-# typeof Operator
+## typeof Operator
 
-Used to check data type.
+Used to check data types.
 
 ```js
 typeof "Hello"; // string
+
 typeof 10; // number
+
 typeof true; // boolean
-typeof undefined; // undefined
-typeof null; // object (historical bug)
-typeof {}; // object
-typeof []; // object
 ```
-
-To properly check arrays:
-
-```js
-Array.isArray([]); // true
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Hoisting
-
-Hoisting is JavaScript's default behavior of moving declarations to the top of their scope during compilation.
-
-Example:
-
-```js
-console.log(a);
-
-var a = 10;
-```
-
-Internally behaves like:
-
-```js
-var a;
-
-console.log(a);
-
-a = 10;
-```
-
-Output:
-
-```js
-undefined
-```
-
----
-
-# Temporal Dead Zone (TDZ)
-
-Variables declared with `let` and `const` exist in a Temporal Dead Zone until initialization.
-
-```js
-console.log(a);
-
-let a = 10;
-```
-
-Output:
-
-```js
-ReferenceError
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Scope
-
-Scope determines where variables can be accessed.
-
-## Global Scope
-
-```js
-const name = "John";
-```
-
-Accessible everywhere.
-
----
-
-## Function Scope
-
-```js
-function test() {
-  var age = 20;
-}
-```
-
-Accessible only inside function.
-
----
-
-## Block Scope
-
-```js
-{
-  let city = "Mumbai";
-}
-```
-
-Accessible only inside block.
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Functions in JavaScript
-
-Functions are reusable blocks of code.
-
-## Function Declaration
-
-```js
-function greet() {
-  return "Hello";
-}
-```
-
----
-
-## Function Expression
-
-```js
-const greet = function () {
-  return "Hello";
-};
-```
-
----
-
-## Arrow Function
-
-```js
-const greet = () => {
-  return "Hello";
-};
-```
-
-Short version:
-
-```js
-const greet = () => "Hello";
-```
-
----
-
-# Parameters vs Arguments
-
-```js
-function add(a, b) {
-  return a + b;
-}
-
-add(10, 20);
-```
-
-| Term | Value |
-|---|---|
-| Parameters | a, b |
-| Arguments | 10, 20 |
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -435,6 +332,8 @@ add(10, 20);
 ---
 
 # Operators
+
+Operators perform operations on values.
 
 ## Arithmetic Operators
 
@@ -447,19 +346,31 @@ add(10, 20);
 **
 ```
 
+Example:
+
+```js
+console.log(10 + 5);
+```
+
 ---
 
 ## Comparison Operators
 
 ```js
->
-<
->=
-<=
 ==
 ===
 !=
 !==
+>
+<
+>=
+<=
+```
+
+Example:
+
+```js
+console.log(10 === 10);
 ```
 
 ---
@@ -472,33 +383,63 @@ add(10, 20);
 !
 ```
 
+Example:
+
+```js
+console.log(true && false);
+```
+
+---
+
+## Assignment Operators
+
+```js
+=
++=
+-=
+*=
+/=
+```
+
+Example:
+
+```js
+let x = 10;
+
+x += 5;
+```
+
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
 </p>
 
 ---
 
-# == vs ===
+# Type Conversion
 
-## Double Equals (`==`)
+JavaScript automatically or manually converts data types.
 
-Performs type conversion before comparison.
+## Implicit Conversion
+
+Automatic conversion by JavaScript.
 
 ```js
-5 == "5"; // true
+"5" + 1; // "51"
 ```
 
 ---
 
-## Triple Equals (`===`)
+## Explicit Conversion
 
-Checks both value and type.
+Manual conversion by developers.
 
 ```js
-5 === "5"; // false
-```
+Number("10");
 
-Always prefer `===`.
+String(100);
+
+Boolean(1);
+```
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -508,9 +449,9 @@ Always prefer `===`.
 
 # Truthy and Falsy Values
 
-## Falsy Values
+Values that become `false` in boolean context are called falsy values.
 
-Only these values are falsy:
+## Falsy Values
 
 ```js
 false
@@ -528,7 +469,7 @@ Everything else is truthy.
 Example:
 
 ```js
-if ("hello") {
+if ("Hello") {
   console.log("Truthy");
 }
 ```
@@ -539,21 +480,15 @@ if ("hello") {
 
 ---
 
-# Conditionals
+# Control Flow
 
-## if Statement
+Control flow determines program execution order.
 
-```js
-if (age >= 18) {
-  console.log("Adult");
-}
-```
-
----
-
-## if...else
+## if else
 
 ```js
+let age = 18;
+
 if (age >= 18) {
   console.log("Adult");
 } else {
@@ -563,21 +498,26 @@ if (age >= 18) {
 
 ---
 
-## Ternary Operator
+## switch
 
 ```js
-const result = age >= 18 ? "Adult" : "Minor";
-```
+let day = 1;
 
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
+switch (day) {
+  case 1:
+    console.log("Monday");
+    break;
+
+  default:
+    console.log("Invalid");
+}
+```
 
 ---
 
-# Loops
+## Loops
 
-## for Loop
+### for Loop
 
 ```js
 for (let i = 0; i < 5; i++) {
@@ -585,9 +525,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
----
-
-## while Loop
+### while Loop
 
 ```js
 let i = 0;
@@ -598,235 +536,56 @@ while (i < 5) {
 }
 ```
 
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
 ---
 
-## for...of
+# Functions Basics
 
-Used for iterable values.
+Functions are reusable blocks of code.
+
+## Function Declaration
 
 ```js
-const arr = [1, 2, 3];
-
-for (const value of arr) {
-  console.log(value);
+function greet() {
+  console.log("Hello");
 }
+
+greet();
 ```
 
 ---
 
-## for...in
-
-Used for object keys.
+## Function with Parameters
 
 ```js
-const user = {
-  name: "John",
-  age: 25
-};
-
-for (const key in user) {
-  console.log(key);
+function add(a, b) {
+  return a + b;
 }
-```
 
-Avoid using `for...in` directly on arrays because it iterates over keys.
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Arrays
-
-Arrays store multiple values.
-
-```js
-const fruits = ["Apple", "Banana", "Mango"];
+console.log(add(2, 3));
 ```
 
 ---
 
-## Common Array Methods
+## Function Expression
 
 ```js
-push()
-pop()
-shift()
-unshift()
-map()
-filter()
-find()
-reduce()
-slice()
-splice()
-```
-
-Example:
-
-```js
-const numbers = [1, 2, 3];
-
-const doubled = numbers.map(num => num * 2);
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Objects
-
-Objects store data in key-value pairs.
-
-```js
-const user = {
-  name: "John",
-  age: 25
+const greet = function () {
+  console.log("Hello");
 };
 ```
 
-Access values:
-
-```js
-user.name;
-user["age"];
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
 ---
 
-# Destructuring
-
-## Array Destructuring
+## Arrow Function
 
 ```js
-const [a, b] = [1, 2];
-```
-
----
-
-## Object Destructuring
-
-```js
-const user = {
-  name: "John",
-  age: 25
+const greet = () => {
+  console.log("Hello");
 };
-
-const { name, age } = user;
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Spread Operator
-
-```js
-const arr1 = [1, 2];
-const arr2 = [...arr1, 3, 4];
-```
-
-Objects:
-
-```js
-const user = {
-  name: "John"
-};
-
-const updatedUser = {
-  ...user,
-  age: 25
-};
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Rest Operator
-
-```js
-function sum(...numbers) {
-  return numbers.reduce((acc, curr) => acc + curr, 0);
-}
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Type Conversion
-
-## Explicit Conversion
-
-```js
-Number("10");
-String(100);
-Boolean(1);
-```
-
----
-
-## Implicit Conversion (Coercion)
-
-```js
-"5" + 1; // "51"
-"5" - 1; // 4
-true + 1; // 2
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# null vs undefined
-
-| null | undefined |
-|---|---|
-| Intentional absence of value | Variable declared but not assigned |
-| Type is object | Type is undefined |
-
-Example:
-
-```js
-let a;
-console.log(a); // undefined
-
-let b = null;
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# NaN
-
-NaN means "Not a Number".
-
-```js
-Number("Hello"); // NaN
-```
-
-Check using:
-
-```js
-Number.isNaN(value);
 ```
 
 <p align="right">
@@ -837,6 +596,10 @@ Number.isNaN(value);
 
 # Template Literals
 
+Template literals use backticks `` ` ` ``.
+
+Example:
+
 ```js
 const name = "John";
 
@@ -845,9 +608,8 @@ console.log(`Hello ${name}`);
 
 Benefits:
 
-- Multi-line strings
 - String interpolation
-- Cleaner syntax
+- Multi-line strings
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -855,33 +617,26 @@ Benefits:
 
 ---
 
-# Optional Chaining
+# Comments in JavaScript
 
-Prevents errors when accessing nested properties.
+## Single Line Comment
 
 ```js
-const user = {
-  profile: {
-    name: "John"
-  }
-};
-
-console.log(user?.profile?.name);
+// This is a comment
 ```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
 
 ---
 
-# Nullish Coalescing Operator
-
-Returns right-side value only for `null` or `undefined`.
+## Multi Line Comment
 
 ```js
-const value = null ?? "Default";
+/*
+  Multi-line
+  comment
+*/
 ```
+
+Comments improve code readability.
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
@@ -889,233 +644,50 @@ const value = null ?? "Default";
 
 ---
 
-# Execution Context (Basic Idea)
+# Strict Mode
 
-JavaScript creates an execution context to run code.
+Strict mode helps write safer JavaScript.
 
-Two major phases:
+```js
+"use strict";
+```
 
-1. Memory Creation Phase
-2. Execution Phase
+Benefits:
 
-Understanding execution context helps in:
+- Prevents accidental mistakes
+- Improves security
+- Throws better errors
 
-- Hoisting
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+# Conclusion
+
+JavaScript fundamentals are the building blocks of advanced JavaScript concepts.
+
+Strong understanding of fundamentals helps in:
+
+- Problem solving
+- Writing clean code
+- Understanding frameworks
+- Cracking interviews
+
+Practice consistently and build small projects to strengthen concepts.
+
+---
+
+# Next Topics
+
+- Scope & Hoisting
 - Closures
-- Scope Chain
-- `this` keyword
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Stack and Heap Memory
-
-## Stack Memory
-
-Stores:
-
-- Primitive values
-- Function calls
-
----
-
-## Heap Memory
-
-Stores:
-
-- Objects
-- Arrays
-- Functions
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Primitive vs Reference Types
-
-## Primitive
-
-Copied by value.
-
-```js
-let a = 10;
-let b = a;
-
-b = 20;
-
-console.log(a); // 10
-```
-
----
-
-## Reference Type
-
-Copied by reference.
-
-```js
-const obj1 = {
-  name: "John"
-};
-
-const obj2 = obj1;
-
-obj2.name = "Doe";
-
-console.log(obj1.name); // Doe
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Pass by Value vs Pass by Reference
-
-## Pass by Value
-
-Primitive values are copied independently.
-
-```js
-let a = 10;
-let b = a;
-
-b = 20;
-
-console.log(a); // 10
-```
-
----
-
-## Pass by Reference
-
-Objects are copied using references.
-
-```js
-const user1 = {
-  name: "John"
-};
-
-const user2 = user1;
-
-user2.name = "Doe";
-
-console.log(user1.name); // Doe
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Important Note About const
-
-`const` prevents reassignment, but object properties can still be modified.
-
-```js
-const user = {
-  name: "John"
-};
-
-user.name = "Doe"; // Allowed
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Naming Conventions
-
-## Variables
-
-Use camelCase.
-
-```js
-const firstName = "John";
-```
-
----
-
-## Constants
-
-Constants are often written in uppercase.
-
-```js
-const API_URL = "https://example.com";
-```
-
----
-
-## Classes
-
-Use PascalCase.
-
-```js
-class UserProfile {}
-```
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Best Practices
-
-- Prefer `const` by default
-- Use `let` when reassignment is needed
-- Avoid `var`
-- Always use `===`
-- Write small reusable functions
-- Use meaningful variable names
-- Avoid global variables
-- Keep code readable
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Common Beginner Mistakes
-
-- Using `==` instead of `===`
-- Confusing `null` and `undefined`
-- Mutating objects accidentally
-- Misunderstanding scope
-- Forgetting return statements
-- Overusing global variables
-- Ignoring async behavior
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Summary
-
-JavaScript fundamentals are the foundation of everything in JavaScript.
-
-Mastering these concepts helps in:
-
-- Frontend Development
-- React
-- Node.js
-- Backend Development
-- System Design
-- Performance Optimization
-- JavaScript Interviews
-
-A strong understanding of fundamentals makes advanced JavaScript significantly easier to learn.
+- this Keyword
+- Event Loop
+- Promises
+- Async/Await
+- Objects & Prototypes
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
