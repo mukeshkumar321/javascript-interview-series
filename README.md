@@ -41,22 +41,22 @@ Each topic generally includes:
 | 07 | Type Coercion | [Notes](./07-Type-Coercion/notes.md) | [Questions](./07-Type-Coercion/tricky-output-questions.md) |
 | 08 | Functions | [Notes](./08-Functions/notes.md) | [Questions](./08-Functions/tricky-output-questions.md) |
 | 09 | Arrays | [Notes](./09-Arrays/notes.md) | [Questions](./09-Arrays/tricky-output-questions.md) |
-| 10 | Objects | [Notes](./09-Objects/notes.md) | [Questions](./09-Objects/tricky-output-questions.md) |
-| 11 | Prototypes and Inheritance | [Notes](./10-Prototypes-And-Inheritance/notes.md) | [Questions](./10-Prototypes-And-Inheritance/tricky-output-questions.md) |
-| 12 | OOP and Classes | [Notes](./11-OOP-And-Classes/notes.md) | [Questions](./11-OOP-And-Classes/tricky-output-questions.md) |
-| 13 | ES6+ | [Notes](./12-ES6-Plus/notes.md) | [Questions](./12-ES6-Plus/tricky-output-questions.md) |
-| 14 | DOM Manipulation | [Notes](./13-DOM-Manipulation/notes.md) | [Questions](./13-DOM-Manipulation/tricky-output-questions.md) |
-| 15 | Event System | [Notes](./14-Event-System/notes.md) | [Questions](./14-Event-System/tricky-output-questions.md) |
-| 16 | Browser APIs | [Notes](./15-Browser-APIs/notes.md) | [Questions](./15-Browser-APIs/tricky-output-questions.md) |
-| 17 | Storage and Caching | [Notes](./16-Storage-And-Caching/notes.md) | [Questions](./16-Storage-And-Caching/tricky-output-questions.md) |
-| 18 | Networking | [Notes](./17-Networking/notes.md) | [Questions](./17-Networking/tricky-output-questions.md) |
-| 19 | Error Handling | [Notes](./18-Error-Handling/notes.md) | [Questions](./18-Error-Handling/tricky-output-questions.md) |
-| 20 | Polyfills | [Notes](./19-Polyfills/notes.md) | [Questions](./19-Polyfills/tricky-output-questions.md) |
-| 21 | Utility Functions | [Notes](./20-Utility-Functions/notes.md) | [Questions](./20-Utility-Functions/tricky-output-questions.md) |
-| 22 | Memory Management | [Notes](./21-Memory-Management/notes.md) | [Questions](./21-Memory-Management/tricky-output-questions.md) |
-| 23 | Browser Internals | [Notes](./22-Browser-Internals/notes.md) | [Questions](./22-Browser-Internals/tricky-output-questions.md) |
-| 24 | Performance Optimization | [Notes](./23-Performance-Optimization/notes.md) | [Questions](./23-Performance-Optimization/tricky-output-questions.md) |
-| 25 | JavaScript Security | [Notes](./24-JavaScript-Security/notes.md) | [Questions](./24-JavaScript-Security/tricky-output-questions.md) |
+| 10 | Objects | [Notes](./10-Objects/notes.md) | [Questions](./10-Objects/tricky-output-questions.md) |
+| 11 | Prototypes and Inheritance | [Notes](./11-Prototypes-And-Inheritance/notes.md) | [Questions](./11-Prototypes-And-Inheritance/tricky-output-questions.md) |
+| 12 | OOP and Classes | [Notes](./12-OOP-And-Classes/notes.md) | [Questions](./12-OOP-And-Classes/tricky-output-questions.md) |
+| 13 | ES6+ | [Notes](./13-ES6-Plus/notes.md) | [Questions](./13-ES6-Plus/tricky-output-questions.md) |
+| 14 | DOM Manipulation | [Notes](./14-DOM-Manipulation/notes.md) | [Questions](./14-DOM-Manipulation/tricky-output-questions.md) |
+| 15 | Event System | [Notes](./15-Event-System/notes.md) | [Questions](./15-Event-System/tricky-output-questions.md) |
+| 16 | Browser APIs | [Notes](./16-Browser-APIs/notes.md) | [Questions](./16-Browser-APIs/tricky-output-questions.md) |
+| 17 | Storage and Caching | [Notes](./17-Storage-And-Caching/notes.md) | [Questions](./17-Storage-And-Caching/tricky-output-questions.md) |
+| 18 | Networking | [Notes](./18-Networking/notes.md) | [Questions](./18-Networking/tricky-output-questions.md) |
+| 19 | Error Handling | [Notes](./19-Error-Handling/notes.md) | [Questions](./19-Error-Handling/tricky-output-questions.md) |
+| 20 | Polyfills | [Notes](./20-Polyfills/notes.md) | [Questions](./20-Polyfills/tricky-output-questions.md) |
+| 21 | Utility Functions | [Notes](./21-Utility-Functions/notes.md) | [Questions](./21-Utility-Functions/tricky-output-questions.md) |
+| 22 | Memory Management | [Notes](./22-Memory-Management/notes.md) | [Questions](./22-Memory-Management/tricky-output-questions.md) |
+| 23 | Browser Internals | [Notes](./23-Browser-Internals/notes.md) | [Questions](./23-Browser-Internals/tricky-output-questions.md) |
+| 24 | Performance Optimization | [Notes](./24-Performance-Optimization/notes.md) | [Questions](./24-Performance-Optimization/tricky-output-questions.md) |
+| 25 | JavaScript Security | [Notes](./25-JavaScript-Security/notes.md) | [Questions](./25-JavaScript-Security/tricky-output-questions.md) |
 
 ## 📂 Repository Structure
 
