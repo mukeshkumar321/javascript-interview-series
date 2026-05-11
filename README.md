@@ -1,4 +1,4 @@
-# JavaScript Interview Series
+# JavaScript Interview Series 🚀
 
 JavaScript Interview Series is a structured repository for developers preparing for JavaScript interviews, frontend interviews, and web development fundamentals. It covers core JavaScript concepts, browser behavior, asynchronous programming, problem-solving patterns, and tricky output-based questions in a practical, revision-friendly format.
 
@@ -9,7 +9,7 @@ This repository is designed for:
 - Engineers revising JavaScript concepts quickly
 - Anyone looking for topic-wise JavaScript notes and tricky questions
 
-## What You Will Learn
+## 🎯 What You Will Learn
 
 - JavaScript fundamentals and execution model
 - Scope, hoisting, closures, and `this`
@@ -20,7 +20,7 @@ This repository is designed for:
 - Storage, networking, error handling, and security
 - Polyfills, utility functions, memory management, and performance optimization
 
-## Repository Content
+## ✅ Repository Content
 
 Each topic generally includes:
 
@@ -28,7 +28,7 @@ Each topic generally includes:
 - Tricky output-based JavaScript questions
 - Topic-wise organization for quick revision
 
-## Topics Covered
+## 📚 Topics Covered
 
 | No. | Topic | Notes | Tricky Output Questions |
 | --- | --- | --- | --- |
@@ -66,25 +66,25 @@ Topic/
 └── tricky-output-questions.md
 ```
 
-## How To Use This Repository
+## 🧠 How To Use This Repository
 
 1. Start with the topic notes to build or revise the concept.
 2. Move to the tricky output questions to test understanding.
 3. Practice explaining the output in your own words.
 4. Revisit weaker topics before interviews.
 
-## Why This Repository Is Useful
+## 💻 Why This Repository Is Useful
 
 - Topic-wise structure makes revision easier
 - Covers both theory and output-based practice
 - Useful for JavaScript interview preparation and frontend interview preparation
 - Suitable for self-study, daily practice, and quick revision rounds
 
-## Keywords
+## 💡Keywords
 
 JavaScript interview questions, JavaScript interview preparation, frontend interview questions, JavaScript notes, JavaScript tricky output questions, JavaScript fundamentals, event loop, closures, scope, hoisting, promises, DOM, browser internals, polyfills, performance optimization.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome. You can improve this repository by:
 
@@ -95,6 +95,6 @@ Contributions are welcome. You can improve this repository by:
 
 If you plan to contribute, keep the content concise, accurate, and interview-focused.
 
-## Support
+## ⭐ Support
 
 If you find this repository useful, consider giving it a star ⭐
