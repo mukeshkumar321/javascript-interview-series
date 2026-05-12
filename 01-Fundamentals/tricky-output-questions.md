@@ -4,7 +4,7 @@
 
 ---
 
-# Table of Contents
+## Table of Contents
 
 1. [Variables](#variables)
 2. [Data Types](#data-types)
@@ -19,11 +19,11 @@
 
 ---
 
-# Variables
+## Variables
 
 ---
 
-## 1. var Redeclaration
+### 1. var Redeclaration
 
 ```js
 var a = 10;
@@ -40,7 +40,7 @@ console.log(a);
 20
 ```
 
-### Explanation
+#### Explanation
 
 `var` allows redeclaration.
 
@@ -50,7 +50,7 @@ Second declaration overrides the first value.
 
 ---
 
-## 2. let Reassignment
+### 2. let Reassignment
 
 ```js
 let a = 10;
@@ -67,7 +67,7 @@ console.log(a);
 30
 ```
 
-### Explanation
+#### Explanation
 
 `let` allows reassignment but not redeclaration.
 
@@ -75,7 +75,7 @@ console.log(a);
 
 ---
 
-## 3. const Object Modification
+### 3. const Object Modification
 
 ```js
 const user = {
@@ -94,7 +94,7 @@ console.log(user.name);
 Sam
 ```
 
-### Explanation
+#### Explanation
 
 `const` prevents reassignment of the variable reference.
 
@@ -104,7 +104,7 @@ Object properties can still be modified.
 
 ---
 
-## 4. Undefined Variable
+### 4. Undefined Variable
 
 ```js
 let a;
@@ -119,7 +119,7 @@ console.log(a);
 undefined
 ```
 
-### Explanation
+#### Explanation
 
 Variable declared without value gets `undefined`.
 
@@ -127,11 +127,11 @@ Variable declared without value gets `undefined`.
 
 ---
 
-# Data Types
+## Data Types
 
 ---
 
-## 5. typeof null
+### 5. typeof null
 
 ```js
 console.log(typeof null);
@@ -144,7 +144,7 @@ console.log(typeof null);
 object
 ```
 
-### Explanation
+#### Explanation
 
 This is a historical JavaScript bug.
 
@@ -154,7 +154,7 @@ This is a historical JavaScript bug.
 
 ---
 
-## 6. typeof NaN
+### 6. typeof NaN
 
 ```js
 console.log(typeof NaN);
@@ -167,7 +167,7 @@ console.log(typeof NaN);
 number
 ```
 
-### Explanation
+#### Explanation
 
 `NaN` means "Not a Number" but its type is still `number`.
 
@@ -175,7 +175,7 @@ number
 
 ---
 
-## 7. Array Type
+### 7. Array Type
 
 ```js
 console.log(typeof []);
@@ -188,7 +188,7 @@ console.log(typeof []);
 object
 ```
 
-### Explanation
+#### Explanation
 
 Arrays are special kinds of objects in JavaScript.
 
@@ -196,7 +196,7 @@ Arrays are special kinds of objects in JavaScript.
 
 ---
 
-## 8. Function Type
+### 8. Function Type
 
 ```js
 console.log(typeof function () {});
@@ -209,7 +209,7 @@ console.log(typeof function () {});
 function
 ```
 
-### Explanation
+#### Explanation
 
 Functions are callable objects with special type `"function"`.
 
@@ -217,11 +217,11 @@ Functions are callable objects with special type `"function"`.
 
 ---
 
-# Type Coercion
+## Type Coercion
 
 ---
 
-## 9. String + Number
+### 9. String + Number
 
 ```js
 console.log("5" + 1);
@@ -234,7 +234,7 @@ console.log("5" + 1);
 51
 ```
 
-### Explanation
+#### Explanation
 
 `+` operator converts number into string when one operand is string.
 
@@ -242,7 +242,7 @@ console.log("5" + 1);
 
 ---
 
-## 10. String - Number
+### 10. String - Number
 
 ```js
 console.log("5" - 1);
@@ -255,7 +255,7 @@ console.log("5" - 1);
 4
 ```
 
-### Explanation
+#### Explanation
 
 `-` operator converts string into number.
 
@@ -263,7 +263,7 @@ console.log("5" - 1);
 
 ---
 
-## 11. Boolean Addition
+### 11. Boolean Addition
 
 ```js
 console.log(true + true);
@@ -276,7 +276,7 @@ console.log(true + true);
 2
 ```
 
-### Explanation
+#### Explanation
 
 `true` becomes `1`.
 
@@ -286,7 +286,7 @@ console.log(true + true);
 
 ---
 
-## 12. null Addition
+### 12. null Addition
 
 ```js
 console.log(null + 1);
@@ -299,7 +299,7 @@ console.log(null + 1);
 1
 ```
 
-### Explanation
+#### Explanation
 
 `null` converts to `0`.
 
@@ -307,7 +307,7 @@ console.log(null + 1);
 
 ---
 
-## 13. undefined Addition
+### 13. undefined Addition
 
 ```js
 console.log(undefined + 1);
@@ -320,7 +320,7 @@ console.log(undefined + 1);
 NaN
 ```
 
-### Explanation
+#### Explanation
 
 `undefined` converts to `NaN`.
 
@@ -328,7 +328,7 @@ NaN
 
 ---
 
-## 14. Empty String Addition
+### 14. Empty String Addition
 
 ```js
 console.log("" + 1 + 2);
@@ -341,7 +341,7 @@ console.log("" + 1 + 2);
 12
 ```
 
-### Explanation
+#### Explanation
 
 Left-to-right evaluation:
 
@@ -355,7 +355,7 @@ Left-to-right evaluation:
 
 ---
 
-## 15. Numeric Addition First
+### 15. Numeric Addition First
 
 ```js
 console.log(1 + 2 + "");
@@ -368,7 +368,7 @@ console.log(1 + 2 + "");
 3
 ```
 
-### Explanation
+#### Explanation
 
 ```js
 1 + 2 = 3
@@ -382,11 +382,11 @@ Console displays string `"3"`.
 
 ---
 
-# Operators
+## Operators
 
 ---
 
-## 16. Exponent Operator
+### 16. Exponent Operator
 
 ```js
 console.log(2 ** 3);
@@ -399,7 +399,7 @@ console.log(2 ** 3);
 8
 ```
 
-### Explanation
+#### Explanation
 
 `**` means power operator.
 
@@ -411,7 +411,7 @@ console.log(2 ** 3);
 
 ---
 
-## 17. Modulus Operator
+### 17. Modulus Operator
 
 ```js
 console.log(10 % 3);
@@ -424,7 +424,7 @@ console.log(10 % 3);
 1
 ```
 
-### Explanation
+#### Explanation
 
 Returns remainder after division.
 
@@ -432,7 +432,7 @@ Returns remainder after division.
 
 ---
 
-## 18. Division by Zero
+### 18. Division by Zero
 
 ```js
 console.log(10 / 0);
@@ -445,7 +445,7 @@ console.log(10 / 0);
 Infinity
 ```
 
-### Explanation
+#### Explanation
 
 JavaScript returns `Infinity` instead of error.
 
@@ -453,7 +453,7 @@ JavaScript returns `Infinity` instead of error.
 
 ---
 
-## 19. Invalid Math
+### 19. Invalid Math
 
 ```js
 console.log(0 / 0);
@@ -466,7 +466,7 @@ console.log(0 / 0);
 NaN
 ```
 
-### Explanation
+#### Explanation
 
 Result is mathematically undefined.
 
@@ -474,11 +474,11 @@ Result is mathematically undefined.
 
 ---
 
-# Truthy and Falsy
+## Truthy and Falsy
 
 ---
 
-## 20. Empty Array
+### 20. Empty Array
 
 ```js
 if ([]) {
@@ -493,7 +493,7 @@ if ([]) {
 Truthy
 ```
 
-### Explanation
+#### Explanation
 
 Empty arrays are truthy.
 
@@ -501,7 +501,7 @@ Empty arrays are truthy.
 
 ---
 
-## 21. Empty Object
+### 21. Empty Object
 
 ```js
 if ({}) {
@@ -516,7 +516,7 @@ if ({}) {
 Truthy
 ```
 
-### Explanation
+#### Explanation
 
 Empty objects are truthy.
 
@@ -524,7 +524,7 @@ Empty objects are truthy.
 
 ---
 
-## 22. Empty String
+### 22. Empty String
 
 ```js
 if ("") {
@@ -541,7 +541,7 @@ if ("") {
 Empty
 ```
 
-### Explanation
+#### Explanation
 
 Empty string is falsy.
 
@@ -549,11 +549,11 @@ Empty string is falsy.
 
 ---
 
-# Comparison Operators
+## Comparison Operators
 
 ---
 
-## 23. Loose Equality
+### 23. Loose Equality
 
 ```js
 console.log(5 == "5");
@@ -566,7 +566,7 @@ console.log(5 == "5");
 true
 ```
 
-### Explanation
+#### Explanation
 
 `==` performs type coercion.
 
@@ -574,7 +574,7 @@ true
 
 ---
 
-## 24. Strict Equality
+### 24. Strict Equality
 
 ```js
 console.log(5 === "5");
@@ -587,7 +587,7 @@ console.log(5 === "5");
 false
 ```
 
-### Explanation
+#### Explanation
 
 `===` checks both value and type.
 
@@ -595,7 +595,7 @@ false
 
 ---
 
-## 25. null vs undefined
+### 25. null vs undefined
 
 ```js
 console.log(null == undefined);
@@ -608,7 +608,7 @@ console.log(null == undefined);
 true
 ```
 
-### Explanation
+#### Explanation
 
 Special loose equality rule in JavaScript.
 
@@ -616,7 +616,7 @@ Special loose equality rule in JavaScript.
 
 ---
 
-## 26. Strict null Comparison
+### 26. Strict null Comparison
 
 ```js
 console.log(null === undefined);
@@ -629,7 +629,7 @@ console.log(null === undefined);
 false
 ```
 
-### Explanation
+#### Explanation
 
 Different data types.
 
@@ -637,7 +637,7 @@ Different data types.
 
 ---
 
-## 27. NaN Comparison
+### 27. NaN Comparison
 
 ```js
 console.log(NaN == NaN);
@@ -650,7 +650,7 @@ console.log(NaN == NaN);
 false
 ```
 
-### Explanation
+#### Explanation
 
 `NaN` is never equal to itself.
 
@@ -658,11 +658,11 @@ false
 
 ---
 
-# Functions Basics
+## Functions Basics
 
 ---
 
-## 28. Function Return
+### 28. Function Return
 
 ```js
 function test() {
@@ -679,7 +679,7 @@ console.log(test());
 undefined
 ```
 
-### Explanation
+#### Explanation
 
 Functions without return value return `undefined`.
 
@@ -687,7 +687,7 @@ Functions without return value return `undefined`.
 
 ---
 
-## 29. Missing Parameters
+### 29. Missing Parameters
 
 ```js
 function add(a, b) {
@@ -704,7 +704,7 @@ add(2);
 NaN
 ```
 
-### Explanation
+#### Explanation
 
 Missing parameter becomes `undefined`.
 
@@ -716,7 +716,7 @@ Missing parameter becomes `undefined`.
 
 ---
 
-## 30. Extra Parameters
+### 30. Extra Parameters
 
 ```js
 function greet(name) {
@@ -733,7 +733,7 @@ greet("John", "Sam");
 John
 ```
 
-### Explanation
+#### Explanation
 
 Extra arguments are ignored unless explicitly used.
 
@@ -741,11 +741,11 @@ Extra arguments are ignored unless explicitly used.
 
 ---
 
-# Control Flow
+## Control Flow
 
 ---
 
-## 31. if Condition
+### 31. if Condition
 
 ```js
 if (0) {
@@ -762,7 +762,7 @@ if (0) {
 No
 ```
 
-### Explanation
+#### Explanation
 
 `0` is falsy.
 
@@ -770,7 +770,7 @@ No
 
 ---
 
-## 32. switch Strict Comparison
+### 32. switch Strict Comparison
 
 ```js
 let value = "1";
@@ -793,7 +793,7 @@ switch (value) {
 String
 ```
 
-### Explanation
+#### Explanation
 
 `switch` uses strict comparison (`===`).
 
@@ -801,11 +801,11 @@ String
 
 ---
 
-# Loops
+## Loops
 
 ---
 
-## 33. Loop Variable
+### 33. Loop Variable
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -822,7 +822,7 @@ for (let i = 0; i < 3; i++) {
 2
 ```
 
-### Explanation
+#### Explanation
 
 Loop runs while condition is true.
 
@@ -830,7 +830,7 @@ Loop runs while condition is true.
 
 ---
 
-## 34. Infinite Loop
+### 34. Infinite Loop
 
 ```js
 for (;;) {
@@ -845,7 +845,7 @@ for (;;) {
 Infinite Loop
 ```
 
-### Explanation
+#### Explanation
 
 All conditions are omitted, so loop never stops.
 
@@ -853,11 +853,11 @@ All conditions are omitted, so loop never stops.
 
 ---
 
-# Template Literals
+## Template Literals
 
 ---
 
-## 35. Template Literal Output
+### 35. Template Literal Output
 
 ```js
 const name = "John";
@@ -872,7 +872,7 @@ console.log(`Hello ${name}`);
 Hello John
 ```
 
-### Explanation
+#### Explanation
 
 Template literals allow variable interpolation.
 
@@ -880,6 +880,6 @@ Template literals allow variable interpolation.
 
 ---
 
-# End
+## End
 
 Practice these questions multiple times to strengthen your JavaScript fundamentals.

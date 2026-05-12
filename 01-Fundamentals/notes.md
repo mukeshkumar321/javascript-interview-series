@@ -4,7 +4,7 @@
 
 ---
 
-# Table of Contents
+## Table of Contents
 
 1. [Introduction](#introduction)
 2. [What is JavaScript?](#what-is-javascript)
@@ -27,7 +27,7 @@
 
 ---
 
-# Introduction
+## Introduction
 
 JavaScript is one of the most widely used programming languages in the world.
 
@@ -47,7 +47,7 @@ JavaScript works directly inside browsers and is also used outside browsers usin
 
 ---
 
-# What is JavaScript?
+## What is JavaScript?
 
 JavaScript is a:
 
@@ -77,7 +77,7 @@ console.log("Hello JavaScript");
 
 ---
 
-# History of JavaScript
+## History of JavaScript
 
 JavaScript was created by **Brendan Eich** in **1995**.
 
@@ -107,7 +107,7 @@ Important versions:
 
 ---
 
-# JavaScript vs ECMAScript
+## JavaScript vs ECMAScript
 
 | JavaScript | ECMAScript |
 |---|---|
@@ -123,9 +123,9 @@ ECMAScript defines the standard, while JavaScript is the implementation of that 
 
 ---
 
-# Features of JavaScript
+## Features of JavaScript
 
-## 1. Dynamic Typing
+### 1. Dynamic Typing
 
 Variable types can change during execution.
 
@@ -137,13 +137,13 @@ value = "Hello";
 
 ---
 
-## 2. Lightweight
+### 2. Lightweight
 
 JavaScript is designed to execute quickly inside browsers.
 
 ---
 
-## 3. Cross Platform
+### 3. Cross Platform
 
 Runs on:
 
@@ -154,7 +154,7 @@ Runs on:
 
 ---
 
-## 4. Event Driven
+### 4. Event Driven
 
 JavaScript reacts to user interactions like:
 
@@ -164,7 +164,7 @@ JavaScript reacts to user interactions like:
 
 ---
 
-## 5. Interpreted Language
+### 5. Interpreted Language
 
 JavaScript code executes directly without manual compilation.
 
@@ -174,7 +174,7 @@ JavaScript code executes directly without manual compilation.
 
 ---
 
-# How JavaScript Runs
+## How JavaScript Runs
 
 When JavaScript code executes:
 
@@ -195,7 +195,7 @@ Code → Parse → Execute
 
 ---
 
-# JavaScript Engine
+## JavaScript Engine
 
 A JavaScript engine is responsible for executing JavaScript code.
 
@@ -207,7 +207,7 @@ Popular engines:
 | SpiderMonkey | Firefox |
 | JavaScriptCore | Safari |
 
-## Responsibilities of JS Engine
+### Responsibilities of JS Engine
 
 - Parsing code
 - Optimizing code
@@ -220,7 +220,7 @@ Popular engines:
 
 ---
 
-# Variables
+## Variables
 
 Variables store data values.
 
@@ -242,7 +242,7 @@ let age = 25;
 const country = "India";
 ```
 
-## Naming Rules
+### Naming Rules
 
 - Cannot start with numbers
 - Cannot use reserved keywords
@@ -270,11 +270,11 @@ let var;
 
 ---
 
-# Data Types
+## Data Types
 
 JavaScript data types are divided into two categories.
 
-## Primitive Data Types
+### Primitive Data Types
 
 - String
 - Number
@@ -296,7 +296,7 @@ let isAdmin = true;
 
 ---
 
-## Non-Primitive Data Types
+### Non-Primitive Data Types
 
 - Object
 - Array
@@ -313,7 +313,7 @@ const user = {
 
 ---
 
-## typeof Operator
+### typeof Operator
 
 Used to check data types.
 
@@ -331,11 +331,11 @@ typeof true; // boolean
 
 ---
 
-# Operators
+## Operators
 
 Operators perform operations on values.
 
-## Arithmetic Operators
+### Arithmetic Operators
 
 ```js
 +
@@ -354,7 +354,7 @@ console.log(10 + 5);
 
 ---
 
-## Comparison Operators
+### Comparison Operators
 
 ```js
 ==
@@ -375,7 +375,7 @@ console.log(10 === 10);
 
 ---
 
-## Logical Operators
+### Logical Operators
 
 ```js
 &&
@@ -391,7 +391,7 @@ console.log(true && false);
 
 ---
 
-## Assignment Operators
+### Assignment Operators
 
 ```js
 =
@@ -415,11 +415,11 @@ x += 5;
 
 ---
 
-# Type Conversion
+## Type Conversion
 
 JavaScript automatically or manually converts data types.
 
-## Implicit Conversion
+### Implicit Conversion
 
 Automatic conversion by JavaScript.
 
@@ -429,7 +429,7 @@ Automatic conversion by JavaScript.
 
 ---
 
-## Explicit Conversion
+### Explicit Conversion
 
 Manual conversion by developers.
 
@@ -447,11 +447,11 @@ Boolean(1);
 
 ---
 
-# Truthy and Falsy Values
+## Truthy and Falsy Values
 
 Values that become `false` in boolean context are called falsy values.
 
-## Falsy Values
+### Falsy Values
 
 ```js
 false
@@ -480,11 +480,11 @@ if ("Hello") {
 
 ---
 
-# Control Flow
+## Control Flow
 
 Control flow determines program execution order.
 
-## if else
+### if else
 
 ```js
 let age = 18;
@@ -498,7 +498,7 @@ if (age >= 18) {
 
 ---
 
-## switch
+### switch
 
 ```js
 let day = 1;
@@ -515,9 +515,9 @@ switch (day) {
 
 ---
 
-## Loops
+### Loops
 
-### for Loop
+#### for Loop
 
 ```js
 for (let i = 0; i < 5; i++) {
@@ -525,7 +525,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-### while Loop
+#### while Loop
 
 ```js
 let i = 0;
@@ -542,11 +542,11 @@ while (i < 5) {
 
 ---
 
-# Functions Basics
+## Functions Basics
 
 Functions are reusable blocks of code.
 
-## Function Declaration
+### Function Declaration
 
 ```js
 function greet() {
@@ -558,7 +558,7 @@ greet();
 
 ---
 
-## Function with Parameters
+### Function with Parameters
 
 ```js
 function add(a, b) {
@@ -570,7 +570,7 @@ console.log(add(2, 3));
 
 ---
 
-## Function Expression
+### Function Expression
 
 ```js
 const greet = function () {
@@ -580,7 +580,7 @@ const greet = function () {
 
 ---
 
-## Arrow Function
+### Arrow Function
 
 ```js
 const greet = () => {
@@ -594,7 +594,7 @@ const greet = () => {
 
 ---
 
-# Template Literals
+## Template Literals
 
 Template literals use backticks `` ` ` ``.
 
@@ -617,9 +617,9 @@ Benefits:
 
 ---
 
-# Comments in JavaScript
+## Comments in JavaScript
 
-## Single Line Comment
+### Single Line Comment
 
 ```js
 // This is a comment
@@ -627,7 +627,7 @@ Benefits:
 
 ---
 
-## Multi Line Comment
+### Multi Line Comment
 
 ```js
 /*
@@ -644,7 +644,7 @@ Comments improve code readability.
 
 ---
 
-# Strict Mode
+## Strict Mode
 
 Strict mode helps write safer JavaScript.
 
@@ -664,7 +664,7 @@ Benefits:
 
 ---
 
-# Conclusion
+## Conclusion
 
 JavaScript fundamentals are the building blocks of advanced JavaScript concepts.
 
@@ -679,7 +679,7 @@ Practice consistently and build small projects to strengthen concepts.
 
 ---
 
-# Next Topics
+## Next Topics
 
 - Scope & Hoisting
 - Closures

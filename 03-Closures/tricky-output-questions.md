@@ -6,7 +6,7 @@
 
 ---
 
-# Table of Contents
+## Table of Contents
 
 1. [Basic Closure](#1-basic-closure)
 2. [Closure with Updated Variable](#2-closure-with-updated-variable)
@@ -41,7 +41,7 @@
 
 ---
 
-# 1. Basic Closure
+## 1. Basic Closure
 
 ```js
 function outer() {
@@ -64,7 +64,7 @@ fn();
 10
 ```
 
-## Explanation
+### Explanation
 
 Returned function remembers `a`.
 
@@ -72,7 +72,7 @@ Returned function remembers `a`.
 
 ---
 
-# 2. Closure with Updated Variable
+## 2. Closure with Updated Variable
 
 ```js
 function outer() {
@@ -100,7 +100,7 @@ fn();
 3
 ```
 
-## Explanation
+### Explanation
 
 Closure keeps same variable reference.
 
@@ -108,7 +108,7 @@ Closure keeps same variable reference.
 
 ---
 
-# 3. Multiple Closures
+## 3. Multiple Closures
 
 ```js
 function test() {
@@ -143,7 +143,7 @@ dec();
 6
 ```
 
-## Explanation
+### Explanation
 
 Both closures share same `value`.
 
@@ -151,7 +151,7 @@ Both closures share same `value`.
 
 ---
 
-# 4. Closures in Loops with var
+## 4. Closures in Loops with var
 
 ```js
 for (var i = 0; i < 3; i++) {
@@ -170,7 +170,7 @@ for (var i = 0; i < 3; i++) {
 3
 ```
 
-## Explanation
+### Explanation
 
 `var` is function scoped.
 
@@ -180,7 +180,7 @@ Single shared variable.
 
 ---
 
-# 5. Closures in Loops with let
+## 5. Closures in Loops with let
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -199,7 +199,7 @@ for (let i = 0; i < 3; i++) {
 2
 ```
 
-## Explanation
+### Explanation
 
 `let` creates new binding each iteration.
 
@@ -207,7 +207,7 @@ for (let i = 0; i < 3; i++) {
 
 ---
 
-# 6. Closure with setTimeout
+## 6. Closure with setTimeout
 
 ```js
 function greet(name) {
@@ -226,7 +226,7 @@ greet("JavaScript");
 JavaScript
 ```
 
-## Explanation
+### Explanation
 
 Callback remembers `name`.
 
@@ -234,7 +234,7 @@ Callback remembers `name`.
 
 ---
 
-# 7. Closure and Parameter
+## 7. Closure and Parameter
 
 ```js
 function outer(x) {
@@ -255,7 +255,7 @@ fn(5);
 15
 ```
 
-## Explanation
+### Explanation
 
 Inner function remembers `x`.
 
@@ -263,7 +263,7 @@ Inner function remembers `x`.
 
 ---
 
-# 8. Closure Sharing Same Reference
+## 8. Closure Sharing Same Reference
 
 ```js
 function counter() {
@@ -294,7 +294,7 @@ c.log();
 2
 ```
 
-## Explanation
+### Explanation
 
 Both methods share same closure state.
 
@@ -302,7 +302,7 @@ Both methods share same closure state.
 
 ---
 
-# 9. Independent Closures
+## 9. Independent Closures
 
 ```js
 function createCounter() {
@@ -331,7 +331,7 @@ b();
 1
 ```
 
-## Explanation
+### Explanation
 
 Each function has separate closure memory.
 
@@ -339,7 +339,7 @@ Each function has separate closure memory.
 
 ---
 
-# 10. Nested Closures
+## 10. Nested Closures
 
 ```js
 function a(x) {
@@ -360,7 +360,7 @@ a(1)(2)(3);
 6
 ```
 
-## Explanation
+### Explanation
 
 Each function remembers outer variables.
 
@@ -368,7 +368,7 @@ Each function remembers outer variables.
 
 ---
 
-# 11. Closure with Global Variable
+## 11. Closure with Global Variable
 
 ```js
 let value = 100;
@@ -393,7 +393,7 @@ fn();
 200
 ```
 
-## Explanation
+### Explanation
 
 Closures store reference, not copy.
 
@@ -401,7 +401,7 @@ Closures store reference, not copy.
 
 ---
 
-# 12. Closure with Object Mutation
+## 12. Closure with Object Mutation
 
 ```js
 function outer() {
@@ -427,7 +427,7 @@ fn();
 3
 ```
 
-## Explanation
+### Explanation
 
 Object reference is preserved.
 
@@ -435,7 +435,7 @@ Object reference is preserved.
 
 ---
 
-# 13. Closure and Reassignment
+## 13. Closure and Reassignment
 
 ```js
 function outer() {
@@ -462,7 +462,7 @@ fn();
 20
 ```
 
-## Explanation
+### Explanation
 
 Closure references updated variable.
 
@@ -470,7 +470,7 @@ Closure references updated variable.
 
 ---
 
-# 14. Function Factory
+## 14. Function Factory
 
 ```js
 function multiply(x) {
@@ -491,7 +491,7 @@ double(5);
 10
 ```
 
-## Explanation
+### Explanation
 
 Closure preserves multiplier.
 
@@ -499,7 +499,7 @@ Closure preserves multiplier.
 
 ---
 
-# 15. Closure with Default Parameter
+## 15. Closure with Default Parameter
 
 ```js
 function outer(x = 5) {
@@ -520,7 +520,7 @@ fn();
 5
 ```
 
-## Explanation
+### Explanation
 
 Default parameter becomes part of closure.
 
@@ -528,7 +528,7 @@ Default parameter becomes part of closure.
 
 ---
 
-# 16. Closure and Block Scope
+## 16. Closure and Block Scope
 
 ```js
 function outer() {
@@ -553,7 +553,7 @@ fn();
 50
 ```
 
-## Explanation
+### Explanation
 
 Closure preserves block scoped variable.
 
@@ -561,7 +561,7 @@ Closure preserves block scoped variable.
 
 ---
 
-# 17. Closure with IIFE
+## 17. Closure with IIFE
 
 ```js
 const fn = (function() {
@@ -585,7 +585,7 @@ fn();
 2
 ```
 
-## Explanation
+### Explanation
 
 IIFE creates private scope.
 
@@ -593,7 +593,7 @@ IIFE creates private scope.
 
 ---
 
-# 18. Closure Inside Object
+## 18. Closure Inside Object
 
 ```js
 function test() {
@@ -618,7 +618,7 @@ obj.getSecret();
 JS
 ```
 
-## Explanation
+### Explanation
 
 Method closes over `secret`.
 
@@ -626,7 +626,7 @@ Method closes over `secret`.
 
 ---
 
-# 19. Closure and Memory Reference
+## 19. Closure and Memory Reference
 
 ```js
 function outer() {
@@ -652,7 +652,7 @@ fn();
 [1, 2, 3, 3]
 ```
 
-## Explanation
+### Explanation
 
 Same array reference is reused.
 
@@ -660,7 +660,7 @@ Same array reference is reused.
 
 ---
 
-# 20. Closure with Async Callback
+## 20. Closure with Async Callback
 
 ```js
 function test() {
@@ -683,7 +683,7 @@ test();
 20
 ```
 
-## Explanation
+### Explanation
 
 Microtask runs later after value update.
 
@@ -691,7 +691,7 @@ Microtask runs later after value update.
 
 ---
 
-# 21. Closure with var in Nested Loop
+## 21. Closure with var in Nested Loop
 
 ```js
 for (var i = 0; i < 2; i++) {
@@ -713,7 +713,7 @@ for (var i = 0; i < 2; i++) {
 2 2
 ```
 
-## Explanation
+### Explanation
 
 Both `i` and `j` are shared.
 
@@ -721,7 +721,7 @@ Both `i` and `j` are shared.
 
 ---
 
-# 22. Closure with let in Nested Loop
+## 22. Closure with let in Nested Loop
 
 ```js
 for (let i = 0; i < 2; i++) {
@@ -743,7 +743,7 @@ for (let i = 0; i < 2; i++) {
 1 1
 ```
 
-## Explanation
+### Explanation
 
 Separate bindings created.
 
@@ -751,7 +751,7 @@ Separate bindings created.
 
 ---
 
-# 23. Closure and Shadowing
+## 23. Closure and Shadowing
 
 ```js
 let x = 1;
@@ -776,7 +776,7 @@ fn();
 2
 ```
 
-## Explanation
+### Explanation
 
 Nearest scope variable is used.
 
@@ -784,7 +784,7 @@ Nearest scope variable is used.
 
 ---
 
-# 24. Closure with Returned Object
+## 24. Closure with Returned Object
 
 ```js
 function test() {
@@ -816,7 +816,7 @@ obj.print();
 2
 ```
 
-## Explanation
+### Explanation
 
 Object methods share closure state.
 
@@ -824,7 +824,7 @@ Object methods share closure state.
 
 ---
 
-# 25. Closure with Function Reassignment
+## 25. Closure with Function Reassignment
 
 ```js
 let fn;
@@ -849,7 +849,7 @@ fn();
 100
 ```
 
-## Explanation
+### Explanation
 
 Function keeps closure after reassignment.
 
@@ -857,7 +857,7 @@ Function keeps closure after reassignment.
 
 ---
 
-# 26. Closure with Delayed Mutation
+## 26. Closure with Delayed Mutation
 
 ```js
 function outer() {
@@ -886,7 +886,7 @@ setTimeout(() => {
 5
 ```
 
-## Explanation
+### Explanation
 
 Closure sees updated variable value.
 
@@ -894,7 +894,7 @@ Closure sees updated variable value.
 
 ---
 
-# 27. Closure with Array Methods
+## 27. Closure with Array Methods
 
 ```js
 function test() {
@@ -916,7 +916,7 @@ console.log(test());
 [1, 2, 3]
 ```
 
-## Explanation
+### Explanation
 
 Callback closes over `count`.
 
@@ -924,7 +924,7 @@ Callback closes over `count`.
 
 ---
 
-# 28. Closure with Private Counter
+## 28. Closure with Private Counter
 
 ```js
 function counter() {
@@ -949,7 +949,7 @@ console.log(c1());
 2
 ```
 
-## Explanation
+### Explanation
 
 Private variable persists.
 
@@ -957,7 +957,7 @@ Private variable persists.
 
 ---
 
-# 29. Closure and Shared State
+## 29. Closure and Shared State
 
 ```js
 function test() {
@@ -992,7 +992,7 @@ obj.a();
 4
 ```
 
-## Explanation
+### Explanation
 
 Methods share same closure variable.
 
@@ -1000,7 +1000,7 @@ Methods share same closure variable.
 
 ---
 
-# 30. Deep Nested Closure
+## 30. Deep Nested Closure
 
 ```js
 function a(x) {
@@ -1023,7 +1023,7 @@ a(1)(2)(3)(4);
 10
 ```
 
-## Explanation
+### Explanation
 
 Each nested function remembers outer variables.
 

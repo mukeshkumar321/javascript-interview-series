@@ -1,12 +1,6 @@
 # Scope & Hoisting in JavaScript
 
-<p align="center">
-  <img src="https://img.shields.io/badge/JavaScript-Scope%20%26%20Hoisting-yellow?style=for-the-badge&logo=javascript" alt"img"/>
-</p>
-
----
-
-# Table of Contents
+## Table of Contents
 
 1. [What is Scope?](#1-what-is-scope)
 2. [Why Scope Exists](#2-why-scope-exists)
@@ -40,7 +34,7 @@
 
 ---
 
-# 1. What is Scope?
+## 1. What is Scope?
 
 Scope determines:
 
@@ -55,7 +49,7 @@ In simple words:
 
 ---
 
-## Example
+### Example
 
 ```js
 let name = "Dilkhush";
@@ -67,7 +61,7 @@ function greet() {
 greet();
 ```
 
-## Output
+### Output
 
 ```js
 Dilkhush
@@ -81,7 +75,7 @@ Dilkhush
 
 ---
 
-# 2. Why Scope Exists
+## 2. Why Scope Exists
 
 Scope helps:
 
@@ -103,7 +97,7 @@ Everything would collide globally.
 
 ---
 
-# 3. Types of Scope
+## 3. Types of Scope
 
 JavaScript has mainly:
 
@@ -116,7 +110,7 @@ JavaScript has mainly:
 
 ---
 
-# 4. Global Scope
+## 4. Global Scope
 
 Variables declared outside all functions/blocks belong to global scope.
 
@@ -132,7 +126,7 @@ showCity();
 
 ---
 
-## Global Variables
+### Global Variables
 
 Accessible everywhere.
 
@@ -149,7 +143,7 @@ console.log(a);
 
 ---
 
-## Problem with Globals
+### Problem with Globals
 
 Too many global variables can:
 
@@ -165,7 +159,7 @@ Too many global variables can:
 
 ---
 
-# 5. Function Scope
+## 5. Function Scope
 
 Variables declared inside a function are only accessible inside that function.
 
@@ -180,7 +174,7 @@ test();
 console.log(age);
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -188,7 +182,7 @@ ReferenceError
 
 ---
 
-## var is Function Scoped
+### var is Function Scoped
 
 ```js
 function demo() {
@@ -198,7 +192,7 @@ function demo() {
 console.log(x);
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -206,7 +200,7 @@ ReferenceError
 
 ---
 
-# 6. Block Scope
+## 6. Block Scope
 
 A block means:
 
@@ -227,7 +221,7 @@ console.log(a);
 console.log(b);
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -236,7 +230,7 @@ ReferenceError
 
 ---
 
-## var ignores block scope
+### var ignores block scope
 
 ```js
 {
@@ -246,7 +240,7 @@ ReferenceError
 console.log(x);
 ```
 
-## Output
+### Output
 
 ```js
 100
@@ -254,7 +248,7 @@ console.log(x);
 
 ---
 
-## if Block
+### if Block
 
 ```js
 if (true) {
@@ -264,7 +258,7 @@ if (true) {
 console.log(message);
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -272,7 +266,7 @@ ReferenceError
 
 ---
 
-## for Loop Block Scope
+### for Loop Block Scope
 
 ```js
 for (let i = 0; i < 3; i++) {}
@@ -280,7 +274,7 @@ for (let i = 0; i < 3; i++) {}
 console.log(i);
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -288,7 +282,7 @@ ReferenceError
 
 ---
 
-# 7. Lexical Scope
+## 7. Lexical Scope
 
 Lexical means:
 
@@ -310,7 +304,7 @@ function outer() {
 outer();
 ```
 
-## Output
+### Output
 
 ```js
 10
@@ -318,7 +312,7 @@ outer();
 
 ---
 
-## Reverse is NOT possible
+### Reverse is NOT possible
 
 Outer function cannot access inner variables.
 
@@ -334,7 +328,7 @@ function outer() {
 outer();
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -342,7 +336,7 @@ ReferenceError
 
 ---
 
-# 8. Scope Chain
+## 8. Scope Chain
 
 JavaScript searches variables in order:
 
@@ -354,7 +348,7 @@ This process is called Scope Chain.
 
 ---
 
-## Example
+### Example
 
 ```js
 let globalVar = "Global";
@@ -378,7 +372,7 @@ outer();
 
 ---
 
-# 9. Nested Scope
+## 9. Nested Scope
 
 Functions inside functions create nested scope.
 
@@ -406,7 +400,7 @@ one();
 
 ---
 
-# 10. Variable Shadowing
+## 10. Variable Shadowing
 
 Inner variable hides outer variable.
 
@@ -422,7 +416,7 @@ function test() {
 test();
 ```
 
-## Output
+### Output
 
 ```js
 Local
@@ -430,7 +424,7 @@ Local
 
 ---
 
-## Shadowing Example
+### Shadowing Example
 
 ```js
 let a = 1;
@@ -451,7 +445,7 @@ demo();
 console.log(a);
 ```
 
-## Output
+### Output
 
 ```js
 3
@@ -461,7 +455,7 @@ console.log(a);
 
 ---
 
-# 11. Illegal Shadowing
+## 11. Illegal Shadowing
 
 Cannot shadow `let` with `var` in same scope.
 
@@ -473,7 +467,7 @@ let a = 10;
 }
 ```
 
-## Output
+### Output
 
 ```js
 SyntaxError
@@ -481,7 +475,7 @@ SyntaxError
 
 ---
 
-## Valid Shadowing
+### Valid Shadowing
 
 ```js
 var a = 10;
@@ -493,7 +487,7 @@ var a = 10;
 console.log(a);
 ```
 
-## Output
+### Output
 
 ```js
 10
@@ -501,7 +495,7 @@ console.log(a);
 
 ---
 
-# 12. Temporal Dead Zone (TDZ)
+## 12. Temporal Dead Zone (TDZ)
 
 TDZ is the time between:
 
@@ -512,7 +506,7 @@ Accessing variable during TDZ causes error.
 
 ---
 
-## Example
+### Example
 
 ```js
 console.log(a);
@@ -520,7 +514,7 @@ console.log(a);
 let a = 10;
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -528,13 +522,13 @@ ReferenceError
 
 ---
 
-## Why TDZ Exists
+### Why TDZ Exists
 
 To prevent accidental access before initialization.
 
 ---
 
-## const and TDZ
+### const and TDZ
 
 ```js
 console.log(pi);
@@ -542,7 +536,7 @@ console.log(pi);
 const pi = 3.14;
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -550,7 +544,7 @@ ReferenceError
 
 ---
 
-# 13. What is Hoisting?
+## 13. What is Hoisting?
 
 Hoisting means:
 
@@ -560,7 +554,7 @@ Only declarations are hoisted, not initializations.
 
 ---
 
-# 14. Hoisting with var
+## 14. Hoisting with var
 
 ```js
 console.log(a);
@@ -578,7 +572,7 @@ console.log(a);
 a = 10;
 ```
 
-## Output
+### Output
 
 ```js
 undefined
@@ -586,13 +580,13 @@ undefined
 
 ---
 
-## Important
+### Important
 
 `var` gets initialized with `undefined`.
 
 ---
 
-# 15. Hoisting with let & const
+## 15. Hoisting with let & const
 
 ```js
 console.log(a);
@@ -600,7 +594,7 @@ console.log(a);
 let a = 10;
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -608,19 +602,19 @@ ReferenceError
 
 ---
 
-## Reason
+### Reason
 
 They are hoisted but kept inside TDZ.
 
 ---
 
-## const must be initialized
+### const must be initialized
 
 ```js
 const a;
 ```
 
-## Output
+### Output
 
 ```js
 SyntaxError
@@ -628,7 +622,7 @@ SyntaxError
 
 ---
 
-# 16. Function Hoisting
+## 16. Function Hoisting
 
 Function declarations are fully hoisted.
 
@@ -640,7 +634,7 @@ function greet() {
 }
 ```
 
-## Output
+### Output
 
 ```js
 Hello
@@ -648,7 +642,7 @@ Hello
 
 ---
 
-# 17. Function Expression Hoisting
+## 17. Function Expression Hoisting
 
 ```js
 sayHi();
@@ -658,7 +652,7 @@ var sayHi = function () {
 };
 ```
 
-## Output
+### Output
 
 ```js
 TypeError
@@ -666,7 +660,7 @@ TypeError
 
 ---
 
-## Why?
+### Why?
 
 Internally:
 
@@ -680,7 +674,7 @@ sayHi();
 
 ---
 
-# 18. Arrow Function Hoisting
+## 18. Arrow Function Hoisting
 
 ```js
 hello();
@@ -690,7 +684,7 @@ const hello = () => {
 };
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -698,7 +692,7 @@ ReferenceError
 
 ---
 
-# 19. Class Hoisting
+## 19. Class Hoisting
 
 Classes are hoisted but stay in TDZ.
 
@@ -708,7 +702,7 @@ const obj = new Person();
 class Person {}
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -716,7 +710,7 @@ ReferenceError
 
 ---
 
-# 20. Hoisting Priority
+## 20. Hoisting Priority
 
 Priority order:
 
@@ -725,7 +719,7 @@ Priority order:
 
 ---
 
-## Example
+### Example
 
 ```js
 var a = 1;
@@ -737,7 +731,7 @@ function a() {
 console.log(a);
 ```
 
-## Output
+### Output
 
 ```js
 1
@@ -745,11 +739,11 @@ console.log(a);
 
 ---
 
-# 21. Scope in Loops
+## 21. Scope in Loops
 
 ---
 
-## var in loops
+### var in loops
 
 ```js
 for (var i = 0; i < 3; i++) {
@@ -759,7 +753,7 @@ for (var i = 0; i < 3; i++) {
 }
 ```
 
-## Output
+### Output
 
 ```js
 3
@@ -769,7 +763,7 @@ for (var i = 0; i < 3; i++) {
 
 ---
 
-## let in loops
+### let in loops
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -779,7 +773,7 @@ for (let i = 0; i < 3; i++) {
 }
 ```
 
-## Output
+### Output
 
 ```js
 0
@@ -789,7 +783,7 @@ for (let i = 0; i < 3; i++) {
 
 ---
 
-# 22. Closures and Scope
+## 22. Closures and Scope
 
 Closures happen because of lexical scope.
 
@@ -810,7 +804,7 @@ fn();
 fn();
 ```
 
-## Output
+### Output
 
 ```js
 1
@@ -820,7 +814,7 @@ fn();
 
 ---
 
-# 23. Strict Mode & Scope
+## 23. Strict Mode & Scope
 
 ```js
 "use strict";
@@ -828,7 +822,7 @@ fn();
 x = 10;
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -836,7 +830,7 @@ ReferenceError
 
 ---
 
-## Without strict mode
+### Without strict mode
 
 ```js
 x = 10;
@@ -844,7 +838,7 @@ x = 10;
 console.log(x);
 ```
 
-## Output
+### Output
 
 ```js
 10
@@ -852,7 +846,7 @@ console.log(x);
 
 ---
 
-# 24. Global Object Behavior
+## 24. Global Object Behavior
 
 In browser:
 
@@ -862,7 +856,7 @@ var a = 10;
 console.log(window.a);
 ```
 
-## Output
+### Output
 
 ```js
 10
@@ -870,7 +864,7 @@ console.log(window.a);
 
 ---
 
-## let and const
+### let and const
 
 ```js
 let b = 20;
@@ -878,7 +872,7 @@ let b = 20;
 console.log(window.b);
 ```
 
-## Output
+### Output
 
 ```js
 undefined
@@ -886,7 +880,7 @@ undefined
 
 ---
 
-# 25. Execution Context and Scope
+## 25. Execution Context and Scope
 
 Execution context contains:
 
@@ -896,14 +890,14 @@ Execution context contains:
 
 ---
 
-## Phases
+### Phases
 
 1. Memory Creation Phase
 2. Code Execution Phase
 
 ---
 
-# 26. Memory Creation Phase
+## 26. Memory Creation Phase
 
 Before execution:
 
@@ -913,7 +907,7 @@ Before execution:
 
 ---
 
-## Example
+### Example
 
 ```js
 console.log(a);
@@ -932,11 +926,11 @@ test = function
 
 ---
 
-# 27. Common Interview Edge Cases
+## 27. Common Interview Edge Cases
 
 ---
 
-## Edge Case 1
+### Edge Case 1
 
 ```js
 var a = 1;
@@ -950,7 +944,7 @@ function test() {
 test();
 ```
 
-## Output
+### Output
 
 ```js
 undefined
@@ -958,7 +952,7 @@ undefined
 
 ---
 
-## Edge Case 2
+### Edge Case 2
 
 ```js
 let a = 1;
@@ -970,7 +964,7 @@ let a = 1;
 }
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -978,7 +972,7 @@ ReferenceError
 
 ---
 
-## Edge Case 3
+### Edge Case 3
 
 ```js
 function test() {
@@ -992,7 +986,7 @@ function test() {
 test();
 ```
 
-## Output
+### Output
 
 ```js
 undefined
@@ -1000,7 +994,7 @@ undefined
 
 ---
 
-## Edge Case 4
+### Edge Case 4
 
 ```js
 function test() {
@@ -1014,7 +1008,7 @@ function test() {
 test();
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -1022,7 +1016,7 @@ ReferenceError
 
 ---
 
-## Edge Case 5
+### Edge Case 5
 
 ```js
 var a = 10;
@@ -1032,7 +1026,7 @@ function a() {}
 console.log(typeof a);
 ```
 
-## Output
+### Output
 
 ```js
 number
@@ -1040,7 +1034,7 @@ number
 
 ---
 
-## Edge Case 6
+### Edge Case 6
 
 ```js
 function demo() {
@@ -1052,7 +1046,7 @@ function demo() {
 demo();
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -1060,7 +1054,7 @@ ReferenceError
 
 ---
 
-## Edge Case 7
+### Edge Case 7
 
 ```js
 {
@@ -1076,7 +1070,7 @@ Behavior may differ between environments.
 
 ---
 
-## Edge Case 8
+### Edge Case 8
 
 ```js
 let a = 10;
@@ -1090,7 +1084,7 @@ function test() {
 test();
 ```
 
-## Output
+### Output
 
 ```js
 ReferenceError
@@ -1098,7 +1092,7 @@ ReferenceError
 
 ---
 
-## Edge Case 9
+### Edge Case 9
 
 ```js
 const obj = {
@@ -1110,7 +1104,7 @@ obj.name = "JavaScript";
 console.log(obj.name);
 ```
 
-## Output
+### Output
 
 ```js
 JavaScript
@@ -1118,7 +1112,7 @@ JavaScript
 
 ---
 
-## Edge Case 10
+### Edge Case 10
 
 ```js
 const arr = [1, 2];
@@ -1128,7 +1122,7 @@ arr.push(3);
 console.log(arr);
 ```
 
-## Output
+### Output
 
 ```js
 [1, 2, 3]
@@ -1136,21 +1130,21 @@ console.log(arr);
 
 ---
 
-# 28. Best Practices
+## 28. Best Practices
 
-## Prefer let and const
+### Prefer let and const
 
 Avoid `var`.
 
 ---
 
-## Minimize Global Variables
+### Minimize Global Variables
 
 Too many globals create bugs.
 
 ---
 
-## Use const by Default
+### Use const by Default
 
 ```js
 const PI = 3.14;
@@ -1158,19 +1152,19 @@ const PI = 3.14;
 
 ---
 
-## Keep Scope Small
+### Keep Scope Small
 
 Smaller scope improves maintainability.
 
 ---
 
-## Avoid Variable Shadowing
+### Avoid Variable Shadowing
 
 Can create confusion.
 
 ---
 
-# 29. Summary
+## 29. Summary
 
 | Topic | Key Point |
 |---|---|
@@ -1186,7 +1180,7 @@ Can create confusion.
 
 ---
 
-# Final Notes
+## Final Notes
 
 Understanding Scope & Hoisting is critical because:
 

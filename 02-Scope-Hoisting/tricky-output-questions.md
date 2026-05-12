@@ -1,12 +1,6 @@
 # Scope & Hoisting — Tricky Output Questions
 
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-# Table of Contents
+## Table of Contents
 
 1. [Global Scope Questions](#1-global-scope-questions)
 2. [Function Scope Questions](#2-function-scope-questions)
@@ -21,11 +15,11 @@
 
 ---
 
-# 1. Global Scope Questions
+## 1. Global Scope Questions
 
 ---
 
-## Q1. What will be the output?
+### Q1. What will be the output?
 
 ```js
 var a = 10;
@@ -40,13 +34,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 10
 ```
 
-## Explanation
+### Explanation
 
 Global variables are accessible inside functions.
 
@@ -54,7 +48,7 @@ Global variables are accessible inside functions.
 
 ---
 
-## Q2. What will be the output?
+### Q2. What will be the output?
 
 ```js
 let a = 20;
@@ -67,13 +61,13 @@ let a = 20;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 20
 ```
 
-## Explanation
+### Explanation
 
 Block can access outer scope variables.
 
@@ -81,7 +75,7 @@ Block can access outer scope variables.
 
 ---
 
-## Q3. What will be the output?
+### Q3. What will be the output?
 
 ```js
 var a = 10;
@@ -96,13 +90,13 @@ console.log(a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 20
 ```
 
-## Explanation
+### Explanation
 
 `var` is NOT block scoped.
 
@@ -110,11 +104,11 @@ console.log(a);
 
 ---
 
-# 2. Function Scope Questions
+## 2. Function Scope Questions
 
 ---
 
-## Q4. What will be the output?
+### Q4. What will be the output?
 
 ```js
 function test() {
@@ -127,13 +121,13 @@ console.log(x);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 `x` is function scoped.
 
@@ -141,7 +135,7 @@ ReferenceError
 
 ---
 
-## Q5. What will be the output?
+### Q5. What will be the output?
 
 ```js
 function test() {
@@ -158,13 +152,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 10
 ```
 
-## Explanation
+### Explanation
 
 `var` ignores block scope.
 
@@ -172,7 +166,7 @@ test();
 
 ---
 
-## Q6. What will be the output?
+### Q6. What will be the output?
 
 ```js
 function test() {
@@ -189,13 +183,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 `let` is block scoped.
 
@@ -203,11 +197,11 @@ ReferenceError
 
 ---
 
-# 3. Block Scope Questions
+## 3. Block Scope Questions
 
 ---
 
-## Q7. What will be the output?
+### Q7. What will be the output?
 
 ```js
 {
@@ -222,14 +216,14 @@ console.log(b);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 Both `let` and `const` are block scoped.
 
@@ -237,7 +231,7 @@ Both `let` and `const` are block scoped.
 
 ---
 
-## Q8. What will be the output?
+### Q8. What will be the output?
 
 ```js
 {
@@ -250,13 +244,13 @@ console.log(x);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 50
 ```
 
-## Explanation
+### Explanation
 
 `var` escapes block scope.
 
@@ -264,7 +258,7 @@ console.log(x);
 
 ---
 
-## Q9. What will be the output?
+### Q9. What will be the output?
 
 ```js
 let a = 1;
@@ -287,7 +281,7 @@ console.log(a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 3
@@ -295,7 +289,7 @@ console.log(a);
 1
 ```
 
-## Explanation
+### Explanation
 
 Each block creates separate scope.
 
@@ -303,11 +297,11 @@ Each block creates separate scope.
 
 ---
 
-# 4. Temporal Dead Zone Questions
+## 4. Temporal Dead Zone Questions
 
 ---
 
-## Q10. What will be the output?
+### Q10. What will be the output?
 
 ```js
 console.log(a);
@@ -318,13 +312,13 @@ let a = 10;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 `a` is inside TDZ before initialization.
 
@@ -332,7 +326,7 @@ ReferenceError
 
 ---
 
-## Q11. What will be the output?
+### Q11. What will be the output?
 
 ```js
 console.log(a);
@@ -343,13 +337,13 @@ var a = 10;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 ```
 
-## Explanation
+### Explanation
 
 `var` gets initialized with `undefined`.
 
@@ -357,7 +351,7 @@ undefined
 
 ---
 
-## Q12. What will be the output?
+### Q12. What will be the output?
 
 ```js
 {
@@ -370,13 +364,13 @@ undefined
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 TDZ exists inside block scope too.
 
@@ -384,11 +378,11 @@ TDZ exists inside block scope too.
 
 ---
 
-# 5. Hoisting Questions
+## 5. Hoisting Questions
 
 ---
 
-## Q13. What will be the output?
+### Q13. What will be the output?
 
 ```js
 console.log(a);
@@ -401,14 +395,14 @@ console.log(a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 5
 ```
 
-## Explanation
+### Explanation
 
 Declaration is hoisted, assignment is not.
 
@@ -416,7 +410,7 @@ Declaration is hoisted, assignment is not.
 
 ---
 
-## Q14. What will be the output?
+### Q14. What will be the output?
 
 ```js
 var a;
@@ -429,7 +423,7 @@ a = 10;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
@@ -439,7 +433,7 @@ undefined
 
 ---
 
-## Q15. What will be the output?
+### Q15. What will be the output?
 
 ```js
 console.log(a);
@@ -450,7 +444,7 @@ const a = 100;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
@@ -460,11 +454,11 @@ ReferenceError
 
 ---
 
-# 6. Function Hoisting Questions
+## 6. Function Hoisting Questions
 
 ---
 
-## Q16. What will be the output?
+### Q16. What will be the output?
 
 ```js
 greet();
@@ -477,13 +471,13 @@ function greet() {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 Hello
 ```
 
-## Explanation
+### Explanation
 
 Function declarations are fully hoisted.
 
@@ -491,7 +485,7 @@ Function declarations are fully hoisted.
 
 ---
 
-## Q17. What will be the output?
+### Q17. What will be the output?
 
 ```js
 sayHi();
@@ -504,13 +498,13 @@ var sayHi = function () {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 TypeError
 ```
 
-## Explanation
+### Explanation
 
 `sayHi` becomes `undefined`.
 
@@ -518,7 +512,7 @@ TypeError
 
 ---
 
-## Q18. What will be the output?
+### Q18. What will be the output?
 
 ```js
 hello();
@@ -531,13 +525,13 @@ let hello = function () {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 `hello` is inside TDZ.
 
@@ -545,7 +539,7 @@ ReferenceError
 
 ---
 
-## Q19. What will be the output?
+### Q19. What will be the output?
 
 ```js
 test();
@@ -558,7 +552,7 @@ const test = () => {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
@@ -568,11 +562,11 @@ ReferenceError
 
 ---
 
-# 7. Shadowing Questions
+## 7. Shadowing Questions
 
 ---
 
-## Q20. What will be the output?
+### Q20. What will be the output?
 
 ```js
 let a = 10;
@@ -591,14 +585,14 @@ console.log(a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 20
 10
 ```
 
-## Explanation
+### Explanation
 
 Inner variable shadows outer variable.
 
@@ -606,7 +600,7 @@ Inner variable shadows outer variable.
 
 ---
 
-## Q21. What will be the output?
+### Q21. What will be the output?
 
 ```js
 var a = 10;
@@ -623,7 +617,7 @@ console.log(a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 20
@@ -634,7 +628,7 @@ console.log(a);
 
 ---
 
-## Q22. What will be the output?
+### Q22. What will be the output?
 
 ```js
 let a = 10;
@@ -649,13 +643,13 @@ let a = 10;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 Local `a` enters TDZ.
 
@@ -663,11 +657,11 @@ Local `a` enters TDZ.
 
 ---
 
-# 8. Loop Scope Questions
+## 8. Loop Scope Questions
 
 ---
 
-## Q23. What will be the output?
+### Q23. What will be the output?
 
 ```js
 for (var i = 0; i < 3; i++) {
@@ -680,7 +674,7 @@ for (var i = 0; i < 3; i++) {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 3
@@ -688,7 +682,7 @@ for (var i = 0; i < 3; i++) {
 3
 ```
 
-## Explanation
+### Explanation
 
 All callbacks share same `i`.
 
@@ -696,7 +690,7 @@ All callbacks share same `i`.
 
 ---
 
-## Q24. What will be the output?
+### Q24. What will be the output?
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -709,7 +703,7 @@ for (let i = 0; i < 3; i++) {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 0
@@ -717,7 +711,7 @@ for (let i = 0; i < 3; i++) {
 2
 ```
 
-## Explanation
+### Explanation
 
 `let` creates new binding every iteration.
 
@@ -725,7 +719,7 @@ for (let i = 0; i < 3; i++) {
 
 ---
 
-## Q25. What will be the output?
+### Q25. What will be the output?
 
 ```js
 for (var i = 1; i <= 3; i++) {
@@ -740,7 +734,7 @@ for (var i = 1; i <= 3; i++) {
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 1
@@ -748,7 +742,7 @@ for (var i = 1; i <= 3; i++) {
 3
 ```
 
-## Explanation
+### Explanation
 
 IIFE creates separate closure.
 
@@ -756,11 +750,11 @@ IIFE creates separate closure.
 
 ---
 
-# 9. Execution Context Questions
+## 9. Execution Context Questions
 
 ---
 
-## Q26. What will be the output?
+### Q26. What will be the output?
 
 ```js
 var x = 1;
@@ -777,13 +771,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 ```
 
-## Explanation
+### Explanation
 
 Local `x` is hoisted inside function.
 
@@ -791,7 +785,7 @@ Local `x` is hoisted inside function.
 
 ---
 
-## Q27. What will be the output?
+### Q27. What will be the output?
 
 ```js
 var x = 1;
@@ -810,14 +804,14 @@ console.log(x);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 1
 2
 ```
 
-## Explanation
+### Explanation
 
 No local variable exists, so global variable is modified.
 
@@ -825,7 +819,7 @@ No local variable exists, so global variable is modified.
 
 ---
 
-## Q28. What will be the output?
+### Q28. What will be the output?
 
 ```js
 function test() {
@@ -842,7 +836,7 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
@@ -853,11 +847,11 @@ undefined
 
 ---
 
-# 10. Advanced Edge Cases
+## 10. Advanced Edge Cases
 
 ---
 
-## Q29. What will be the output?
+### Q29. What will be the output?
 
 ```js
 var a = 10;
@@ -872,13 +866,13 @@ console.log(typeof a);
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 number
 ```
 
-## Explanation
+### Explanation
 
 Variable assignment overrides function reference.
 
@@ -886,7 +880,7 @@ Variable assignment overrides function reference.
 
 ---
 
-## Q30. What will be the output?
+### Q30. What will be the output?
 
 ```js
 function test() {
@@ -903,13 +897,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 ```
 
-## Explanation
+### Explanation
 
 `var a` is hoisted to function scope.
 
@@ -917,7 +911,7 @@ undefined
 
 ---
 
-## Q31. What will be the output?
+### Q31. What will be the output?
 
 ```js
 function test() {
@@ -934,13 +928,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 `a` inside block enters TDZ.
 
@@ -948,7 +942,7 @@ ReferenceError
 
 ---
 
-## Q32. What will be the output?
+### Q32. What will be the output?
 
 ```js
 let a = 10;
@@ -965,13 +959,13 @@ test();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 ReferenceError
 ```
 
-## Explanation
+### Explanation
 
 Inner `a` shadows outer `a` and stays in TDZ.
 
@@ -979,7 +973,7 @@ Inner `a` shadows outer `a` and stays in TDZ.
 
 ---
 
-## Q33. What will be the output?
+### Q33. What will be the output?
 
 ```js
 {
@@ -994,13 +988,13 @@ greet();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 Behavior may differ between environments
 ```
 
-## Explanation
+### Explanation
 
 Block-level function declarations behave differently in browsers and strict mode.
 
@@ -1008,7 +1002,7 @@ Block-level function declarations behave differently in browsers and strict mode
 
 ---
 
-## Q34. What will be the output?
+### Q34. What will be the output?
 
 ```js
 var a = 1;
@@ -1031,14 +1025,14 @@ outer();
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 2
 ```
 
-## Explanation
+### Explanation
 
 Local `a` is hoisted inside `outer`.
 
@@ -1046,7 +1040,7 @@ Local `a` is hoisted inside `outer`.
 
 ---
 
-## Q35. What will be the output?
+### Q35. What will be the output?
 
 ```js
 console.log(typeof x);
@@ -1057,13 +1051,13 @@ var x = 10;
 <details>
 <summary><strong>Show Output & Explanation</strong></summary>
 
-## Output
+### Output
 
 ```txt
 undefined
 ```
 
-## Explanation
+### Explanation
 
 `x` exists during hoisting with value `undefined`.
 
@@ -1071,7 +1065,7 @@ undefined
 
 ---
 
-# Final Tips
+## Final Tips
 
 For Scope & Hoisting output questions, always analyze:
 

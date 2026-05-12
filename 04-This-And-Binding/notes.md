@@ -5,7 +5,7 @@
 
 ---
 
-# 📑 Table of Contents
+## 📑 Table of Contents
 
 1. [What is `this`?](#1-what-is-this)
 2. [Why `this` Exists](#2-why-this-exists)
@@ -52,7 +52,7 @@
 43. [Summary](#43-summary)
 
 
-# 1. What is `this`?
+## 1. What is `this`?
 
 `this` is a special keyword in JavaScript that refers to the object executing the current function.
 
@@ -64,13 +64,13 @@ It depends on **how the function is called**.
 
 ---
 
-# 2. Why `this` Exists
+## 2. Why `this` Exists
 
 `this` allows functions to work with different objects dynamically.
 
 Without `this`, we would need to reference object names directly.
 
-## Example
+### Example
 
 ```js
 const user = {
@@ -97,7 +97,7 @@ this === user
 
 ---
 
-# 3. How `this` is Determined
+## 3. How `this` is Determined
 
 There are 4 major rules:
 
@@ -116,7 +116,7 @@ new binding > explicit binding > implicit binding > default binding
 
 ---
 
-# 4. Global Context
+## 4. Global Context
 
 In browser global execution context:
 
@@ -144,9 +144,9 @@ Output:
 
 ---
 
-# 5. Function Context
+## 5. Function Context
 
-## Non-Strict Mode
+### Non-Strict Mode
 
 ```js
 function test() {
@@ -164,7 +164,7 @@ window
 
 ---
 
-## Strict Mode
+### Strict Mode
 
 ```js
 "use strict";
@@ -184,7 +184,7 @@ undefined
 
 ---
 
-# 6. Method Context
+## 6. Method Context
 
 When function is called through object:
 
@@ -207,9 +207,9 @@ John
 
 ---
 
-# 7. Object Method vs Regular Function
+## 7. Object Method vs Regular Function
 
-## Method
+### Method
 
 ```js
 const obj = {
@@ -230,7 +230,7 @@ Output:
 
 ---
 
-## Regular Function
+### Regular Function
 
 ```js
 const value = 100;
@@ -250,7 +250,7 @@ Browser output:
 
 ---
 
-# 8. `this` in Strict Mode
+## 8. `this` in Strict Mode
 
 Strict mode prevents automatic global binding.
 
@@ -272,7 +272,7 @@ undefined
 
 ---
 
-# 9. `this` in Browser vs Node.js
+## 9. `this` in Browser vs Node.js
 
 | Environment | Global `this` |
 |---|---|
@@ -282,7 +282,7 @@ undefined
 
 ---
 
-# 10. `this` inside Arrow Functions
+## 10. `this` inside Arrow Functions
 
 Arrow functions do NOT have their own `this`.
 
@@ -309,7 +309,7 @@ Because arrow function inherits global `this`.
 
 ---
 
-# 11. Arrow Function vs Regular Function
+## 11. Arrow Function vs Regular Function
 
 | Feature | Regular Function | Arrow Function |
 |---|---|---|
@@ -320,7 +320,7 @@ Because arrow function inherits global `this`.
 
 ---
 
-# 12. `this` in Event Listeners
+## 12. `this` in Event Listeners
 
 ```js
 button.addEventListener("click", function () {
@@ -336,7 +336,7 @@ button element
 
 ---
 
-## Arrow Function
+### Arrow Function
 
 ```js
 button.addEventListener("click", () => {
@@ -348,7 +348,7 @@ Arrow function inherits outer `this`.
 
 ---
 
-# 13. `this` in Classes
+## 13. `this` in Classes
 
 ```js
 class User {
@@ -373,7 +373,7 @@ John
 
 ---
 
-# 14. `this` in Constructor Functions
+## 14. `this` in Constructor Functions
 
 ```js
 function User(name) {
@@ -393,7 +393,7 @@ John
 
 ---
 
-# 15. `new` Keyword and `this`
+## 15. `new` Keyword and `this`
 
 When using `new`:
 
@@ -404,7 +404,7 @@ When using `new`:
 
 ---
 
-# 16. Explicit Binding
+## 16. Explicit Binding
 
 Using:
 
@@ -416,7 +416,7 @@ We can manually set `this`.
 
 ---
 
-# 17. Implicit Binding
+## 17. Implicit Binding
 
 ```js
 const obj = {
@@ -433,7 +433,7 @@ obj.greet();
 
 ---
 
-# 18. Default Binding
+## 18. Default Binding
 
 ```js
 function test() {
@@ -457,7 +457,7 @@ undefined
 
 ---
 
-# 19. Hard Binding
+## 19. Hard Binding
 
 ```js
 function greet() {
@@ -479,7 +479,7 @@ John
 
 ---
 
-# 20. Lexical Binding
+## 20. Lexical Binding
 
 Arrow functions use lexical `this`.
 
@@ -506,7 +506,7 @@ John
 
 ---
 
-# 21. `call()`
+## 21. `call()`
 
 Calls function immediately.
 
@@ -528,7 +528,7 @@ John 25
 
 ---
 
-# 22. `apply()`
+## 22. `apply()`
 
 Same as `call()` but arguments passed as array.
 
@@ -538,7 +538,7 @@ greet.apply(user, [25]);
 
 ---
 
-# 23. `bind()`
+## 23. `bind()`
 
 Returns new bound function.
 
@@ -550,7 +550,7 @@ bound(25);
 
 ---
 
-# 24. `call()` vs `apply()` vs `bind()`
+## 24. `call()` vs `apply()` vs `bind()`
 
 | Method | Executes Immediately | Arguments Format | Returns Function |
 |---|---|---|---|
@@ -560,7 +560,7 @@ bound(25);
 
 ---
 
-# 25. Losing `this`
+## 25. Losing `this`
 
 ```js
 const user = {
@@ -585,7 +585,7 @@ Because function lost object reference.
 
 ---
 
-# 26. Nested Functions and `this`
+## 26. Nested Functions and `this`
 
 ```js
 const obj = {
@@ -610,7 +610,7 @@ undefined
 
 ---
 
-## Solution Using Arrow Function
+### Solution Using Arrow Function
 
 ```js
 const obj = {
@@ -627,7 +627,7 @@ const obj = {
 
 ---
 
-# 27. `this` in Callbacks
+## 27. `this` in Callbacks
 
 ```js
 const obj = {
@@ -650,9 +650,9 @@ undefined
 
 ---
 
-# 28. `this` in setTimeout
+## 28. `this` in setTimeout
 
-## Solution
+### Solution
 
 ```js
 const obj = {
@@ -675,7 +675,7 @@ Output:
 
 ---
 
-# 29. `this` in Object Destructuring
+## 29. `this` in Object Destructuring
 
 ```js
 const user = {
@@ -698,7 +698,7 @@ undefined
 
 ---
 
-# 30. `this` in DOM
+## 30. `this` in DOM
 
 ```js
 <input onclick="console.log(this)" />
@@ -708,7 +708,7 @@ undefined
 
 ---
 
-# 31. `this` with Prototype Methods
+## 31. `this` with Prototype Methods
 
 ```js
 function User(name) {
@@ -732,7 +732,7 @@ John
 
 ---
 
-# 32. `this` inside IIFE
+## 32. `this` inside IIFE
 
 ```js
 (function () {
@@ -754,7 +754,7 @@ undefined
 
 ---
 
-# 33. `this` in ES Modules
+## 33. `this` in ES Modules
 
 Inside ES modules:
 
@@ -770,7 +770,7 @@ undefined
 
 ---
 
-# 34. `this` in CommonJS
+## 34. `this` in CommonJS
 
 Node.js CommonJS:
 
@@ -786,7 +786,7 @@ module.exports
 
 ---
 
-# 35. `super` and `this`
+## 35. `super` and `this`
 
 ```js
 class Animal {
@@ -807,7 +807,7 @@ class Dog extends Animal {
 
 ---
 
-# 36. `this` in Getter & Setter
+## 36. `this` in Getter & Setter
 
 ```js
 const user = {
@@ -830,7 +830,7 @@ John Doe
 
 ---
 
-# 37. `this` in Static Methods
+## 37. `this` in Static Methods
 
 ```js
 class User {
@@ -850,7 +850,7 @@ Output:
 
 ---
 
-# 38. `this` in Closures
+## 38. `this` in Closures
 
 Closures and `this` are separate concepts.
 
@@ -860,7 +860,7 @@ Closures preserve variables.
 
 ---
 
-# 39. `this` in Functional Programming
+## 39. `this` in Functional Programming
 
 Functional programming prefers avoiding mutable context.
 
@@ -868,11 +868,11 @@ Arrow functions commonly used because they avoid dynamic `this`.
 
 ---
 
-# 40. Interview Edge Cases
+## 40. Interview Edge Cases
 
 ---
 
-## Edge Case 1
+### Edge Case 1
 
 ```js
 const obj = {
@@ -895,7 +895,7 @@ undefined
 
 ---
 
-## Edge Case 2
+### Edge Case 2
 
 ```js
 const obj = {
@@ -918,7 +918,7 @@ John
 
 ---
 
-## Edge Case 3
+### Edge Case 3
 
 ```js
 function test() {
@@ -942,7 +942,7 @@ null
 
 ---
 
-## Edge Case 4
+### Edge Case 4
 
 ```js
 const obj = {
@@ -963,7 +963,7 @@ undefined
 
 ---
 
-## Edge Case 5
+### Edge Case 5
 
 ```js
 class User {
@@ -991,7 +991,7 @@ Because arrow function lexically binds instance `this`.
 
 ---
 
-# 41. Common Mistakes
+## 41. Common Mistakes
 
 | Mistake | Problem |
 |---|---|
@@ -1002,7 +1002,7 @@ Because arrow function lexically binds instance `this`.
 
 ---
 
-# 42. Best Practices
+## 42. Best Practices
 
 ✅ Use regular functions for object methods
 
@@ -1018,7 +1018,7 @@ Because arrow function lexically binds instance `this`.
 
 ---
 
-# 43. Summary
+## 43. Summary
 
 | Scenario | `this` Value |
 |---|---|
@@ -1034,7 +1034,7 @@ Because arrow function lexically binds instance `this`.
 
 ---
 
-# 🎯 Final Notes
+## 🎯 Final Notes
 
 To master `this`, remember:
 

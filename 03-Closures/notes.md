@@ -1,6 +1,6 @@
 # Closures in JavaScript
 
-# Table of Contents
+## Table of Contents
 
 1. [What is a Closure?](#1-what-is-a-closure)
 2. [Why Closures Exist](#2-why-closures-exist)
@@ -31,7 +31,7 @@
 
 ---
 
-# 1. What is a Closure?
+## 1. What is a Closure?
 
 A closure is a combination of:
 
@@ -44,7 +44,7 @@ In simple words:
 
 ---
 
-## Example
+### Example
 
 ```js
 function outer() {
@@ -64,7 +64,7 @@ fn();
 
 ---
 
-## Output
+### Output
 
 ```txt
 Dilkhush
@@ -72,7 +72,7 @@ Dilkhush
 
 ---
 
-## Why?
+### Why?
 
 Even though `outer()` has finished execution, the `inner()` function still remembers `username`.
 
@@ -86,7 +86,7 @@ That memory preservation is called a closure.
 
 ---
 
-# 2. Why Closures Exist
+## 2. Why Closures Exist
 
 JavaScript functions are first-class citizens.
 
@@ -102,7 +102,7 @@ Closures make this possible.
 
 ---
 
-## Without Closures
+### Without Closures
 
 Returned functions would lose access to outer variables.
 
@@ -116,7 +116,7 @@ Closures solve this problem.
 
 ---
 
-# 3. Lexical Scope
+## 3. Lexical Scope
 
 Closures are based on lexical scope.
 
@@ -126,7 +126,7 @@ Lexical scope means:
 
 ---
 
-## Example
+### Example
 
 ```js
 function outer() {
@@ -144,7 +144,7 @@ outer();
 
 ---
 
-## Output
+### Output
 
 ```txt
 10
@@ -160,7 +160,7 @@ outer();
 
 ---
 
-# 4. Lexical Environment
+## 4. Lexical Environment
 
 Every execution context has:
 
@@ -171,7 +171,7 @@ Together these form the lexical environment.
 
 ---
 
-## Structure
+### Structure
 
 ```txt
 Lexical Environment
@@ -191,7 +191,7 @@ Closures preserve this environment.
 
 ---
 
-# 5. How Closures Work Internally
+## 5. How Closures Work Internally
 
 When a function is returned:
 
@@ -201,7 +201,7 @@ When a function is returned:
 
 ---
 
-## Example
+### Example
 
 ```js
 function counter() {
@@ -222,7 +222,7 @@ increment();
 
 ---
 
-## Output
+### Output
 
 ```txt
 1
@@ -232,7 +232,7 @@ increment();
 
 ---
 
-## Internal Working
+### Internal Working
 
 `count` is preserved because returned function still references it.
 
@@ -244,7 +244,7 @@ increment();
 
 ---
 
-# 6. Basic Closure Example
+## 6. Basic Closure Example
 
 ```js
 function greeting(message) {
@@ -260,7 +260,7 @@ sayHello("Dilkhush");
 
 ---
 
-## Output
+### Output
 
 ```txt
 Hello Dilkhush
@@ -276,7 +276,7 @@ The inner function remembers `message`.
 
 ---
 
-# 7. Closure with Returned Function
+## 7. Closure with Returned Function
 
 ```js
 function outer() {
@@ -294,7 +294,7 @@ fn();
 
 ---
 
-## Output
+### Output
 
 ```txt
 Secret
@@ -310,7 +310,7 @@ Returned function forms closure over `data`.
 
 ---
 
-# 8. Closure Scope Chain
+## 8. Closure Scope Chain
 
 Closures can access:
 
@@ -320,7 +320,7 @@ Closures can access:
 
 ---
 
-## Example
+### Example
 
 ```js
 let globalVar = "Global";
@@ -344,7 +344,7 @@ outer();
 
 ---
 
-## Output
+### Output
 
 ```txt
 Inner
@@ -360,13 +360,13 @@ Global
 
 ---
 
-# 9. Data Hiding & Encapsulation
+## 9. Data Hiding & Encapsulation
 
 Closures can create private variables.
 
 ---
 
-## Example
+### Example
 
 ```js
 function bankAccount() {
@@ -395,7 +395,7 @@ console.log(account.balance);
 
 ---
 
-## Output
+### Output
 
 ```txt
 1500
@@ -413,13 +413,13 @@ undefined
 
 ---
 
-# 10. Function Factory
+## 10. Function Factory
 
 Closures help create reusable customized functions.
 
 ---
 
-## Example
+### Example
 
 ```js
 function multiply(x) {
@@ -437,7 +437,7 @@ console.log(triple(5));
 
 ---
 
-## Output
+### Output
 
 ```txt
 10
@@ -452,7 +452,7 @@ console.log(triple(5));
 
 ---
 
-# 11. Currying Using Closures
+## 11. Currying Using Closures
 
 ```js
 function add(a) {
@@ -468,7 +468,7 @@ console.log(add(1)(2)(3));
 
 ---
 
-## Output
+### Output
 
 ```txt
 6
@@ -484,13 +484,13 @@ Closures preserve `a` and `b`.
 
 ---
 
-# 12. Closures in Loops
+## 12. Closures in Loops
 
 This is one of the most important interview topics.
 
 ---
 
-# Problem with `var`
+## Problem with `var`
 
 ```js
 for (var i = 1; i <= 3; i++) {
@@ -502,7 +502,7 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-## Output
+### Output
 
 ```txt
 4
@@ -512,7 +512,7 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-## Why?
+### Why?
 
 - `var` is function scoped
 - Same `i` is shared
@@ -521,7 +521,7 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-# Solution Using `let`
+## Solution Using `let`
 
 ```js
 for (let i = 1; i <= 3; i++) {
@@ -533,7 +533,7 @@ for (let i = 1; i <= 3; i++) {
 
 ---
 
-## Output
+### Output
 
 ```txt
 1
@@ -545,7 +545,7 @@ for (let i = 1; i <= 3; i++) {
 
 ---
 
-# Solution Using Closure
+## Solution Using Closure
 
 ```js
 for (var i = 1; i <= 3; i++) {
@@ -561,7 +561,7 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-## Output
+### Output
 
 ```txt
 1
@@ -577,7 +577,7 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-# 13. Closures with setTimeout
+## 13. Closures with setTimeout
 
 ```js
 function greet(name) {
@@ -591,7 +591,7 @@ greet("Dilkhush");
 
 ---
 
-## Output
+### Output
 
 ```txt
 Hello Dilkhush
@@ -607,7 +607,7 @@ The callback remembers `name`.
 
 ---
 
-# 14. Closures in Event Listeners
+## 14. Closures in Event Listeners
 
 ```js
 function attachEvent() {
@@ -632,13 +632,13 @@ Each click remembers previous `count`.
 
 ---
 
-# 15. Module Pattern
+## 15. Module Pattern
 
 Before ES6 modules, closures were used for modules.
 
 ---
 
-## Example
+### Example
 
 ```js
 const counterModule = (function() {
@@ -662,7 +662,7 @@ console.log(counterModule.getCount());
 
 ---
 
-## Output
+### Output
 
 ```txt
 1
@@ -676,13 +676,13 @@ console.log(counterModule.getCount());
 
 ---
 
-# 16. Memoization
+## 16. Memoization
 
 Closures help store cache.
 
 ---
 
-## Example
+### Example
 
 ```js
 function memoizedAdd() {
@@ -710,7 +710,7 @@ console.log(add(5));
 
 ---
 
-## Output
+### Output
 
 ```txt
 Calculated
@@ -728,13 +728,13 @@ Cached
 
 ---
 
-# 17. Closures and Memory Management
+## 17. Closures and Memory Management
 
 Closures keep variables alive in memory.
 
 ---
 
-## Example
+### Example
 
 ```js
 function hugeMemory() {
@@ -758,7 +758,7 @@ const data = hugeMemory();
 
 ---
 
-# 18. Garbage Collection and Closures
+## 18. Garbage Collection and Closures
 
 Unused memory is automatically cleaned.
 
@@ -766,7 +766,7 @@ But variables referenced by closures are not garbage collected.
 
 ---
 
-## Example
+### Example
 
 ```js
 let fn = hugeMemory();
@@ -784,7 +784,7 @@ Now memory becomes collectible.
 
 ---
 
-# 19. Advantages of Closures
+## 19. Advantages of Closures
 
 - Data privacy
 - Encapsulation
@@ -802,7 +802,7 @@ Now memory becomes collectible.
 
 ---
 
-# 20. Disadvantages of Closures
+## 20. Disadvantages of Closures
 
 - Increased memory usage
 - Possible memory leaks
@@ -817,11 +817,11 @@ Now memory becomes collectible.
 
 ---
 
-# 21. Common Closure Mistakes
+## 21. Common Closure Mistakes
 
 ---
 
-## 1. Using `var` in loops
+### 1. Using `var` in loops
 
 ```js
 for (var i = 0; i < 5; i++) {
@@ -831,7 +831,7 @@ for (var i = 0; i < 5; i++) {
 
 ---
 
-## 2. Retaining unnecessary memory
+### 2. Retaining unnecessary memory
 
 ```js
 function test() {
@@ -845,7 +845,7 @@ function test() {
 
 ---
 
-## 3. Assuming variables are copied
+### 3. Assuming variables are copied
 
 Closures store references, not copies.
 
@@ -857,7 +857,7 @@ Closures store references, not copies.
 
 ---
 
-# 22. Closures vs Scope
+## 22. Closures vs Scope
 
 | Scope | Closure |
 |---|---|
@@ -873,7 +873,7 @@ Closures store references, not copies.
 
 ---
 
-# 23. Closures vs Objects
+## 23. Closures vs Objects
 
 | Closures | Objects |
 |---|---|
@@ -889,7 +889,7 @@ Closures store references, not copies.
 
 ---
 
-# 24. Real World Use Cases
+## 24. Real World Use Cases
 
 Closures are heavily used in:
 
@@ -912,11 +912,11 @@ Closures are heavily used in:
 
 ---
 
-# 25. Important Interview Points
+## 25. Important Interview Points
 
 ---
 
-## 1. Do closures copy variables?
+### 1. Do closures copy variables?
 
 No.
 
@@ -924,7 +924,7 @@ Closures store references.
 
 ---
 
-## 2. Are closures only created when functions return?
+### 2. Are closures only created when functions return?
 
 No.
 
@@ -932,7 +932,7 @@ Any inner function accessing outer variables creates closure.
 
 ---
 
-## 3. Can closures access updated values?
+### 3. Can closures access updated values?
 
 Yes.
 
@@ -949,7 +949,7 @@ function outer() {
 
 ---
 
-## 4. Do arrow functions create closures?
+### 4. Do arrow functions create closures?
 
 Yes.
 
@@ -957,7 +957,7 @@ Arrow functions also form closures.
 
 ---
 
-## 5. Are closures memory efficient?
+### 5. Are closures memory efficient?
 
 Not always.
 
@@ -971,7 +971,7 @@ Improper usage can increase memory usage.
 
 ---
 
-# 26. Summary
+## 26. Summary
 
 - Closures allow functions to remember outer variables
 - Closures depend on lexical scope
@@ -982,7 +982,7 @@ Improper usage can increase memory usage.
 
 ---
 
-# Final Definition
+## Final Definition
 
 > A closure is a function bundled together with its lexical environment, allowing it to access outer scope variables even after the outer function has completed execution.
 

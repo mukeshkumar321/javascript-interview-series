@@ -16,7 +16,7 @@
 
 ---
 
-# 📑 Table of Contents
+## 📑 Table of Contents
 
 1. [Global Context](#1-global-context)
 2. [Regular Functions](#2-regular-functions)
@@ -34,11 +34,9 @@
 
 ---
 
-# 1. Global Context
+## 1. Global Context
 
----
-
-## Question 1
+### Question 1
 
 ```js
 console.log(this);
@@ -63,7 +61,7 @@ Node.js:
 
 ---
 
-## Question 2
+### Question 2
 
 ```js
 var name = "John";
@@ -90,7 +88,7 @@ Because regular function uses default binding.
 
 ---
 
-## Question 3
+### Question 3
 
 ```js
 "use strict";
@@ -117,11 +115,9 @@ Strict mode disables default global binding.
 
 ---
 
-# 2. Regular Functions
+## 2. Regular Functions
 
----
-
-## Question 4
+### Question 4
 
 ```js
 function test() {
@@ -144,7 +140,7 @@ Primitive gets boxed into object wrapper.
 
 ---
 
-## Question 5
+### Question 5
 
 ```js
 function test() {
@@ -167,11 +163,9 @@ String primitive becomes String object.
 
 ---
 
-# 3. Object Methods
+## 3. Object Methods
 
----
-
-## Question 6
+### Question 6
 
 ```js
 const user = {
@@ -195,7 +189,7 @@ John
 
 ---
 
-## Question 7
+### Question 7
 
 ```js
 const user = {
@@ -231,7 +225,7 @@ Function lost object reference.
 
 ---
 
-## Question 8
+### Question 8
 
 ```js
 const user = {
@@ -257,7 +251,7 @@ Parentheses do NOT break binding.
 
 ---
 
-## Question 9
+### Question 9
 
 ```js
 const user = {
@@ -283,11 +277,9 @@ Assignment breaks implicit binding.
 
 ---
 
-# 4. Arrow Functions
+## 4. Arrow Functions
 
----
-
-## Question 10
+### Question 10
 
 ```js
 const user = {
@@ -315,7 +307,7 @@ Arrow functions inherit outer `this`.
 
 ---
 
-## Question 11
+### Question 11
 
 ```js
 const obj = {
@@ -345,7 +337,7 @@ Arrow function lexically captures `this`.
 
 ---
 
-## Question 12
+### Question 12
 
 ```js
 const obj = {
@@ -374,11 +366,10 @@ undefined
 
 ---
 
-# 5. Nested Functions
+## 5. Nested Functions
 
----
 
-## Question 13
+### Question 13
 
 ```js
 const obj = {
@@ -408,7 +399,7 @@ Nested regular function gets default binding.
 
 ---
 
-## Question 14
+### Question 14
 
 ```js
 const obj = {
@@ -440,11 +431,9 @@ Classic `self = this` pattern.
 
 ---
 
-# 6. call/apply/bind
+## 6. call/apply/bind
 
----
-
-## Question 15
+### Question 15
 
 ```js
 function greet(age) {
@@ -467,7 +456,7 @@ John 25
 
 ---
 
-## Question 16
+### Question 16
 
 ```js
 function greet(age) {
@@ -490,7 +479,7 @@ John 30
 
 ---
 
-## Question 17
+### Question 17
 
 ```js
 function greet() {
@@ -518,7 +507,7 @@ John
 
 ---
 
-## Question 18
+### Question 18
 
 ```js
 const obj = {
@@ -542,16 +531,28 @@ undefined
 ```
 
 `new` binding overrides bind binding.
+>new does:
+>- Creates a fresh empty object
+>- Sets this to that object
+>- Executes function
+>- Returns object
+
+```js 
+this -> newly created instance
+```
 
 </details>
 
+#### Very Important Interview Rule
+Priority of this binding:
+
+>NOTE:  new binding > explicit binding (bind/call/apply) > implicit binding > default binding
+
 ---
 
-# 7. Constructor Functions
+## 7. Constructor Functions
 
----
-
-## Question 19
+### Question 19
 
 ```js
 function User(name) {
@@ -578,7 +579,7 @@ Without `new`, `this` becomes global object.
 
 ---
 
-## Question 20
+### Question 20
 
 ```js
 "use strict";
@@ -598,12 +599,13 @@ TypeError
 ```
 
 `this` is undefined in strict mode.
+Cannot set properties of undefined
 
 </details>
 
 ---
 
-## Question 21
+### Question 21A
 
 ```js
 function User(name) {
@@ -626,17 +628,59 @@ console.log(u.name);
 Override
 ```
 
-Explicit object return overrides constructed object.
+When a constructor returns an object, JavaScript replaces the automatically created instance with that returned object.
 
 </details>
 
 ---
+### Question 21B
 
-# 8. Classes
+```js
+function User(name) {
+  this.name = name;
+
+  return 100;
+}
+
+const u = new User("John");
+
+console.log(u.name);
+```
+
+<details>
+<summary>✅ Output</summary>
+
+```js
+John
+```
+
+because primitive return is ignored.
+
+</details>
+
+### Important Rule
+With `new`:
+If constructor returns:
+#### Primitive
+```js
+return 10;
+return "hello";
+return true;
+```
+→ ignored, JavaScript still returns the created instance.
+#### Object
+```js
+return {};
+return [];
+return function() {}
+```
+→ returned instead of this
 
 ---
 
-## Question 22
+## 8. Classes
+
+### Question 22
 
 ```js
 class User {
@@ -669,7 +713,7 @@ Class methods are always strict mode.
 
 ---
 
-## Question 23
+### Question 23
 
 ```js
 class User {
@@ -700,11 +744,9 @@ Arrow function captures instance `this`.
 
 ---
 
-# 9. Event Loop & Callbacks
+## 9. Event Loop & Callbacks
 
----
-
-## Question 24
+### Question 24
 
 ```js
 const obj = {
@@ -734,7 +776,7 @@ Callback loses object binding.
 
 ---
 
-## Question 25
+### Question 25
 
 ```js
 const obj = {
@@ -762,11 +804,9 @@ Arrow function preserves lexical `this`.
 
 ---
 
-# 10. Strict Mode
+## 10. Strict Mode
 
----
-
-## Question 26
+### Question 26
 
 ```js
 "use strict";
@@ -791,7 +831,7 @@ Strict mode preserves exact value.
 
 ---
 
-## Question 27
+### Question 27
 
 ```js
 function test() {
@@ -816,11 +856,9 @@ window
 
 ---
 
-# 11. Destructuring
+## 11. Destructuring
 
----
-
-## Question 28
+### Question 28
 
 ```js
 const user = {
@@ -848,11 +886,9 @@ Destructuring removes object context.
 
 ---
 
-# 12. Prototype & Inheritance
+## 12. Prototype & Inheritance
 
----
-
-## Question 29
+### Question 29
 
 ```js
 function User(name) {
@@ -879,7 +915,7 @@ John
 
 ---
 
-## Question 30
+### Question 30
 
 ```js
 function User(name) {
@@ -908,11 +944,9 @@ Arrow function should NOT be used in prototype methods.
 
 ---
 
-# 13. Mixed Edge Cases
+## 13. Mixed Edge Cases
 
----
-
-## Question 31
+### Question 31
 
 ```js
 const obj = {
@@ -940,7 +974,7 @@ Returned function loses binding.
 
 ---
 
-## Question 32
+### Question 32
 
 ```js
 const obj = {
@@ -968,7 +1002,7 @@ Arrow function captures outer `this`.
 
 ---
 
-## Question 33
+### Question 33
 
 ```js
 const obj = {
@@ -994,7 +1028,7 @@ Passing method reference loses binding.
 
 ---
 
-## Question 34
+### Question 34
 
 ```js
 const obj = {
@@ -1020,7 +1054,7 @@ John
 
 ---
 
-## Question 35
+### Question 35
 
 ```js
 const obj = {
@@ -1053,19 +1087,19 @@ Arrow function inherits method `this`.
 
 ---
 
-# 🎯 Final Interview Rule
+## 🎯 Final Interview Rule
 
 To solve ANY `this` question:
 
 ---
 
-## Step 1
+### Step 1
 
 Check HOW function is called.
 
 ---
 
-## Step 2
+### Step 2
 
 Apply priority order:
 
@@ -1081,7 +1115,7 @@ default binding
 
 ---
 
-## Step 3
+### Step 3
 
 Check if function is arrow function.
 
@@ -1094,7 +1128,7 @@ Use lexical this.
 
 ---
 
-# 🚀 Golden Rule
+## 🚀 Golden Rule
 
 ```txt
 this depends on CALL-SITE,
