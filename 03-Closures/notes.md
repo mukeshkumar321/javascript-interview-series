@@ -3,154 +3,94 @@
 ## Table of Contents
 
 1. [What is a Closure?](#1-what-is-a-closure)
-2. [Why Closures Exist](#2-why-closures-exist)
-3. [Lexical Scope](#3-lexical-scope)
-4. [Lexical Environment](#4-lexical-environment)
-5. [How Closures Work Internally](#5-how-closures-work-internally)
-6. [Basic Closure Example](#6-basic-closure-example)
-7. [Closure with Returned Function](#7-closure-with-returned-function)
-8. [Closure Scope Chain](#8-closure-scope-chain)
-9. [Data Hiding & Encapsulation](#9-data-hiding--encapsulation)
-10. [Function Factory](#10-function-factory)
-11. [Currying Using Closures](#11-currying-using-closures)
-12. [Closures in Loops](#12-closures-in-loops)
-13. [Closures with setTimeout](#13-closures-with-settimeout)
-14. [Closures in Event Listeners](#14-closures-in-event-listeners)
-15. [Module Pattern](#15-module-pattern)
-16. [Memoization](#16-memoization)
-17. [Closures and Memory Management](#17-closures-and-memory-management)
-18. [Garbage Collection and Closures](#18-garbage-collection-and-closures)
-19. [Advantages of Closures](#19-advantages-of-closures)
-20. [Disadvantages of Closures](#20-disadvantages-of-closures)
-21. [Common Closure Mistakes](#21-common-closure-mistakes)
-22. [Closures vs Scope](#22-closures-vs-scope)
-23. [Closures vs Objects](#23-closures-vs-objects)
-24. [Real World Use Cases](#24-real-world-use-cases)
-25. [Important Interview Points](#25-important-interview-points)
-26. [Summary](#26-summary)
+2. [How Closures Work](#2-how-closures-work)
+3. [Basic Closure Example](#3-basic-closure-example)
+4. [Closures and Private Variables](#4-closures-and-private-variables)
+5. [Counter Pattern](#5-counter-pattern)
+6. [Factory Functions](#6-factory-functions)
+7. [Module Pattern (IIFE-based)](#7-module-pattern-iife-based)
+8. [Closure in Loops (var Problem)](#8-closure-in-loops-var-problem)
+9. [Closure in setTimeout](#9-closure-in-settimeout)
+10. [Memoization with Closures](#10-memoization-with-closures)
+11. [Partial Application using Closures](#11-partial-application-using-closures)
+12. [Currying with Closures](#12-currying-with-closures)
+13. [Event Listeners and Closures](#13-event-listeners-and-closures)
+14. [Closures in React (Stale Closure)](#14-closures-in-react-stale-closure)
+15. [Closure vs Class](#15-closure-vs-class)
+16. [Common Closure Mistakes](#16-common-closure-mistakes)
+17. [Memory Implications](#17-memory-implications)
+18. [Once Function](#18-once-function)
+19. [Compose / Pipe using Closures](#19-compose--pipe-using-closures)
+20. [Interview Q: What Gets Captured?](#20-interview-q-what-gets-captured)
+21. [Summary](#21-summary)
 
 ---
 
 ## 1. What is a Closure?
 
-A closure is a combination of:
+A **closure** is the combination of a function and the **lexical environment** (scope) in which that function was declared. Even after the outer function has finished executing, the inner function retains access to the variables of the outer function's scope.
 
-- A function
-- Its lexical environment
-
-In simple words:
-
-> A closure allows a function to access variables from its outer scope even after the outer function has finished execution.
-
----
-
-### Example
+> Every function in JavaScript is a closure — it always carries a reference to its surrounding scope.
 
 ```js
 function outer() {
-  let username = "Dilkhush";
+  const message = "Hello from outer";
 
   function inner() {
-    console.log(username);
+    console.log(message); // accesses outer's variable
   }
 
   return inner;
 }
 
 const fn = outer();
-
 fn();
 ```
 
----
-
 ### Output
 
-```txt
-Dilkhush
+```js
+Hello from outer
 ```
 
 ---
 
-### Why?
-
-Even though `outer()` has finished execution, the `inner()` function still remembers `username`.
-
-That memory preservation is called a closure.
-
----
-
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
 </p>
 
 ---
 
-## 2. Why Closures Exist
+## 2. How Closures Work
 
-JavaScript functions are first-class citizens.
+When a function is created, JavaScript attaches a hidden `[[Environment]]` property to it. This property holds a **reference** to the variable environment (scope chain) that was active at the time the function was defined — not when it is called.
 
-Functions can:
-
-- Be stored in variables
-- Be passed as arguments
-- Be returned from functions
-
-Because functions can survive outside their original scope, JavaScript preserves variables needed by those functions.
-
-Closures make this possible.
-
----
-
-### Without Closures
-
-Returned functions would lose access to outer variables.
-
-Closures solve this problem.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 3. Lexical Scope
-
-Closures are based on lexical scope.
-
-Lexical scope means:
-
-> Scope is determined by where code is written.
-
----
-
-### Example
+Key points:
+- The outer function's variables are **not garbage-collected** as long as the inner function is reachable.
+- The inner function holds a **live reference** (not a copy) to those variables — changes to the variable are visible inside the closure.
 
 ```js
-function outer() {
-  let a = 10;
-
-  function inner() {
-    console.log(a);
-  }
-
-  inner();
+function makeAdder(x) {
+  return function (y) {
+    return x + y; // x is captured by reference in the closure
+  };
 }
 
-outer();
-```
+const add5 = makeAdder(5);
+const add10 = makeAdder(10);
 
----
+console.log(add5(3));   // 8
+console.log(add10(3));  // 13
+console.log(add5(7));   // 12
+```
 
 ### Output
 
-```txt
-10
+```js
+8
+13
+12
 ```
-
-`inner()` can access `a` because it is lexically inside `outer()`.
 
 ---
 
@@ -160,81 +100,117 @@ outer();
 
 ---
 
-## 4. Lexical Environment
+## 3. Basic Closure Example
 
-Every execution context has:
-
-- Local Memory
-- Reference to outer environment
-
-Together these form the lexical environment.
-
----
-
-### Structure
-
-```txt
-Lexical Environment
-    ↓
-Local Variables
-    +
-Reference to Parent Lexical Environment
-```
-
-Closures preserve this environment.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 5. How Closures Work Internally
-
-When a function is returned:
-
-- JavaScript keeps the variables alive
-- Variables are not destroyed
-- Inner function maintains reference to them
-
----
-
-### Example
+A function defined inside another function, returned and called later, still remembers the variables of its parent scope.
 
 ```js
-function counter() {
+function greet(name) {
+  return function () {
+    console.log("Hi, " + name + "!");
+  };
+}
+
+const greetAlice = greet("Alice");
+const greetBob   = greet("Bob");
+
+greetAlice(); // Hi, Alice!
+greetBob();   // Hi, Bob!
+```
+
+### Output
+
+```js
+Hi, Alice!
+Hi, Bob!
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 4. Closures and Private Variables
+
+Closures are the primary mechanism for **data encapsulation** in JavaScript. Variables declared inside a function are not accessible from outside — only the inner functions that close over them can read or modify them.
+
+```js
+function createPerson(name) {
+  let age = 0; // private
+
+  return {
+    birthday() {
+      age++;
+    },
+    getAge() {
+      return age;
+    },
+    getName() {
+      return name;
+    },
+  };
+}
+
+const alice = createPerson("Alice");
+alice.birthday();
+alice.birthday();
+console.log(alice.getName()); // Alice
+console.log(alice.getAge());  // 2
+console.log(alice.age);       // undefined — age is private
+```
+
+### Output
+
+```js
+Alice
+2
+undefined
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 5. Counter Pattern
+
+The counter is the most commonly asked closure example in interviews. Each call to `makeCounter` creates an **independent** closure with its own `count` variable.
+
+```js
+function makeCounter() {
   let count = 0;
 
-  return function () {
-    count++;
-    console.log(count);
+  return {
+    increment() { count++; },
+    decrement() { count--; },
+    getCount()  { return count; },
   };
 }
 
-const increment = counter();
+const counter1 = makeCounter();
+const counter2 = makeCounter();
 
-increment();
-increment();
-increment();
+counter1.increment();
+counter1.increment();
+counter1.increment();
+counter2.increment();
+
+console.log(counter1.getCount()); // 3
+console.log(counter2.getCount()); // 1
 ```
-
----
 
 ### Output
 
-```txt
-1
-2
+```js
 3
+1
 ```
-
----
-
-### Internal Working
-
-`count` is preserved because returned function still references it.
 
 ---
 
@@ -244,29 +220,32 @@ increment();
 
 ---
 
-## 6. Basic Closure Example
+## 6. Factory Functions
+
+A **factory function** uses closures to create and return objects or functions with pre-configured state. Each invocation produces an independent closure with its own closed-over variables.
 
 ```js
-function greeting(message) {
-  return function(name) {
-    console.log(`${message} ${name}`);
+function createMultiplier(multiplier) {
+  return function (number) {
+    return number * multiplier;
   };
 }
 
-const sayHello = greeting("Hello");
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
 
-sayHello("Dilkhush");
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+console.log(double(9)); // 18
 ```
-
----
 
 ### Output
 
-```txt
-Hello Dilkhush
+```js
+10
+15
+18
 ```
-
-The inner function remembers `message`.
 
 ---
 
@@ -276,134 +255,49 @@ The inner function remembers `message`.
 
 ---
 
-## 7. Closure with Returned Function
+## 7. Module Pattern (IIFE-based)
+
+The **Module Pattern** combines an IIFE with closures to create a module-like structure with private state and a public API — a pattern that predates ES6 modules.
 
 ```js
-function outer() {
-  let data = "Secret";
+const bankAccount = (function () {
+  let balance = 1000; // private
 
-  return function() {
-    console.log(data);
-  };
-}
-
-const fn = outer();
-
-fn();
-```
-
----
-
-### Output
-
-```txt
-Secret
-```
-
-Returned function forms closure over `data`.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 8. Closure Scope Chain
-
-Closures can access:
-
-1. Own variables
-2. Parent variables
-3. Global variables
-
----
-
-### Example
-
-```js
-let globalVar = "Global";
-
-function outer() {
-  let outerVar = "Outer";
-
-  function inner() {
-    let innerVar = "Inner";
-
-    console.log(innerVar);
-    console.log(outerVar);
-    console.log(globalVar);
+  function log(action, amount) {
+    console.log(`${action}: $${amount} | Balance: $${balance}`);
   }
-
-  inner();
-}
-
-outer();
-```
-
----
-
-### Output
-
-```txt
-Inner
-Outer
-Global
-```
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 9. Data Hiding & Encapsulation
-
-Closures can create private variables.
-
----
-
-### Example
-
-```js
-function bankAccount() {
-  let balance = 1000;
 
   return {
     deposit(amount) {
       balance += amount;
-      console.log(balance);
+      log("Deposit", amount);
     },
-
     withdraw(amount) {
+      if (amount > balance) {
+        console.log("Insufficient funds");
+        return;
+      }
       balance -= amount;
-      console.log(balance);
-    }
+      log("Withdraw", amount);
+    },
+    getBalance() {
+      return balance;
+    },
   };
-}
+})();
 
-const account = bankAccount();
-
-account.deposit(500);
-account.withdraw(200);
-
-console.log(account.balance);
+bankAccount.deposit(500);
+bankAccount.withdraw(200);
+console.log(bankAccount.getBalance());
 ```
-
----
 
 ### Output
 
-```txt
-1500
+```js
+Deposit: $500 | Balance: $1500
+Withdraw: $200 | Balance: $1300
 1300
-undefined
 ```
-
-`balance` cannot be directly accessed.
 
 ---
 
@@ -413,33 +307,198 @@ undefined
 
 ---
 
-## 10. Function Factory
+## 8. Closure in Loops (var Problem)
 
-Closures help create reusable customized functions.
+> **Pre-requisite:** `var` hoisting and function scoping are covered in `02-Scope-Hoisting`. This section focuses only on the closure-specific behaviour.
 
----
+When `var` is used in a loop, all iterations **share the same variable** because `var` is function-scoped. Closures inside the loop all close over the **same reference**, so they all see the final value after the loop finishes.
 
-### Example
+**The Problem:**
 
 ```js
-function multiply(x) {
-  return function(y) {
-    return x * y;
-  };
+for (var i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i); // all callbacks close over the same `i`
+  }, 100);
 }
+```
 
-const double = multiply(2);
-const triple = multiply(3);
+### Output
 
-console.log(double(5));
-console.log(triple(5));
+```js
+3
+3
+3
+```
+
+**Fix 1 — IIFE (creates a new scope per iteration):**
+
+```js
+for (var i = 0; i < 3; i++) {
+  (function (j) {
+    setTimeout(function () {
+      console.log(j);
+    }, 100);
+  })(i);
+}
+```
+
+### Output
+
+```js
+0
+1
+2
+```
+
+**Fix 2 — `let` (block-scoped, new binding per iteration):**
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, 100);
+}
+```
+
+### Output
+
+```js
+0
+1
+2
 ```
 
 ---
 
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 9. Closure in setTimeout
+
+`setTimeout` callbacks are closures — they retain access to the variables in scope when they were defined. This is useful for deferred execution that still needs access to the original context.
+
+```js
+function delayedMessage(msg, delay) {
+  setTimeout(function () {
+    console.log(msg); // `msg` is captured in the closure
+  }, delay);
+}
+
+delayedMessage("Hello after 1s", 1000);
+delayedMessage("Hello after 2s", 2000);
+```
+
 ### Output
 
-```txt
+```js
+Hello after 1s    // printed after 1 second
+Hello after 2s    // printed after 2 seconds
+```
+
+A common gotcha — the closure captures the variable, not the value at the time of the call:
+
+```js
+let x = "before";
+
+setTimeout(function () {
+  console.log(x); // captures the variable `x`
+}, 0);
+
+x = "after"; // modifies x before the callback runs
+console.log(x); // "after" — synchronous, runs first
+```
+
+### Output
+
+```js
+after
+after
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 10. Memoization with Closures
+
+**Memoization** is an optimisation technique that caches the results of expensive function calls. Closures make it clean — the cache object is private and persists between calls.
+
+```js
+function memoize(fn) {
+  const cache = {}; // private cache, persists via closure
+
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (key in cache) {
+      console.log("From cache:", key);
+      return cache[key];
+    }
+    cache[key] = fn(...args);
+    return cache[key];
+  };
+}
+
+function slowSquare(n) {
+  return n * n;
+}
+
+const fastSquare = memoize(slowSquare);
+
+console.log(fastSquare(4)); // 16
+console.log(fastSquare(4)); // From cache: [4] → 16
+console.log(fastSquare(5)); // 25
+```
+
+### Output
+
+```js
+16
+From cache: [4]
+16
+25
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 11. Partial Application using Closures
+
+**Partial application** fixes some arguments of a function and returns a new function that takes the remaining arguments. The fixed arguments are captured in the closure.
+
+```js
+function multiply(a, b) {
+  return a * b;
+}
+
+function partial(fn, ...presetArgs) {
+  return function (...laterArgs) {
+    return fn(...presetArgs, ...laterArgs); // presetArgs captured in closure
+  };
+}
+
+const double = partial(multiply, 2);
+const triple = partial(multiply, 3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+```
+
+### Output
+
+```js
 10
 15
 ```
@@ -452,30 +511,43 @@ console.log(triple(5));
 
 ---
 
-## 11. Currying Using Closures
+## 12. Currying with Closures
+
+**Currying** transforms a function that takes multiple arguments into a sequence of functions each taking a single argument. Each intermediate function closes over the arguments received so far.
 
 ```js
-function add(a) {
-  return function(b) {
-    return function(c) {
-      return a + b + c;
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn(...args);
+    }
+    return function (...moreArgs) {
+      return curried(...args, ...moreArgs); // args captured in closure
     };
   };
 }
 
-console.log(add(1)(2)(3));
-```
+function add(a, b, c) {
+  return a + b + c;
+}
 
----
+const curriedAdd = curry(add);
+
+console.log(curriedAdd(1)(2)(3));  // 6
+console.log(curriedAdd(1, 2)(3));  // 6
+console.log(curriedAdd(1)(2, 3));  // 6
+console.log(curriedAdd(1, 2, 3));  // 6
+```
 
 ### Output
 
-```txt
+```js
+6
+6
+6
 6
 ```
 
-Closures preserve `a` and `b`.
-
 ---
 
 <p align="right">
@@ -484,89 +556,46 @@ Closures preserve `a` and `b`.
 
 ---
 
-## 12. Closures in Loops
+## 13. Event Listeners and Closures
 
-This is one of the most important interview topics.
-
----
-
-## Problem with `var`
+Event listener callbacks are closures — they close over variables in their defining scope. This is powerful but can cause **memory leaks** if listeners are never removed and they hold large objects in their closure.
 
 ```js
-for (var i = 1; i <= 3; i++) {
-  setTimeout(() => {
-    console.log(i);
-  }, 1000);
+function setupButton(buttonId, message) {
+  const button = document.getElementById(buttonId);
+
+  button.addEventListener("click", function () {
+    console.log(message); // `message` captured — stays in memory as long as the listener exists
+  });
 }
 ```
 
----
-
-### Output
-
-```txt
-4
-4
-4
-```
-
----
-
-### Why?
-
-- `var` is function scoped
-- Same `i` is shared
-- Loop finishes first
-- `i` becomes `4`
-
----
-
-## Solution Using `let`
+**Memory Leak Risk:**
 
 ```js
-for (let i = 1; i <= 3; i++) {
-  setTimeout(() => {
-    console.log(i);
-  }, 1000);
+function attachListener() {
+  const largeData = new Array(1_000_000).fill("data"); // held in closure
+
+  document.getElementById("btn").addEventListener("click", function () {
+    console.log(largeData[0]); // largeData cannot be GC'd while listener is alive
+  });
+  // If the listener is never removed, largeData stays in memory forever
 }
 ```
 
----
-
-### Output
-
-```txt
-1
-2
-3
-```
-
-`let` creates new binding for every iteration.
-
----
-
-## Solution Using Closure
+**Fix — Remove the listener when no longer needed:**
 
 ```js
-for (var i = 1; i <= 3; i++) {
-  function close(x) {
-    setTimeout(() => {
-      console.log(x);
-    }, 1000);
+function attachListener() {
+  const largeData = new Array(1_000_000).fill("data");
+
+  function handler() {
+    console.log(largeData[0]);
+    document.getElementById("btn").removeEventListener("click", handler);
   }
 
-  close(i);
+  document.getElementById("btn").addEventListener("click", handler);
 }
-```
-
----
-
-### Output
-
-```txt
-1
-2
-3
 ```
 
 ---
@@ -577,27 +606,51 @@ for (var i = 1; i <= 3; i++) {
 
 ---
 
-## 13. Closures with setTimeout
+## 14. Closures in React (Stale Closure)
+
+In React, closures are everywhere — `useEffect`, `useState` callbacks, and event handlers all close over component state and props. A **stale closure** happens when a function captures an outdated value of a state variable that has since changed.
+
+**Stale closure in useEffect:**
 
 ```js
-function greet(name) {
-  setTimeout(() => {
-    console.log(`Hello ${name}`);
+function Counter() {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      // This closure captures `count` from the first render: 0
+      // It never sees updated values on re-renders
+      setCount(count + 1); // stale! always sets to 0 + 1 = 1
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, []); // empty deps — effect runs once, closure captures count = 0
+}
+```
+
+**Fix 1 — Use a functional updater (no need to close over `count`):**
+
+```js
+React.useEffect(() => {
+  const id = setInterval(() => {
+    setCount(prev => prev + 1); // no closure over `count` — always fresh
   }, 1000);
-}
 
-greet("Dilkhush");
+  return () => clearInterval(id);
+}, []);
 ```
 
----
+**Fix 2 — Add `count` to the dependency array:**
 
-### Output
+```js
+React.useEffect(() => {
+  const id = setInterval(() => {
+    setCount(count + 1); // `count` is fresh on each re-run
+  }, 1000);
 
-```txt
-Hello Dilkhush
+  return () => clearInterval(id);
+}, [count]); // re-runs whenever count changes
 ```
-
-The callback remembers `name`.
 
 ---
 
@@ -607,118 +660,76 @@ The callback remembers `name`.
 
 ---
 
-## 14. Closures in Event Listeners
+## 15. Closure vs Class
+
+Both closures and classes can implement private state with public methods. Here is the same counter implemented both ways:
+
+**Closure approach:**
 
 ```js
-function attachEvent() {
-  let count = 0;
-
-  document
-    .getElementById("btn")
-    .addEventListener("click", function() {
-      count++;
-      console.log(count);
-    });
-}
-```
-
-Each click remembers previous `count`.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 15. Module Pattern
-
-Before ES6 modules, closures were used for modules.
-
----
-
-### Example
-
-```js
-const counterModule = (function() {
-  let count = 0;
+function makeCounter(initial = 0) {
+  let count = initial; // truly private — no external access
 
   return {
-    increment() {
-      count++;
-    },
-
-    getCount() {
-      return count;
-    }
+    increment: () => ++count,
+    decrement: () => --count,
+    reset:     () => { count = initial; },
+    getCount:  () => count,
   };
-})();
+}
 
-counterModule.increment();
-
-console.log(counterModule.getCount());
+const c = makeCounter(10);
+console.log(c.increment()); // 11
+console.log(c.decrement()); // 10
+console.log(c.getCount());  // 10
 ```
-
----
 
 ### Output
 
-```txt
-1
+```js
+11
+10
+10
 ```
 
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 16. Memoization
-
-Closures help store cache.
-
----
-
-### Example
+**Class approach:**
 
 ```js
-function memoizedAdd() {
-  let cache = {};
+class Counter {
+  #count; // private field (ES2022)
 
-  return function(num) {
-    if (cache[num]) {
-      console.log("Cached");
-      return cache[num];
-    }
+  constructor(initial = 0) {
+    this.#count = initial;
+  }
 
-    console.log("Calculated");
-
-    cache[num] = num + 10;
-
-    return cache[num];
-  };
+  increment() { return ++this.#count; }
+  decrement() { return --this.#count; }
+  getCount()  { return this.#count; }
 }
 
-const add = memoizedAdd();
-
-console.log(add(5));
-console.log(add(5));
+const c2 = new Counter(10);
+console.log(c2.increment()); // 11
+console.log(c2.decrement()); // 10
+console.log(c2.getCount());  // 10
 ```
-
----
 
 ### Output
 
-```txt
-Calculated
-15
-
-Cached
-15
+```js
+11
+10
+10
 ```
+
+**Key Differences:**
+
+| Aspect | Closure | Class |
+|---|---|---|
+| Privacy | Truly private (no external access) | Private with `#` fields (ES2022) |
+| Memory | Each instance has its own function copies | Methods live on the prototype (shared) |
+| Inheritance | Achieved via composition | Built-in `extends` |
+| `this` binding | Not needed (uses closed-over variables) | Required — can be lost |
+| Readability | Functional style | OOP style |
 
 ---
 
@@ -728,240 +739,110 @@ Cached
 
 ---
 
-## 17. Closures and Memory Management
+## 16. Common Closure Mistakes
 
-Closures keep variables alive in memory.
-
----
-
-### Example
+**Mistake 1 — Accidentally sharing mutable state across closures:**
 
 ```js
-function hugeMemory() {
-  let largeArray = new Array(1000000).fill("🔥");
+function makeAdders() {
+  const adders = [];
 
-  return function() {
-    console.log(largeArray[0]);
+  for (var i = 0; i < 3; i++) {
+    adders.push(function (x) { return x + i; }); // all close over the same `i`
+  }
+
+  return adders;
+}
+
+const adders = makeAdders();
+console.log(adders[0](10)); // 13, not 10 — i is 3 after the loop
+console.log(adders[1](10)); // 13
+console.log(adders[2](10)); // 13
+```
+
+### Output
+
+```js
+13
+13
+13
+```
+
+**Mistake 2 — Assuming closures copy values (they capture by reference):**
+
+```js
+let x = 10;
+const getX = () => x;
+
+x = 20; // modifies the variable the closure refers to
+console.log(getX()); // 20, not 10
+```
+
+### Output
+
+```js
+20
+```
+
+**Mistake 3 — Unintentionally holding large data in a closure:**
+
+```js
+function setup() {
+  const bigArray = new Array(1_000_000).fill(0);
+
+  return function () {
+    return bigArray.length; // only needs .length, but entire array is retained
   };
 }
-
-const data = hugeMemory();
 ```
 
-`largeArray` remains in memory because closure references it.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 18. Garbage Collection and Closures
-
-Unused memory is automatically cleaned.
-
-But variables referenced by closures are not garbage collected.
-
----
-
-### Example
+Fix: extract only the needed value before creating the closure.
 
 ```js
-let fn = hugeMemory();
+function setup() {
+  const bigArray = new Array(1_000_000).fill(0);
+  const length = bigArray.length; // extract what is needed
 
-fn = null;
-```
-
-Now memory becomes collectible.
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 19. Advantages of Closures
-
-- Data privacy
-- Encapsulation
-- Function factories
-- Currying
-- Memoization
-- Maintaining state
-- Useful in async programming
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 20. Disadvantages of Closures
-
-- Increased memory usage
-- Possible memory leaks
-- Harder debugging
-- Retained unnecessary references
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 21. Common Closure Mistakes
-
----
-
-### 1. Using `var` in loops
-
-```js
-for (var i = 0; i < 5; i++) {
-  setTimeout(() => console.log(i));
-}
-```
-
----
-
-### 2. Retaining unnecessary memory
-
-```js
-function test() {
-  let bigData = new Array(1000000);
-
-  return function() {
-    console.log(bigData);
+  return function () {
+    return length; // bigArray can now be GC'd
   };
 }
 ```
 
 ---
 
-### 3. Assuming variables are copied
-
-Closures store references, not copies.
-
----
-
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>
 </p>
 
 ---
 
-## 22. Closures vs Scope
+## 17. Memory Implications
 
-| Scope | Closure |
-|---|---|
-| Determines accessibility | Remembers variables |
-| Created during parsing | Created during function creation |
-| Static structure | Runtime behavior |
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 23. Closures vs Objects
-
-| Closures | Objects |
-|---|---|
-| Data privacy | Public properties |
-| Functional approach | OOP approach |
-| Memory efficient for small cases | Better for large structured data |
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 24. Real World Use Cases
-
-Closures are heavily used in:
-
-- React Hooks
-- Event handlers
-- Timers
-- Debouncing
-- Throttling
-- Memoization
-- State management
-- Currying
-- Module patterns
-- API wrappers
-
----
-
-<p align="right">
-  <a href="#table-of-contents">⬆ Back to Top</a>
-</p>
-
----
-
-## 25. Important Interview Points
-
----
-
-### 1. Do closures copy variables?
-
-No.
-
-Closures store references.
-
----
-
-### 2. Are closures only created when functions return?
-
-No.
-
-Any inner function accessing outer variables creates closure.
-
----
-
-### 3. Can closures access updated values?
-
-Yes.
+Closures keep the variables they close over **alive in memory** as long as the closure itself is reachable. This is the expected behaviour — but it becomes a problem when large objects are retained unintentionally.
 
 ```js
 function outer() {
-  let count = 0;
+  const bigArray = new Array(1_000_000).fill(0); // ~8 MB
 
-  return function() {
-    count++;
-    console.log(count);
+  return function inner() {
+    return bigArray[0]; // only uses one element, but keeps the entire array alive
   };
 }
+
+const fn = outer(); // bigArray cannot be GC'd while fn is alive
+fn();
+
+// Fix: null out the reference when done
+// fn = null; // now bigArray can be garbage collected
 ```
 
----
+**Best Practices:**
 
-### 4. Do arrow functions create closures?
-
-Yes.
-
-Arrow functions also form closures.
-
----
-
-### 5. Are closures memory efficient?
-
-Not always.
-
-Improper usage can increase memory usage.
+- Null out closure references when they are no longer needed.
+- Avoid closing over large objects when only a small part is needed — extract the needed value into a smaller variable first.
+- Remove event listeners when components unmount or are destroyed.
+- Be careful with global variables that hold closures — they live for the entire lifetime of the page.
 
 ---
 
@@ -971,22 +852,210 @@ Improper usage can increase memory usage.
 
 ---
 
-## 26. Summary
+## 18. Once Function
 
-- Closures allow functions to remember outer variables
-- Closures depend on lexical scope
-- Closures preserve lexical environment
-- Used for encapsulation and state management
-- Commonly used in async JavaScript
-- Closures can cause memory leaks if misused
+A **once function** ensures a wrapped function executes only once — subsequent calls are no-ops that return the cached result. The `called` flag and `result` variable live in the closure and survive across calls.
+
+```js
+function once(fn) {
+  let called = false;
+  let result;
+
+  return function (...args) {
+    if (!called) {
+      called = true;
+      result = fn(...args);
+    }
+    return result;
+  };
+}
+
+const init = once(function () {
+  console.log("Initialised!");
+  return 42;
+});
+
+console.log(init()); // Initialised! → 42
+console.log(init()); // (no log) → 42
+console.log(init()); // (no log) → 42
+```
+
+### Output
+
+```js
+Initialised!
+42
+42
+42
+```
 
 ---
 
-## Final Definition
-
-> A closure is a function bundled together with its lexical environment, allowing it to access outer scope variables even after the outer function has completed execution.
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
+
+## 19. Compose / Pipe using Closures
+
+**Compose** and **Pipe** are higher-order functions that chain other functions together. The `fns` array is captured in the closure returned by each.
+
+**Compose (right-to-left execution):**
+
+```js
+function compose(...fns) {
+  return function (value) {
+    return fns.reduceRight((acc, fn) => fn(acc), value);
+  };
+}
+
+const double  = x => x * 2;
+const addTen  = x => x + 10;
+const square  = x => x * x;
+
+const transform = compose(square, addTen, double);
+// execution order: double → addTen → square
+
+console.log(transform(3)); // double(3)=6, addTen(6)=16, square(16)=256
+```
+
+### Output
+
+```js
+256
+```
+
+**Pipe (left-to-right execution):**
+
+```js
+function pipe(...fns) {
+  return function (value) {
+    return fns.reduce((acc, fn) => fn(acc), value);
+  };
+}
+
+const process = pipe(double, addTen, square);
+// execution order: double → addTen → square
+
+console.log(process(3)); // double(3)=6, addTen(6)=16, square(16)=256
+```
+
+### Output
+
+```js
+256
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 20. Interview Q: What Gets Captured?
+
+One of the most nuanced closure questions: **does a closure capture the value or the reference?**
+
+**Answer: Closures capture the variable binding (reference), not the value.**
+
+**Primitives — closure sees the current value of the variable:**
+
+```js
+function test() {
+  let num = 1;
+  const inner = () => num;
+  num = 2; // update after inner is defined
+  return inner;
+}
+
+console.log(test()()); // 2 — sees the updated value, not 1
+```
+
+### Output
+
+```js
+2
+```
+
+**Objects — closure sees mutations to the same object:**
+
+```js
+function test() {
+  const obj = { a: 1 };
+  const inner = () => obj.a;
+  obj.a = 99; // mutates the same object
+  return inner;
+}
+
+console.log(test()()); // 99
+```
+
+### Output
+
+```js
+99
+```
+
+**Reassignment — closure sees the new reference:**
+
+```js
+function test() {
+  let obj = { a: 1 };
+  const inner = () => obj.a;
+  obj = { a: 99 }; // reassigns the variable to a new object
+  return inner;
+}
+
+console.log(test()()); // 99 — closure tracks the variable, which now points to { a: 99 }
+```
+
+### Output
+
+```js
+99
+```
+
+**Key Rule:** Closures close over **variables** (bindings), not values. Whatever the variable holds at the time the inner function **executes** is what you get — not what it held when the inner function was **defined**.
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 21. Summary
+
+| Topic | Key Point |
+|---|---|
+| Definition | A closure = function + its lexical environment |
+| Memory model | Inner function holds a live reference to outer scope; outer variables are not GC'd while closure is reachable |
+| Private variables | Variables in outer scope are inaccessible from outside — only the closure can read or modify them |
+| Counter pattern | Each `makeCounter()` call creates an independent closure with its own state |
+| Factory functions | Closures parameterise behaviour at creation time — each call produces independent state |
+| Module pattern | IIFE + closure = private state + public API |
+| Loop + `var` | All iterations share the same `var` binding — use `let` or an IIFE to create per-iteration scope |
+| `setTimeout` | Callbacks are closures — they see the variable value at execution time, not at definition time |
+| Memoization | Cache object persists across calls via closure |
+| Partial application | Pre-set arguments are captured in the closure and prepended on each call |
+| Currying | Each nested function closes over previously received args |
+| Event listeners | Closures can cause memory leaks if listeners are never removed |
+| Stale closure (React) | Old render's state captured — fix with functional updaters or correct dependency arrays |
+| Closure vs Class | Closures: truly private, functional style; Classes: prototype methods shared, OOP style |
+| Memory implications | Closed-over variables stay in memory as long as the closure is reachable — null out when done |
+| Once function | `called` flag and `result` live in the closure — survive across calls |
+| Compose / Pipe | Higher-order functions that chain closures together |
+| Value vs reference | Closures capture the variable binding — both primitives and objects captured by reference to the binding |
+
+---
+
+## Final Notes
+
+Closures are one of the most powerful and frequently misunderstood features in JavaScript. They are the foundation of the Module Pattern, memoization, currying, partial application, higher-order functions, and much of React's hook model. The single most important concept to internalise is that a closure captures the **variable binding**, not a snapshot of the value — so the closure always sees the most current value of any closed-over variable. Understanding this is essential for writing correct, predictable JavaScript and for acing every closure question in an interview.
 
 <p align="right">
   <a href="#table-of-contents">⬆ Back to Top</a>

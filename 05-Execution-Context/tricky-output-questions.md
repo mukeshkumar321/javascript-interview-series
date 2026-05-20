@@ -1,395 +1,415 @@
-# 🚀 JavaScript Execution Context — Tricky Output Questions
+# Execution Context — Tricky Output Questions
 
-# 📚 Table of Contents
-
-- [1. Global Execution Context](#1-global-execution-context)
-- [2. Memory Creation Phase](#2-memory-creation-phase)
-- [3. Code Execution Phase](#3-code-execution-phase)
-- [4. Hoisting in Execution Context](#4-hoisting-in-execution-context)
-- [5. Function Execution Context](#5-function-execution-context)
-- [6. Scope Chain](#6-scope-chain)
-- [7. Lexical Environment](#7-lexical-environment)
-- [8. Variable Environment](#8-variable-environment)
-- [9. Temporal Dead Zone](#9-temporal-dead-zone)
-- [10. Call Stack](#10-call-stack)
-- [11. Nested Execution Context](#11-nested-execution-context)
-- [12. `this` Binding](#12-this-binding)
-- [13. Closures and Execution Context](#13-closures-and-execution-context)
-- [14. Strict Mode](#14-strict-mode)
-- [15. Browser vs Node.js](#15-browser-vs-nodejs)
-- [16. Mixed Concept Questions](#16-mixed-concept-questions)
+## Table of Contents
+1. [Call Stack Questions](#1-call-stack-questions)
+2. [Memory Phase Questions](#2-memory-phase-questions)
+3. [Execution Order Questions](#3-execution-order-questions)
+4. [Stack Overflow Questions](#4-stack-overflow-questions)
+5. [Nested Execution Questions](#5-nested-execution-questions)
+6. [Advanced Execution Context Questions](#6-advanced-execution-context-questions)
 
 ---
 
-# 1. Global Execution Context
+## 1. Call Stack Questions
 
 ---
 
-## Question 1
+### Q1. What will be the output?
 
 ```js
-console.log(a);
-
-var a = 10;
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-```
-
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-During memory creation phase:
-
-```txt
-a -> undefined
-```
-
-So `a` exists before execution.
-
-</details>
-
----
-
-## Question 2
-
-```js
-console.log(a);
-let a = 10;
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-ReferenceError
-```
-
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-`let` is hoisted but remains inside Temporal Dead Zone.
-
-</details>
-
----
-
-## Question 3
-
-```js
-console.log(this);
-```
-
-<details>
-<summary>✅ Output</summary>
-
-### Browser
-
-```txt
-window object
-```
-
-### Node.js
-
-```txt
-{}
-```
-
-or
-
-```txt
-module.exports
-```
-
-</details>
-
----
-
-# 2. Memory Creation Phase
-
----
-
-## Question 4
-
-```js
-console.log(a);
-console.log(b);
-
-var a = 1;
-var b = 2;
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-undefined
-```
-
-</details>
-
----
-
-## Question 5
-
-```js
-console.log(test);
-
-function test() {}
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-[Function: test]
-```
-
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-Function declarations are fully hoisted.
-
-</details>
-
----
-
-## Question 6
-
-```js
-console.log(test);
-
-var test = function () {};
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-```
-
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-Only variable declaration is hoisted.
-
-Function expression is not initialized during memory phase.
-
-</details>
-
----
-
-# 3. Code Execution Phase
-
----
-
-## Question 7
-
-```js
-var a = 10;
-
-console.log(a);
-
-a = 20;
-
-console.log(a);
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-10
-20
-```
-
-</details>
-
----
-
-## Question 8
-
-```js
-var a = 10;
-
-function test() {
-  console.log(a);
+function a() {
+  console.log("a");
+  b();
 }
 
-test();
+function b() {
+  console.log("b");
+  c();
+}
 
-var a = 20;
+function c() {
+  console.log("c");
+}
+
+a();
+console.log("done");
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-10
+a
+b
+c
+done
 ```
+
+### Explanation
+`a()` is pushed to the call stack and logs `"a"`, then calls `b()`. `b` is pushed, logs `"b"`, then calls `c()`. `c` is pushed, logs `"c"`, then returns (popped). `b` resumes and returns (popped). `a` resumes and returns (popped). Finally, `console.log("done")` runs in the Global EC.
 
 </details>
 
 ---
 
-# 4. Hoisting in Execution Context
+### Q2. What will be the output?
+
+```js
+function first() {
+  console.log("first - start");
+  second();
+  console.log("first - end");
+}
+
+function second() {
+  console.log("second - start");
+  console.log("second - end");
+}
+
+console.log("global - start");
+first();
+console.log("global - end");
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+global - start
+first - start
+second - start
+second - end
+first - end
+global - end
+```
+
+### Explanation
+Code runs synchronously and the call stack is LIFO. `global - start` runs in the Global EC, then `first` is pushed, logs `"first - start"`, calls `second`. `second` logs both its lines and returns (popped). `first` resumes, logs `"first - end"`, and returns. Back in Global EC, `global - end` runs.
+
+</details>
 
 ---
 
-## Question 9
+### Q3. What will be the output?
 
 ```js
-foo();
+function foo() {
+  return bar();
+}
+
+function bar() {
+  return baz();
+}
+
+function baz() {
+  return 42;
+}
+
+console.log(foo());
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+42
+```
+
+### Explanation
+`foo` calls `bar`, which calls `baz`. `baz` returns `42` → `bar` returns `42` → `foo` returns `42`. Each EC is pushed and popped in sequence. `console.log` receives the final return value `42`.
+
+</details>
+
+---
+
+### Q4. What will be the output?
+
+```js
+function x() {
+  console.log("x");
+  y();
+  console.log("x again");
+}
+
+function y() {
+  console.log("y");
+}
+
+x();
+y();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+x
+y
+x again
+y
+```
+
+### Explanation
+`x()` is called first: logs `"x"`, then calls `y()` (logs `"y"`), then logs `"x again"`. After `x` returns, `y()` is called directly from the global EC and logs `"y"` again.
+
+</details>
+
+---
+
+### Q5. What will be the output?
+
+```js
+function greet() {
+  var name = "World";
+  console.log("Hello, " + name);
+}
+
+greet();
+console.log(typeof name);
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+Hello, World
+undefined
+```
+
+### Explanation
+`name` is declared inside the `greet` function EC. Once `greet` returns and its EC is destroyed, `name` is no longer accessible. `typeof name` in the Global EC returns `"undefined"` because `name` does not exist in the global scope (no `var name` at the top level).
+
+</details>
+
+---
+
+## 2. Memory Phase Questions
+
+---
+
+### Q6. What will be the output?
+
+```js
+console.log(a);
+var a = 5;
+console.log(a);
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+undefined
+5
+```
+
+### Explanation
+During the memory creation phase, `var a` is hoisted and initialized to `undefined`. The first `console.log(a)` runs before the assignment, so it sees `undefined`. After the code execution phase assigns `a = 5`, the second log prints `5`.
+
+</details>
+
+---
+
+### Q7. What will be the output?
+
+```js
+console.log(typeof foo);
+console.log(typeof bar);
 
 function foo() {
-  console.log("Hello");
+  return 1;
 }
-```
 
-<details>
-<summary>✅ Output</summary>
-
-```txt
-Hello
-```
-
-</details>
-
----
-
-## Question 10
-
-```js
-foo();
-
-var foo = function () {
-  console.log("Hello");
+var bar = function () {
+  return 2;
 };
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-TypeError: foo is not a function
+function
+undefined
 ```
 
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-During memory phase:
-
-```txt
-foo -> undefined
-```
-
-Then:
-
-```js
-foo()
-```
-
-becomes:
-
-```js
-undefined()
-```
+### Explanation
+During the memory phase: `foo` (function declaration) is fully hoisted as a function. `bar` (function expression assigned to `var`) is hoisted as `undefined` — only the `var bar` declaration is hoisted, not the assignment. `typeof foo` is `"function"`, `typeof bar` is `"undefined"`.
 
 </details>
 
 ---
 
-# 5. Function Execution Context
-
----
-
-## Question 11
+### Q8. What will be the output?
 
 ```js
-function a() {
-  console.log("A");
-}
+let x = 1;
+console.log(x);
 
-function b() {
-  a();
-  console.log("B");
+{
+  console.log(x);
+  let x = 2;
+  console.log(x);
 }
-
-b();
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-A
-B
+1
+// ReferenceError: Cannot access 'x' before initialization
 ```
+
+### Explanation
+Inside the block, `let x = 2` is hoisted to the top of the block but placed in the Temporal Dead Zone (TDZ) until the declaration line. The second `console.log(x)` — before `let x = 2` — accesses `x` while it is in the TDZ, throwing a `ReferenceError`. The block's `x` shadows the outer `x`.
 
 </details>
 
 ---
 
-## Question 12
+### Q9. What will be the output?
+
+```js
+var x = 10;
+
+function outer() {
+  console.log(x);
+  var x = 20;
+  console.log(x);
+}
+
+outer();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+undefined
+20
+```
+
+### Explanation
+Inside `outer`'s execution context, `var x = 20` is hoisted to the top of the function (not the global `x`). During the memory creation phase of `outer`'s EC, the local `x` is `undefined`. The first `console.log(x)` reads the local (hoisted but not yet assigned) `x` — `undefined`. Then `x = 20` is assigned, so the second log prints `20`.
+
+</details>
+
+---
+
+### Q10. What will be the output?
+
+```js
+console.log(sum(2, 3));
+console.log(multiply(2, 3));
+
+function sum(a, b) {
+  return a + b;
+}
+
+var multiply = function (a, b) {
+  return a * b;
+};
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+5
+// TypeError: multiply is not a function
+```
+
+### Explanation
+`sum` is a function declaration — fully hoisted with its body, so `sum(2, 3)` works and returns `5`. `multiply` is a `var` holding a function expression — only the `var multiply` is hoisted (as `undefined`). Calling `multiply(2, 3)` before the assignment is like calling `undefined(2, 3)`, throwing a `TypeError`.
+
+</details>
+
+---
+
+### Q11. What will be the output?
 
 ```js
 function test() {
-  var a = 10;
-
-  console.log(a);
+  console.log(a, b, c);
+  var a = 1;
+  let b = 2;
+  const c = 3;
 }
 
 test();
-
-console.log(a);
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-10
-ReferenceError
+// ReferenceError: Cannot access 'b' before initialization
 ```
+
+### Explanation
+`var a` is hoisted to `undefined`, so `a` would print `undefined`. However, `let b` and `const c` are in the TDZ when `console.log` executes. The engine throws a `ReferenceError` for `b` before even evaluating `c`.
 
 </details>
 
 ---
 
-# 6. Scope Chain
+## 3. Execution Order Questions
 
 ---
 
-## Question 13
+### Q12. What will be the output?
 
 ```js
-var a = 1;
+var n = 1;
 
+function fn() {
+  var n = 2;
+  console.log(n);
+}
+
+fn();
+console.log(n);
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+2
+1
+```
+
+### Explanation
+Each execution context has its own variable environment. Inside `fn`, `var n = 2` creates a local `n` in `fn`'s EC. The global `n = 1` is unaffected. `fn()` logs its local `2`. After `fn` returns, global `n` remains `1`.
+
+</details>
+
+---
+
+### Q13. What will be the output?
+
+```js
 function outer() {
-  var b = 2;
+  var x = 10;
 
   function inner() {
-    var c = 3;
-
-    console.log(a, b, c);
+    console.log(x);
   }
 
+  x = 20;
   inner();
 }
 
@@ -397,800 +417,718 @@ outer();
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-1 2 3
+20
 ```
+
+### Explanation
+`inner` closes over `outer`'s variable environment. It does not capture the **value** of `x` at the time `inner` is defined — it captures a **live reference** to the variable `x`. By the time `inner()` is called, `x` has been updated to `20`, so that is what is logged.
 
 </details>
 
 ---
 
-## Question 14
+### Q14. What will be the output?
 
 ```js
-var a = 10;
+for (var i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, 0);
+}
+```
 
-function test() {
-  console.log(a);
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
 
-  var a = 20;
+### Output
+```txt
+3
+3
+3
+```
+
+### Explanation
+`var i` is function-scoped (or global here), so all three `setTimeout` callbacks share a reference to the **same** `i` in the Global EC. The loop completes (i = 3) before any callback runs. When they execute, they all read `i = 3`.
+
+</details>
+
+---
+
+### Q15. What will be the output?
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, 0);
+}
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+0
+1
+2
+```
+
+### Explanation
+`let` is block-scoped. Each iteration of the `for` loop creates a **new lexical environment** with its own `i`. Each `setTimeout` callback closes over a different `i` binding. When they run, they each read their own saved value.
+
+</details>
+
+---
+
+### Q16. What will be the output?
+
+```js
+function makeAdder(x) {
+  return function (y) {
+    return x + y;
+  };
 }
 
-test();
+const add5 = makeAdder(5);
+const add10 = makeAdder(10);
+
+console.log(add5(3));
+console.log(add10(3));
+console.log(add5(add10(1)));
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-undefined
+8
+13
+16
 ```
 
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-Inside function:
-
-```txt
-a -> undefined
-```
-
-Local variable shadows global variable.
+### Explanation
+Each call to `makeAdder` creates a new EC with its own `x`. `add5` closes over `x = 5`, `add10` over `x = 10`. `add5(3)` → `5+3=8`. `add10(3)` → `10+3=13`. `add10(1)` → `11`, then `add5(11)` → `16`.
 
 </details>
 
 ---
 
-# 7. Lexical Environment
+## 4. Stack Overflow Questions
 
 ---
 
-## Question 15
+### Q17. What will be the output?
+
+```js
+function loop() {
+  loop();
+}
+
+try {
+  loop();
+} catch (e) {
+  console.log(e.name);
+}
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+RangeError
+```
+
+### Explanation
+`loop` calls itself indefinitely, continuously pushing new ECs onto the call stack until the stack exceeds its maximum size. JavaScript throws a `RangeError` with the message `"Maximum call stack size exceeded"`. The `try/catch` catches it and logs the error name.
+
+</details>
+
+---
+
+### Q18. What will be the output?
+
+```js
+function count(n) {
+  if (n === 0) return "done";
+  return count(n - 1);
+}
+
+console.log(count(3));
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+done
+```
+
+### Explanation
+`count(3)` calls `count(2)` → `count(1)` → `count(0)`. At `n === 0`, it returns `"done"`. Each return value propagates back up the chain. No overflow because the recursion has a clear base case and depth is only 4.
+
+</details>
+
+---
+
+### Q19. What will be the output?
+
+```js
+function isMutuallyRecursive(n) {
+  if (n <= 0) return "base";
+  return isEven(n);
+}
+
+function isEven(n) {
+  return isMutuallyRecursive(n - 1);
+}
+
+try {
+  console.log(isMutuallyRecursive(50000));
+} catch (e) {
+  console.log(e.name + ": stack exhausted");
+}
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+RangeError: stack exhausted
+```
+
+### Explanation
+Even with a base case, calling 50000 levels of mutual recursion pushes ~50000 EC pairs onto the stack, exhausting it. JavaScript engines typically allow ~10,000–15,000 stack frames. The `RangeError` is caught and logged.
+
+</details>
+
+---
+
+## 5. Nested Execution Questions
+
+---
+
+### Q20. What will be the output?
+
+```js
+var result = [];
+
+function buildFunctions() {
+  for (var i = 0; i < 3; i++) {
+    result.push(function () {
+      console.log(i);
+    });
+  }
+}
+
+buildFunctions();
+result[0]();
+result[1]();
+result[2]();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+3
+3
+3
+```
+
+### Explanation
+`var i` is scoped to `buildFunctions`'s EC (not the loop block). All three pushed functions close over the same `i` variable. After the loop, `i = 3`. All three functions read `3` when invoked.
+
+</details>
+
+---
+
+### Q21. What will be the output?
+
+```js
+var result = [];
+
+function buildFunctions() {
+  for (var i = 0; i < 3; i++) {
+    result.push(
+      (function (j) {
+        return function () {
+          console.log(j);
+        };
+      })(i)
+    );
+  }
+}
+
+buildFunctions();
+result[0]();
+result[1]();
+result[2]();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+0
+1
+2
+```
+
+### Explanation
+An IIFE (Immediately Invoked Function Expression) is used to create a **new execution context** for each iteration, capturing the current value of `i` as `j`. Each inner function closes over a different `j`, giving `0`, `1`, `2`.
+
+</details>
+
+---
+
+### Q22. What will be the output?
 
 ```js
 function outer() {
-  let a = 10;
+  var count = 0;
 
   function inner() {
-    console.log(a);
+    count++;
+    console.log(count);
   }
 
   return inner;
 }
 
-const fn = outer();
+const fn1 = outer();
+const fn2 = outer();
 
-fn();
+fn1(); fn1(); fn1();
+fn2(); fn2();
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
-```txt
-10
-```
-
-</details>
-
----
-
-## Question 16
-
-```js
-let a = 1;
-
-function x() {
-  let a = 2;
-
-  function y() {
-    console.log(a);
-  }
-
-  y();
-}
-
-x();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-2
-```
-
-</details>
-
----
-
-# 8. Variable Environment
-
----
-
-## Question 17
-
-```js
-var a = 1;
-
-function test() {
-  var a = 2;
-
-  console.log(a);
-}
-
-test();
-
-console.log(a);
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-2
-1
-```
-
-</details>
-
----
-
-# 9. Temporal Dead Zone
-
----
-
-## Question 18
-
-```js
-{
-  console.log(a);
-
-  let a = 10;
-}
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-ReferenceError
-```
-
-</details>
-
----
-
-## Question 19
-
-```js
-{
-  let a = 10;
-
-  console.log(a);
-}
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-10
-```
-
-</details>
-
----
-
-## Question 20
-
-```js
-console.log(a);
-
-const a = 100;
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-ReferenceError
-```
-
-</details>
-
----
-
-# 10. Call Stack
-
----
-
-## Question 21
-
-```js
-function one() {
-  two();
-  console.log("One");
-}
-
-function two() {
-  three();
-  console.log("Two");
-}
-
-function three() {
-  console.log("Three");
-}
-
-one();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-Three
-Two
-One
-```
-
-</details>
-
----
-
-## Question 22
-
-```js
-function a() {
-  console.log("A");
-}
-
-function b() {
-  a();
-}
-
-function c() {
-  b();
-}
-
-c();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-A
-```
-
-</details>
-
----
-
-# 11. Nested Execution Context
-
----
-
-## Question 23
-
-```js
-function a() {
-  console.log("A");
-
-  function b() {
-    console.log("B");
-  }
-
-  b();
-}
-
-a();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-A
-B
-```
-
-</details>
-
----
-
-# 12. `this` Binding
-
----
-
-## Question 24
-
-```js
-function test() {
-  console.log(this);
-}
-
-test();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-### Browser
-
-```txt
-window
-```
-
-### Strict Mode
-
-```txt
-undefined
-```
-
-</details>
-
----
-
-## Question 25
-
-```js
-const obj = {
-  name: "JS",
-  show() {
-    console.log(this.name);
-  }
-};
-
-obj.show();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-JS
-```
-
-</details>
-
----
-
-## Question 26
-
-```js
-const obj = {
-  name: "JS",
-  show: () => {
-    console.log(this.name);
-  }
-};
-
-obj.show();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-```
-
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-Arrow functions don't have their own `this`.
-
-</details>
-
----
-
-# 13. Closures and Execution Context
-
----
-
-## Question 27
-
-```js
-function outer() {
-  let count = 0;
-
-  return function inner() {
-    count++;
-    console.log(count);
-  };
-}
-
-const fn = outer();
-
-fn();
-fn();
-fn();
-```
-
-<details>
-<summary>✅ Output</summary>
-
+### Output
 ```txt
 1
 2
 3
+1
+2
 ```
+
+### Explanation
+Each call to `outer()` creates a **new execution context** with a new, independent `count = 0`. `fn1` and `fn2` close over separate `count` variables. Calling `fn1` three times increments its own `count` to `3`. Calling `fn2` twice increments its own `count` to `2`.
 
 </details>
 
 ---
 
-## Question 28
+### Q23. What will be the output?
 
 ```js
-function test() {
-  var a = 10;
+function parent() {
+  let val = "parent";
 
-  return function () {
-    console.log(a);
+  function child() {
+    let val = "child";
+
+    function grandchild() {
+      console.log(val);
+    }
+
+    grandchild();
+  }
+
+  child();
+  console.log(val);
+}
+
+parent();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+child
+parent
+```
+
+### Explanation
+`grandchild` looks up `val` through its scope chain: finds `val = "child"` in `child`'s lexical environment and logs it. After `child()` returns, `parent` logs its own `val = "parent"`. Each EC has its own `val` — they shadow each other, not overwrite.
+
+</details>
+
+---
+
+### Q24. What will be the output?
+
+```js
+function createMultiplier(factor) {
+  return {
+    multiply(n) {
+      return factor * n;
+    },
+    multiplyTwice(n) {
+      return this.multiply(this.multiply(n));
+    },
   };
 }
 
-const fn = test();
-
-fn();
+const triple = createMultiplier(3);
+console.log(triple.multiply(4));
+console.log(triple.multiplyTwice(2));
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-10
+12
+18
 ```
+
+### Explanation
+`triple.multiply(4)` → `3 * 4 = 12`. `triple.multiplyTwice(2)` calls `this.multiply(2)` → `6`, then `this.multiply(6)` → `18`. `factor` is captured from `createMultiplier`'s EC via closure.
 
 </details>
 
 ---
 
-# 14. Strict Mode
-
----
-
-## Question 29
+### Q25. What will be the output?
 
 ```js
-"use strict";
+let x = "global";
 
-function test() {
-  console.log(this);
+function foo() {
+  let x = "foo";
+  bar();
 }
 
-test();
+function bar() {
+  console.log(x);
+}
+
+foo();
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-undefined
+global
 ```
+
+### Explanation
+This demonstrates **lexical (static) scoping**. `bar`'s outer environment reference points to the Global EC (where `bar` was **defined**), not to `foo`'s EC (where `bar` was **called**). `x` in `bar`'s scope chain resolves to `"global"`.
 
 </details>
 
 ---
 
-## Question 30
-
-```js
-"use strict";
-
-a = 10;
-
-console.log(a);
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-ReferenceError
-```
-
-</details>
+## 6. Advanced Execution Context Questions
 
 ---
 
-# 15. Browser vs Node.js
-
----
-
-## Question 31
+### Q26. What will be the output?
 
 ```js
-var a = 10;
+function test() {
+  console.log(arguments[0]);
+  console.log(arguments[1]);
+}
 
-console.log(window.a);
+test(10, 20, 30);
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
-### Browser
-
+### Output
 ```txt
 10
+20
 ```
 
-### Node.js
-
-```txt
-ReferenceError
-```
+### Explanation
+The `arguments` object is part of the Function EC's variable environment. It holds all passed arguments regardless of formal parameter count. `arguments[0]` is `10`, `arguments[1]` is `20`. `arguments[2]` (30) exists but is not logged.
 
 </details>
 
 ---
 
-## Question 32
+### Q27. What will be the output?
 
 ```js
-console.log(this);
+function outer() {
+  var x = 10;
+
+  function inner() {
+    var x = 20;
+    return x;
+  }
+
+  return inner() + x;
+}
+
+console.log(outer());
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
-### Browser
-
+### Output
 ```txt
-window
+30
 ```
 
-### Node.js
-
-```txt
-{}
-```
+### Explanation
+`inner()` creates its own EC with `x = 20` and returns `20`. Back in `outer`'s EC, `x` is still `10`. `inner() + x` → `20 + 10 = 30`. The two `x` variables are completely independent.
 
 </details>
 
 ---
 
-# 16. Mixed Concept Questions
+### Q28. What will be the output?
+
+```js
+function counter() {
+  var count = 0;
+  return {
+    increment() { count++; },
+    decrement() { count--; },
+    value()     { return count; },
+  };
+}
+
+const c = counter();
+c.increment();
+c.increment();
+c.increment();
+c.decrement();
+console.log(c.value());
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+2
+```
+
+### Explanation
+`counter()` returns an object whose three methods all close over the same `count` variable in `counter`'s (now-destroyed) EC. Three increments and one decrement: `0 + 3 - 1 = 2`.
+
+</details>
 
 ---
 
-## Question 33
+### Q29. What will be the output?
 
 ```js
 var x = 1;
 
 function a() {
-  console.log(x);
-
   var x = 2;
+  b();
+}
+
+function b() {
+  var x = 3;
+  c();
+}
+
+function c() {
+  console.log(x);
 }
 
 a();
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
-```txt
-undefined
-```
-
-</details>
-
----
-
-## Question 34
-
-```js
-var x = 1;
-
-function a() {
-  console.log(x);
-}
-
-function b() {
-  var x = 10;
-
-  a();
-}
-
-b();
-```
-
-<details>
-<summary>✅ Output</summary>
-
+### Output
 ```txt
 1
 ```
 
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-JavaScript uses lexical scope, not dynamic scope.
+### Explanation
+`c` is defined at the global level. Its outer environment reference is the Global EC, where `x = 1`. Despite being **called** from within `b`, which is called from `a`, the scope chain of `c` only goes through its **lexical** ancestors — which is just the Global EC. So `x` resolves to the global `1`.
 
 </details>
 
 ---
 
-## Question 35
+### Q30. What will be the output?
 
 ```js
-function outer() {
-  let x = 10;
+function init() {
+  var name = "init";
 
-  return function inner() {
-    console.log(x);
+  function display() {
+    console.log(name);
+  }
+
+  return display;
+}
+
+const fn = init();
+fn();
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+init
+```
+
+### Explanation
+Classic closure demonstration. `init()` returns `display`. Even after `init`'s EC is popped off the call stack, the `name` binding lives on in `display`'s closed-over lexical environment. Calling `fn()` logs `"init"`.
+
+</details>
+
+---
+
+### Q31. What will be the output?
+
+```js
+var funcs = [];
+
+for (var i = 0; i < 5; i++) {
+  funcs[i] = function () { return i * i; };
+}
+
+console.log(funcs[0]());
+console.log(funcs[2]());
+console.log(funcs[4]());
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+```txt
+25
+25
+25
+```
+
+### Explanation
+`var i` is in the Global EC (or the enclosing function if there were one). All five functions share the same `i`. After the loop completes, `i = 5`. When called, all functions compute `5 * 5 = 25`.
+
+</details>
+
+---
+
+### Q32. What will be the output?
+
+```js
+function memoize(fn) {
+  const cache = {};
+  return function (n) {
+    if (n in cache) {
+      console.log("cached:", n);
+      return cache[n];
+    }
+    console.log("computing:", n);
+    cache[n] = fn(n);
+    return cache[n];
   };
 }
 
-const fn1 = outer();
-const fn2 = outer();
+const square = memoize(function (x) { return x * x; });
 
-fn1();
-fn2();
+console.log(square(4));
+console.log(square(4));
+console.log(square(5));
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
-10
-10
+computing: 4
+16
+cached: 4
+16
+computing: 5
+25
 ```
+
+### Explanation
+`memoize` returns a closure that captures `cache` from `memoize`'s EC. First call with `4`: not in cache, computes `16` and stores it. Second call with `4`: found in cache, returns `16` without recomputing. Call with `5`: not in cache, computes and stores `25`.
 
 </details>
 
 ---
 
-## Question 36
+### Q33. What will be the output?
 
 ```js
-var a = 10;
+function outer() {
+  let shared = 0;
 
-(function () {
-  console.log(a);
+  const inc = () => { shared++; return shared; };
+  const dec = () => { shared--; return shared; };
+  const get = () => shared;
 
-  var a = 20;
-})();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-```
-
-</details>
-
----
-
-## Question 37
-
-```js
-let a = 10;
-
-{
-  console.log(a);
-
-  let a = 20;
-}
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-ReferenceError
-```
-
-</details>
-
----
-
-## Question 38
-
-```js
-function test(a, b) {
-  console.log(a);
-  console.log(b);
+  return [inc, dec, get];
 }
 
-test(1);
+const [inc, dec, get] = outer();
+
+console.log(inc());
+console.log(inc());
+console.log(dec());
+console.log(get());
 ```
 
 <details>
-<summary>✅ Output</summary>
+<summary><strong>Show Output & Explanation</strong></summary>
 
+### Output
 ```txt
 1
-undefined
-```
-
-</details>
-
----
-
-## Question 39
-
-```js
-function test() {
-  console.log(a);
-
-  if (true) {
-    var a = 10;
-  }
-}
-
-test();
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-```
-
-</details>
-
----
-
-## Question 40
-
-```js
-var a = 1;
-
-function test() {
-  console.log(a);
-
-  a = 10;
-
-  console.log(a);
-
-  var a = 100;
-
-  console.log(a);
-}
-
-test();
-
-console.log(a);
-```
-
-<details>
-<summary>✅ Output</summary>
-
-```txt
-undefined
-10
-100
+2
+1
 1
 ```
 
-</details>
-
-<details>
-<summary>🧠 Explanation</summary>
-
-Inside function:
-
-```txt
-var a -> undefined
-```
-
-Local variable shadows global variable.
+### Explanation
+All three arrow functions close over the same `shared` variable in `outer`'s lexical environment. `inc()` twice → `shared` becomes `2`. `dec()` → `shared` becomes `1`. `get()` returns the current value `1`.
 
 </details>
 
 ---
+
+## Final Tips
+
+- The call stack is LIFO — the last function pushed is the first to complete and be popped.
+- The **memory creation phase** happens before any line of code executes — this is why `var` declarations and function declarations are available before their line in the source.
+- `let` and `const` are hoisted but live in the **TDZ** — accessing them before their declaration is a `ReferenceError`, not `undefined`.
+- Functions declared inside other functions get their **outer environment reference** set to the enclosing function's lexical environment at **definition** time, not call time — this is lexical (static) scoping.
+- Closures keep the outer EC's variable environment alive even after the function returns — only a garbage collector can clean them up when no references remain.
+- Recursive functions with no base case will always cause a `RangeError: Maximum call stack size exceeded`.
+- Each call to a factory/outer function creates a **new, independent** EC and closure — two calls to `counter()` produce two separate `count` variables.
+- The classic `var` in a `for` loop closure bug (`3 3 3` vs `0 1 2`) is one of the most common execution-context interview traps — remember `let` creates a new binding per iteration.
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>

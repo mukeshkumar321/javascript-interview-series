@@ -1,425 +1,418 @@
-# 🚀 JavaScript Execution Context
+# Execution Context in JavaScript
 
-Execution Context is one of the most important concepts in JavaScript.
+## Table of Contents
 
-Almost everything in JavaScript happens inside an execution context.
-
-Understanding execution context helps you understand:
-
-- How JavaScript code runs
-- How variables are stored
-- How functions execute
-- How `this` works
-- How closures work internally
-- How hoisting actually works
-- How the call stack operates
-
----
-
-# 📚 Table of Contents
-
-- [1. What is Execution Context?](#1-what-is-execution-context)
-- [2. Why Execution Context Exists](#2-why-execution-context-exists)
-- [3. Types of Execution Context](#3-types-of-execution-context)
-- [4. Global Execution Context (GEC)](#4-global-execution-context-gec)
-- [5. Function Execution Context (FEC)](#5-function-execution-context-fec)
-- [6. Eval Execution Context](#6-eval-execution-context)
-- [7. Components of Execution Context](#7-components-of-execution-context)
-- [8. Memory Creation Phase](#8-memory-creation-phase)
-- [9. Code Execution Phase](#9-code-execution-phase)
-- [10. JavaScript Execution Flow](#10-javascript-execution-flow)
-- [11. Variable Environment](#11-variable-environment)
-- [12. Lexical Environment](#12-lexical-environment)
-- [13. Scope Chain](#13-scope-chain)
-- [14. Outer Environment Reference](#14-outer-environment-reference)
-- [15. Thread of Execution](#15-thread-of-execution)
-- [16. Call Stack](#16-call-stack)
-- [17. Execution Context Lifecycle](#17-execution-context-lifecycle)
-- [18. Synchronous Nature of JavaScript](#18-synchronous-nature-of-javascript)
-- [19. Single Threaded Execution](#19-single-threaded-execution)
-- [20. Function Invocation Process](#20-function-invocation-process)
-- [21. Nested Execution Context](#21-nested-execution-context)
-- [22. Execution Context vs Scope](#22-execution-context-vs-scope)
-- [23. Execution Context vs Call Stack](#23-execution-context-vs-call-stack)
-- [24. Execution Context and Hoisting](#24-execution-context-and-hoisting)
-- [25. Execution Context and Closures](#25-execution-context-and-closures)
-- [26. Execution Context and `this`](#26-execution-context-and-this)
-- [27. Re-execution of Functions](#27-re-execution-of-functions)
-- [28. Memory Allocation in Context](#28-memory-allocation-in-context)
-- [29. Temporal Dead Zone in Context](#29-temporal-dead-zone-in-context)
-- [30. Strict Mode Behavior](#30-strict-mode-behavior)
-- [31. Browser vs Node.js Execution Context](#31-browser-vs-nodejs-execution-context)
-- [32. Internal Representation](#32-internal-representation)
-- [33. Common Misconceptions](#33-common-misconceptions)
-- [34. Real-World Example](#34-real-world-example)
-- [35. Deep Execution Flow Example](#35-deep-execution-flow-example)
-- [36. Important Interview Points](#36-important-interview-points)
-- [37. Summary](#37-summary)
+1. [What is Execution Context?](#1-what-is-execution-context)
+2. [Types of Execution Context](#2-types-of-execution-context)
+3. [Global Execution Context](#3-global-execution-context)
+4. [Function Execution Context](#4-function-execution-context)
+5. [Call Stack](#5-call-stack)
+6. [Stack Overflow](#6-stack-overflow)
+7. [Memory Creation Phase (Creation Phase)](#7-memory-creation-phase-creation-phase)
+8. [Code Execution Phase](#8-code-execution-phase)
+9. [Variable Environment](#9-variable-environment)
+10. [Lexical Environment](#10-lexical-environment)
+11. [Outer Environment Reference](#11-outer-environment-reference)
+12. [Scope Chain in Execution Context](#12-scope-chain-in-execution-context)
+13. [Execution Context Lifecycle](#13-execution-context-lifecycle)
+14. [How Functions Are Called (push/pop on call stack)](#14-how-functions-are-called-pushpop-on-call-stack)
+15. [Nested Function Calls](#15-nested-function-calls)
+16. [Execution Context and Closures](#16-execution-context-and-closures)
+17. [`this` in Execution Context](#17-this-in-execution-context)
+18. [eval() and Execution Context](#18-eval-and-execution-context)
+19. [Visual Representation of Call Stack](#19-visual-representation-of-call-stack)
+20. [Summary Table](#20-summary-table)
 
 ---
 
-# 1. What is Execution Context?
+## 1. What is Execution Context?
 
-Execution Context is the environment where JavaScript code is evaluated and executed.
+An **Execution Context (EC)** is the environment in which JavaScript code is evaluated and executed. Every time JavaScript runs any code — global code, a function, or `eval` — it creates a corresponding execution context that tracks:
 
-It contains everything needed to run code:
+- The variables and functions available (Variable/Lexical Environment)
+- The value of `this`
+- A reference to the outer scope (outer environment)
 
-- Variables
-- Functions
-- Scope information
-- `this` value
-- References to outer scopes
-
-Think of it as:
-
-> A container where JavaScript code runs.
-
-Every time JavaScript executes code, it creates an execution context.
-
----
-
-# 2. Why Execution Context Exists
-
-JavaScript needs a structured environment to:
-
-- Store variables
-- Track function calls
-- Manage scope
-- Determine `this`
-- Execute code line by line
-
-Without execution context:
-
-- Variables couldn't exist
-- Functions couldn't execute
-- Scope couldn't work
-- Closures wouldn't exist
-
----
-
-# 3. Types of Execution Context
-
-JavaScript has three types of execution contexts:
-
-| Type | Description |
-|------|-------------|
-| Global Execution Context | Created for global code |
-| Function Execution Context | Created whenever a function is invoked |
-| Eval Execution Context | Created inside `eval()` |
-
----
-
-# 4. Global Execution Context (GEC)
-
-The Global Execution Context is created when JavaScript starts executing the file.
-
-It is created only once.
-
----
-
-## Example
+Think of an execution context as a "box" that wraps all the information needed to run a particular piece of code.
 
 ```js
-console.log("Start");
+var globalVar = "I am global";
+
+function greet(name) {
+  var message = "Hello, " + name;
+  console.log(message);
+}
+
+greet("World");
 ```
 
-Before executing this code:
+### Output
 
-JavaScript creates:
+```js
+Hello, World
+```
 
-- Global object
-- `this`
-- Memory space
-- Scope chain
+When this script runs:
+1. A **Global EC** is created for `var globalVar` and the function declaration `greet`.
+2. When `greet("World")` is called, a **Function EC** is created for it.
 
 ---
 
-## Browser
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
-In browsers:
+---
+
+## 2. Types of Execution Context
+
+JavaScript has three types of execution context:
+
+| Type | When Created | Notes |
+|---|---|---|
+| **Global EC** | Once, when the script starts | One per script/module; creates the global object and `this` |
+| **Function EC** | Every time a function is **called** | A new EC is created for each invocation |
+| **Eval EC** | When `eval()` is called | Rarely used; executes code string in its own context |
 
 ```js
-this === window // true
+var x = 1; // Global EC
+
+function outer() {    // Function EC created when called
+  var y = 2;
+  function inner() { // Another Function EC created when called
+    var z = 3;
+    console.log(x, y, z);
+  }
+  inner();
+}
+
+outer();
 ```
 
-Global object:
+### Output
 
 ```js
-window
+1 2 3
 ```
 
 ---
 
-## Node.js
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
-In Node.js:
+---
+
+## 3. Global Execution Context
+
+The **Global Execution Context** (Global EC) is the default, outermost context. It is created before any code runs and performs two important tasks:
+
+1. Creates the **global object** (`window` in browsers, `global` in Node.js).
+2. Sets `this` to the global object.
+
+It also goes through the two phases (memory creation + code execution) for all top-level code.
 
 ```js
-this !== global
+var a = 10;
+let b = 20;
+
+function add(x, y) {
+  return x + y;
+}
+
+console.log(add(a, b));
 ```
 
-Global object:
+### Output
+
+```js
+30
+```
+
+During the Global EC's **memory phase**, `a` is initialized to `undefined`, `b` is placed in the temporal dead zone, and `add` is hoisted as a full function. During the **execution phase**, actual values are assigned and `add(10, 20)` is called.
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 4. Function Execution Context
+
+A **Function Execution Context** is created every time a function is **invoked** (not when it is defined). Each function call gets its own fresh EC containing its local variables, arguments, and its own `this` value.
+
+```js
+function multiply(a, b) {
+  var result = a * b;
+  console.log(result);
+}
+
+multiply(3, 4); // EC 1 created and destroyed
+multiply(5, 6); // EC 2 created and destroyed
+```
+
+### Output
+
+```js
+12
+30
+```
+
+Each call creates an independent EC. Variables inside one call do not interfere with another. After the function returns, its EC is popped off the call stack and garbage collected (unless a closure holds a reference).
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 5. Call Stack
+
+The **Call Stack** is a LIFO (Last In, First Out) data structure that JavaScript uses to track which execution context is currently running. When a function is called, its EC is **pushed** onto the stack. When the function returns, its EC is **popped** off.
+
+```js
+function third() {
+  console.log("In third");
+}
+
+function second() {
+  console.log("In second - before third");
+  third();
+  console.log("In second - after third");
+}
+
+function first() {
+  console.log("In first - before second");
+  second();
+  console.log("In first - after second");
+}
+
+first();
+```
+
+### Output
+
+```js
+In first - before second
+In second - before third
+In third
+In second - after third
+In first - after second
+```
+
+Call stack sequence:
+```
+[Global EC]
+[Global EC] → [first EC]
+[Global EC] → [first EC] → [second EC]
+[Global EC] → [first EC] → [second EC] → [third EC]
+[Global EC] → [first EC] → [second EC]   (third popped)
+[Global EC] → [first EC]                 (second popped)
+[Global EC]                              (first popped)
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 6. Stack Overflow
+
+A **Stack Overflow** occurs when the call stack grows beyond its maximum size. This typically happens with **unbounded recursion** — a function that calls itself without a proper base case, causing an infinite chain of EC pushes.
+
+```js
+function recurse() {
+  return recurse(); // no base case — infinite recursion
+}
+
+try {
+  recurse();
+} catch (e) {
+  console.log(e instanceof RangeError); // true
+  console.log(e.message);
+}
+```
+
+### Output
+
+```js
+true
+Maximum call stack size exceeded
+```
+
+```js
+// Correct recursion with a base case
+function factorial(n) {
+  if (n <= 1) return 1;          // base case — stops recursion
+  return n * factorial(n - 1);   // recursive call
+}
+
+console.log(factorial(5));
+```
+
+### Output
+
+```js
+120
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 7. Memory Creation Phase (Creation Phase)
+
+Before any code in an execution context runs, JavaScript first goes through the **Memory Creation Phase** (also called the Creation Phase). During this phase:
+
+- **`var` declarations** are hoisted and initialized to `undefined`.
+- **Function declarations** are hoisted in their entirety (name + body).
+- **`let` and `const` declarations** are hoisted but placed in the **Temporal Dead Zone (TDZ)** — accessing them before their declaration throws a `ReferenceError`.
+- The value of `this` is determined.
+
+```js
+console.log(a);     // undefined (var hoisted)
+console.log(b);     // ReferenceError (let in TDZ)
+console.log(fn());  // "hello" (function declaration hoisted)
+
+var a = 5;
+let b = 10;
+
+function fn() {
+  return "hello";
+}
+```
+
+### Output
+
+```js
+undefined
+// ReferenceError: Cannot access 'b' before initialization
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 8. Code Execution Phase
+
+After the memory creation phase, JavaScript enters the **Code Execution Phase**, where it runs the code line by line, assigning actual values to variables and invoking functions.
+
+```js
+var x;           // Memory phase: x = undefined
+var y;           // Memory phase: y = undefined
+
+x = 10;          // Execution phase: x = 10
+y = 20;          // Execution phase: y = 20
+
+console.log(x + y); // 30
+```
+
+### Output
+
+```js
+30
+```
+
+```js
+// Demonstrating both phases
+var num = 5;
+console.log(num);   // 5 — value assigned before this line runs
+
+function square(n) {
+  var result = n * n;  // local var, memory phase inside function EC
+  return result;
+}
+
+console.log(square(num)); // 25
+```
+
+### Output
+
+```js
+5
+25
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 9. Variable Environment
+
+The **Variable Environment** is a component of the execution context that stores all the `var` bindings and function declarations for that context. It is the memory store associated with the current EC.
+
+- In the Global EC, it holds global `var` declarations and function declarations.
+- In a Function EC, it holds the local `var` declarations, function declarations, and the `arguments` object.
+
+```js
+var globalA = "global";
+
+function demo() {
+  var localB = "local";
+  console.log(globalA); // accessible via scope chain
+  console.log(localB);  // accessible from this EC's variable environment
+}
+
+demo();
+console.log(typeof localB); // "undefined" — not in global variable environment
+```
+
+### Output
 
 ```js
 global
+local
+undefined
 ```
 
 ---
 
-# 5. Function Execution Context (FEC)
-
-Whenever a function is called:
-
-A new execution context is created.
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-## Example
+## 10. Lexical Environment
+
+A **Lexical Environment** is a structure that holds identifier-to-value bindings for the current scope. It consists of two parts:
+
+1. **Environment Record** — the actual storage of local variable and function bindings.
+2. **Outer Environment Reference** — a pointer to the parent lexical environment.
+
+In modern JavaScript (ES6+), `let` and `const` live in the lexical environment, while `var` lives in the variable environment. Together they form the full scope available to the code.
 
 ```js
-function greet() {
-  console.log("Hello");
-}
+let outerVal = "outer";
 
-greet();
-```
-
-Steps:
-
-1. Global execution context created
-2. Function stored in memory
-3. `greet()` invoked
-4. New function execution context created
-5. Function executes
-6. Context removed from stack
-
----
-
-# 6. Eval Execution Context
-
-Created when code runs inside:
-
-```js
-eval()
-```
-
-Example:
-
-```js
-eval("console.log('Hi')");
-```
-
-Rarely used in modern JavaScript.
-
-Avoid using `eval()`.
-
----
-
-# 7. Components of Execution Context
-
-Every execution context contains:
-
-| Component | Purpose |
-|-----------|---------|
-| Memory Component | Stores variables/functions |
-| Code Component | Executes code |
-| Lexical Environment | Scope handling |
-| Variable Environment | Variable storage |
-| `this` Binding | Value of `this` |
-
----
-
-# 8. Memory Creation Phase
-
-Also called:
-
-- Creation Phase
-- Hoisting Phase
-
-Before code executes:
-
-JavaScript scans the code.
-
----
-
-## During this phase
-
-### Variables
-
-```js
-var a = 10;
-```
-
-Stored as:
-
-```js
-a: undefined
-```
-
----
-
-### Functions
-
-Entire function stored in memory.
-
-```js
-function test() {}
-```
-
-Stored completely.
-
----
-
-### let and const
-
-Allocated memory but remain uninitialized.
-
-They stay inside:
-
-```txt
-Temporal Dead Zone (TDZ)
-```
-
----
-
-## Example
-
-```js
-console.log(a);
-
-var a = 10;
-```
-
-Memory phase:
-
-```txt
-a: undefined
-```
-
-Execution phase:
-
-```txt
-a = 10
-```
-
----
-
-# 9. Code Execution Phase
-
-After memory creation:
-
-JavaScript starts executing code line by line.
-
----
-
-## Example
-
-```js
-var a = 10;
-
-console.log(a);
-```
-
-Execution:
-
-```txt
-a = 10
-print 10
-```
-
----
-
-# 10. JavaScript Execution Flow
-
-JavaScript executes code in two phases:
-
-| Phase | Work |
-|------|------|
-| Memory Creation Phase | Allocate memory |
-| Code Execution Phase | Execute code |
-
----
-
-## Example
-
-```js
-var a = 5;
-
-function test() {
-  console.log("Hello");
-}
-
-test();
-```
-
----
-
-## Memory Phase
-
-```txt
-a -> undefined
-test -> function definition
-```
-
----
-
-## Execution Phase
-
-```txt
-a = 5
-test() invoked
-```
-
----
-
-# 11. Variable Environment
-
-Stores:
-
-- Variables
-- Function declarations
-
----
-
-## Example
-
-```js
-var a = 10;
-
-function test() {}
-```
-
-Variable environment contains:
-
-```txt
-a
-test
-```
-
----
-
-# 12. Lexical Environment
-
-Lexical Environment determines:
-
-- Scope
-- Accessibility of variables/functions
-
-It contains:
-
-- Local memory
-- Reference to outer lexical environment
-
----
-
-## Example
-
-```js
 function outer() {
-  let a = 10;
+  let innerVal = "inner";
 
   function inner() {
-    console.log(a);
+    // inner's Lexical Environment: { innerVal: "inner" }
+    // outer reference → outer's LE: { outerVal: "outer" }
+    // outer reference → global LE: { outerVal: "outer" }
+    console.log(outerVal); // found in outer's LE
+    console.log(innerVal); // found in inner's own LE
   }
 
   inner();
@@ -428,762 +421,475 @@ function outer() {
 outer();
 ```
 
-`inner()` accesses `a` using lexical environment.
-
----
-
-# 13. Scope Chain
-
-JavaScript searches variables in:
-
-1. Current scope
-2. Outer scope
-3. Parent scope
-4. Global scope
-
-This process is called:
-
-```txt
-Scope Chain
-```
-
----
-
-## Example
+### Output
 
 ```js
-let a = 10;
+outer
+inner
+```
 
-function outer() {
-  function inner() {
-    console.log(a);
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 11. Outer Environment Reference
+
+Each execution context (except the Global EC) has an **Outer Environment Reference** — a link to the lexical environment of its **enclosing scope** at the time the function was **defined** (not called). This chain of references forms the **scope chain**.
+
+```js
+var level = "global";
+
+function first() {
+  var level = "first";
+
+  function second() {
+    var level = "second";
+    console.log(level); // "second" — found in own LE
   }
 
-  inner();
+  function third() {
+    // no local `level`
+    console.log(level); // "first" — found via outer ref to first's LE
+  }
+
+  second();
+  third();
 }
 
-outer();
+first();
 ```
 
-Search order:
+### Output
 
-```txt
-inner -> outer -> global
+```js
+second
+first
 ```
 
 ---
 
-# 14. Outer Environment Reference
-
-Every lexical environment keeps reference to outer environment.
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-## Example
+## 12. Scope Chain in Execution Context
+
+The **scope chain** is the series of outer environment references that connects each execution context back to the global context. When JavaScript looks up a variable, it walks this chain from innermost to outermost until it finds the variable or reaches the global EC (and throws a `ReferenceError` if not found).
+
+Note: Full scope and hoisting details are covered in `02-Scope-Hoisting`. This section focuses on how the scope chain is physically implemented via execution contexts and lexical environment references.
+
+```js
+const A = "A";
+
+function outerFn() {
+  const B = "B";
+
+  function middleFn() {
+    const C = "C";
+
+    function innerFn() {
+      // Scope chain lookup order: innerFn LE → middleFn LE → outerFn LE → Global LE
+      console.log(A, B, C);
+    }
+
+    innerFn();
+  }
+
+  middleFn();
+}
+
+outerFn();
+```
+
+### Output
+
+```js
+A B C
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 13. Execution Context Lifecycle
+
+Every execution context goes through the same lifecycle:
+
+1. **Creation Phase**
+   - Variable Environment set up (`var` → `undefined`, functions → full definition, `let`/`const` → TDZ)
+   - Lexical Environment set up
+   - `this` value determined
+2. **Execution Phase**
+   - Code runs line by line
+   - Variables receive actual values
+   - Functions are invoked (creating new ECs)
+3. **Destruction Phase**
+   - EC is popped off the call stack
+   - Local variables become eligible for garbage collection
+   - Exception: closures retain a reference to the surrounding LE
+
+```js
+function lifecycle() {
+  // Creation phase: result = undefined
+  console.log(result); // undefined (hoisted)
+  var result = "done";
+  // Execution phase: result = "done"
+  console.log(result); // done
+  // Destruction: EC popped, result GC'd
+}
+
+lifecycle();
+```
+
+### Output
+
+```js
+undefined
+done
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 14. How Functions Are Called (push/pop on call stack)
+
+Every function invocation causes a new EC to be **pushed** onto the call stack. When the function finishes (returns or reaches its end), its EC is **popped**. The engine then resumes execution in the EC that is now on top of the stack.
 
 ```js
 function a() {
-  function b() {
-    function c() {
-      console.log("Hi");
-    }
-  }
+  console.log("a start");
+  b();
+  console.log("a end");
 }
+
+function b() {
+  console.log("b start");
+  c();
+  console.log("b end");
+}
+
+function c() {
+  console.log("c");
+}
+
+a();
 ```
 
-References:
-
-```txt
-c -> b -> a -> global
-```
-
----
-
-# 15. Thread of Execution
-
-JavaScript executes one line at a time.
-
-This is called:
-
-```txt
-Thread of Execution
-```
-
----
-
-# 16. Call Stack
-
-Call Stack manages execution contexts.
-
-Also called:
-
-- Execution Stack
-- Program Stack
-- Runtime Stack
-
----
-
-## Example
+### Output
 
 ```js
-function one() {
-  two();
-}
+a start
+b start
+c
+b end
+a end
+```
 
-function two() {
-  three();
-}
-
-function three() {
-  console.log("Done");
-}
-
-one();
+Call stack trace:
+```
+push: Global EC
+push: a EC
+push: b EC
+push: c EC
+pop:  c EC (c returns)
+pop:  b EC (b returns)
+pop:  a EC (a returns)
 ```
 
 ---
 
-## Stack Flow
-
-```txt
-Global()
-one()
-two()
-three()
-```
-
-After completion:
-
-```txt
-three removed
-two removed
-one removed
-global remains
-```
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-# 17. Execution Context Lifecycle
+## 15. Nested Function Calls
 
-Lifecycle:
-
-1. Creation
-2. Execution
-3. Destruction
-
----
-
-## Example
+When functions are nested and called, each invocation creates its own EC. Each EC has its own memory space for local variables — they do not interfere with each other, even if functions share the same variable names.
 
 ```js
-function test() {
-  console.log("Hello");
+function add(a, b) {
+  var sum = a + b;
+  return sum;
 }
 
-test();
+function compute() {
+  var x = add(2, 3); // EC for add(2,3) created and destroyed
+  var y = add(4, 5); // EC for add(4,5) created and destroyed
+  console.log(x, y, x + y);
+}
+
+compute();
 ```
 
-Lifecycle:
-
-```txt
-Create context
-Execute code
-Destroy context
-```
-
----
-
-# 18. Synchronous Nature of JavaScript
-
-JavaScript is synchronous by default.
-
-Meaning:
-
-One operation executes at a time.
-
----
-
-## Example
+### Output
 
 ```js
-console.log(1);
-console.log(2);
-console.log(3);
+5 9 14
 ```
 
-Output:
+Each call to `add` gets its own EC with its own `a`, `b`, and `sum` variables. They are completely isolated.
 
-```txt
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
+## 16. Execution Context and Closures
+
+A **closure** is formed when an inner function retains a reference to the **lexical environment** of its outer function's EC — even after the outer function has returned and its EC has been popped off the call stack.
+
+The inner function's outer environment reference keeps the outer EC's variable bindings alive in memory.
+
+```js
+function makeCounter() {
+  let count = 0; // Lives in makeCounter's lexical environment
+
+  return function increment() {
+    count++; // increment retains a reference to makeCounter's LE
+    console.log(count);
+  };
+}
+
+const counter = makeCounter(); // makeCounter's EC is popped, but `count` lives on
+counter(); // 1
+counter(); // 2
+counter(); // 3
+```
+
+### Output
+
+```js
 1
 2
 3
 ```
 
----
-
-# 19. Single Threaded Execution
-
-JavaScript has:
-
-```txt
-One Call Stack
-```
-
-Thus:
-
-```txt
-Single Threaded Language
-```
-
-Only one task executes at a time.
+After `makeCounter()` returns, its EC is destroyed, but `count` is preserved because `increment` holds a reference to the lexical environment that contains it.
 
 ---
 
-# 20. Function Invocation Process
-
-When function is called:
-
-1. New execution context created
-2. Pushed into call stack
-3. Executes
-4. Removed after completion
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-## Example
+## 17. `this` in Execution Context
+
+The value of `this` is determined **during the creation phase** of an execution context and depends on how the code is invoked:
+
+- **Global EC:** `this` is the global object (`window`/`global`) or `module.exports` in a Node.js module.
+- **Function EC (regular call):** `this` is the global object (non-strict) or `undefined` (strict).
+- **Function EC (method call):** `this` is the object to the left of the dot.
+- **Function EC (`new` call):** `this` is the newly created instance.
 
 ```js
-function greet() {
-  console.log("Hello");
+// Global EC
+console.log(typeof this); // "object"
+
+function regularFn() {
+  "use strict";
+  console.log(this); // undefined
 }
 
-greet();
+const obj = {
+  method() {
+    console.log(this === obj); // true
+  },
+};
+
+regularFn();
+obj.method();
 ```
 
----
-
-# 21. Nested Execution Context
-
-Functions can create nested contexts.
-
----
-
-## Example
+### Output
 
 ```js
-function a() {
-  function b() {
-    console.log("B");
-  }
-
-  b();
-}
-
-a();
-```
-
-Contexts:
-
-```txt
-Global -> a -> b
-```
-
----
-
-# 22. Execution Context vs Scope
-
-| Execution Context | Scope |
-|------------------|------|
-| Runtime concept | Lexical concept |
-| Created during execution | Defined during writing code |
-| Stores execution info | Determines accessibility |
-
----
-
-# 23. Execution Context vs Call Stack
-
-| Execution Context | Call Stack |
-|------------------|------------|
-| Environment of execution | Structure managing contexts |
-| Created per execution | Stores contexts |
-
----
-
-# 24. Execution Context and Hoisting
-
-Hoisting happens during:
-
-```txt
-Memory Creation Phase
-```
-
----
-
-## Example
-
-```js
-console.log(a);
-
-var a = 10;
-```
-
-Output:
-
-```txt
+object
 undefined
+true
 ```
-
-Because:
-
-```txt
-a -> undefined
-```
-
-during creation phase.
 
 ---
 
-# 25. Execution Context and Closures
-
-Closures depend on lexical environment.
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-## Example
+## 18. eval() and Execution Context
+
+`eval()` takes a string and executes it as JavaScript code. Depending on where it is called, it creates a new execution context (or re-uses the current one) and has access to the surrounding scope. Using `eval` is strongly discouraged in production code due to security risks and performance implications.
 
 ```js
-function outer() {
-  let count = 0;
+var x = 10;
 
-  return function inner() {
-    count++;
-    console.log(count);
-  };
+function demo() {
+  var y = 20;
+  eval("console.log(x + y)"); // access both outer and local variables
+  eval("var z = 30");          // z is added to demo's variable environment
+  console.log(z);
 }
 
-const fn = outer();
-
-fn();
-fn();
+demo();
 ```
 
-Output:
-
-```txt
-1
-2
-```
-
-Why?
-
-Because `inner()` remembers outer lexical environment.
-
----
-
-# 26. Execution Context and `this`
-
-`this` is determined during execution context creation.
-
----
-
-## Global Context
-
-Browser:
+### Output
 
 ```js
-console.log(this === window);
+30
+30
 ```
-
----
-
-## Function Context
 
 ```js
-function test() {
-  console.log(this);
-}
-
-test();
-```
-
-Depends on:
-
-- Strict mode
-- Invocation style
-
----
-
-# 27. Re-execution of Functions
-
-Every function call creates a brand new execution context.
-
----
-
-## Example
-
-```js
-function test() {
-  let a = 0;
-  a++;
-  console.log(a);
-}
-
-test();
-test();
-```
-
-Output:
-
-```txt
-1
-1
-```
-
-Each call gets separate memory.
-
----
-
-# 28. Memory Allocation in Context
-
-Memory allocation differs for:
-
-| Keyword | Behavior |
-|---------|----------|
-| var | Initialized with undefined |
-| let | TDZ |
-| const | TDZ |
-
----
-
-# 29. Temporal Dead Zone in Context
-
-TDZ exists between:
-
-```txt
-Memory allocation
-and
-Initialization
-```
-
----
-
-## Example
-
-```js
-console.log(a);
-
-let a = 10;
-```
-
-Output:
-
-```txt
-ReferenceError
-```
-
----
-
-# 30. Strict Mode Behavior
-
-Strict mode changes `this`.
-
----
-
-## Example
-
-```js
+// eval in strict mode gets its own EC and cannot modify outer variables
 "use strict";
 
-function test() {
-  console.log(this);
+function strictDemo() {
+  eval("var local = 99");
+  console.log(typeof local); // "undefined" — eval has its own scope in strict mode
 }
 
-test();
+strictDemo();
 ```
 
-Output:
+### Output
 
-```txt
+```js
 undefined
 ```
 
 ---
 
-# 31. Browser vs Node.js Execution Context
-
-| Feature | Browser | Node.js |
-|---------|----------|---------|
-| Global Object | window | global |
-| Top-level `this` | window | module.exports |
-| Environment | Browser APIs | Node APIs |
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-# 32. Internal Representation
+## 19. Visual Representation of Call Stack
 
-Execution Context internally stores:
-
-```txt
-LexicalEnvironment
-VariableEnvironment
-ThisBinding
-```
-
----
-
-# 33. Common Misconceptions
-
----
-
-## Misconception 1
-
-### "Hoisting moves code"
-
-Wrong.
-
-Only declarations are stored during memory phase.
-
----
-
-## Misconception 2
-
-### "`let` is not hoisted"
-
-Wrong.
-
-`let` is hoisted but stays inside TDZ.
-
----
-
-## Misconception 3
-
-### "Call stack and execution context are same"
-
-Wrong.
-
-Call stack stores execution contexts.
-
----
-
-# 34. Real-World Example
+The following traces the call stack for a typical nested function scenario, showing which ECs are active at each step.
 
 ```js
-var a = 10;
-
-function outer() {
-  var b = 20;
-
-  function inner() {
-    var c = 30;
-
-    console.log(a, b, c);
-  }
-
-  inner();
+function multiply(a, b) {
+  return a * b;
 }
 
-outer();
+function square(n) {
+  return multiply(n, n);
+}
+
+function printSquare(n) {
+  var result = square(n);
+  console.log(result);
+}
+
+printSquare(4);
 ```
 
----
-
-## Execution Flow
-
-### Global Context
-
-```txt
-a -> undefined
-outer -> function
-```
-
----
-
-### Execute
-
-```txt
-a = 10
-outer() called
-```
-
----
-
-### outer Context
-
-```txt
-b -> undefined
-inner -> function
-```
-
----
-
-### inner Context
-
-```txt
-c -> undefined
-```
-
----
-
-### Scope Chain
-
-```txt
-inner -> outer -> global
-```
-
----
-
-# 35. Deep Execution Flow Example
+### Output
 
 ```js
-var x = 1;
+16
+```
 
-function a() {
-  var y = 2;
+**Call Stack Visualization:**
 
-  function b() {
-    var z = 3;
+```
+Step 1: Script starts
+┌─────────────┐
+│  Global EC  │  ← top of stack (printSquare, square, multiply defined)
+└─────────────┘
 
-    console.log(x, y, z);
-  }
+Step 2: printSquare(4) called
+┌──────────────────┐
+│  printSquare EC  │  ← pushed
+├──────────────────┤
+│    Global EC     │
+└──────────────────┘
 
-  b();
-}
+Step 3: square(4) called inside printSquare
+┌──────────────────┐
+│    square EC     │  ← pushed
+├──────────────────┤
+│  printSquare EC  │
+├──────────────────┤
+│    Global EC     │
+└──────────────────┘
 
-a();
+Step 4: multiply(4, 4) called inside square
+┌──────────────────┐
+│   multiply EC    │  ← pushed
+├──────────────────┤
+│    square EC     │
+├──────────────────┤
+│  printSquare EC  │
+├──────────────────┤
+│    Global EC     │
+└──────────────────┘
+
+Step 5: multiply returns 16 → popped
+Step 6: square returns 16 → popped
+Step 7: printSquare logs 16, returns → popped
+Step 8: Only Global EC remains
 ```
 
 ---
 
-## Global Context
-
-```txt
-x -> undefined
-a -> function
-```
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
-## Execution
+## 20. Summary Table
 
-```txt
-x = 1
-a() called
-```
-
----
-
-## a() Context
-
-```txt
-y -> undefined
-b -> function
-```
-
----
-
-## b() Context
-
-```txt
-z -> undefined
-```
+| Concept | Description |
+|---|---|
+| Execution Context (EC) | Environment containing variables, `this`, and outer reference for running code |
+| Global EC | Created once on script start; holds global variables and sets `this` to global object |
+| Function EC | Created on every function **call**; holds local vars, arguments, own `this` |
+| Eval EC | Created by `eval()`; has access to surrounding scope (non-strict) |
+| Call Stack | LIFO stack that tracks the currently active ECs |
+| Stack Overflow | Error from unbounded recursion exhausting the call stack |
+| Memory Creation Phase | Phase where `var` → `undefined`, functions hoisted fully, `let`/`const` → TDZ |
+| Code Execution Phase | Phase where code runs line by line and variables get actual values |
+| Variable Environment | Storage for `var` bindings and function declarations in a given EC |
+| Lexical Environment | Environment record + outer reference; storage for `let`/`const` and scope chain link |
+| Outer Environment Reference | Pointer to the enclosing lexical environment (set at **definition** time) |
+| Scope Chain | Chain of outer references from inner EC to global EC used for variable lookup |
+| Closure | Inner function retaining access to outer function's LE after outer EC is destroyed |
+| `this` in EC | Determined during creation phase based on how the function was invoked |
+| eval() | Executes code strings; discouraged due to security/perf issues |
 
 ---
 
-## Variable Lookup
+## Final Notes
 
-```txt
-z -> local
-y -> parent scope
-x -> global scope
-```
+The execution context is the invisible engine behind every line of JavaScript you write. Understanding that code runs in two phases — memory creation and execution — immediately explains hoisting. Understanding the call stack explains why recursive functions can overflow and why asynchronous code (callbacks, promises) defers to the event loop instead of blocking the stack. Lexical environments and their outer references are the physical mechanism behind closures, which are one of JavaScript's most powerful features. Mastering execution context gives you a mental model that makes all other JavaScript concepts — scope, hoisting, closures, `this`, and async — fall neatly into place.
 
----
-
-# 36. Important Interview Points
-
----
-
-## Q1. What are the phases of execution context?
-
-Two phases:
-
-1. Memory Creation Phase
-2. Code Execution Phase
-
----
-
-## Q2. What is stored during memory creation?
-
-- Variables
-- Functions
-- Scope references
-- `this`
-
----
-
-## Q3. Why does `var` print undefined?
-
-Because during memory phase:
-
-```txt
-var -> undefined
-```
-
----
-
-## Q4. Why does `let` throw ReferenceError?
-
-Because it stays inside:
-
-```txt
-Temporal Dead Zone
-```
-
----
-
-## Q5. Is JavaScript synchronous?
-
-Yes.
-
-JavaScript is synchronous and single-threaded by default.
-
----
-
-## Q6. Does every function call create a new execution context?
-
-Yes.
-
-Every invocation creates a fresh context.
-
----
-
-## Q7. What manages execution contexts?
-
-```txt
-Call Stack
-```
-
----
-
-## Q8. What happens after function execution?
-
-Its execution context is removed from call stack.
-
----
-
-# 37. Summary
-
-- JavaScript runs inside execution contexts
-- Global context is created first
-- Every function call creates a new context
-- Execution occurs in two phases:
-  - Memory Creation
-  - Code Execution
-- Call stack manages contexts
-- Lexical environment enables closures
-- Scope chain handles variable lookup
-- JavaScript is synchronous and single-threaded
-- `this` is determined during context creation
-- Closures work because lexical environments persist
-
----
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
