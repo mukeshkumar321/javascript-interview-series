@@ -47,12 +47,8 @@ In simple words:
 
 > Scope controls accessibility of variables and functions in different parts of code.
 
----
-
-### Example
-
 ```js
-let name = "Dilkhush";
+let name = "JavaScript";
 
 function greet() {
   console.log(name);
@@ -64,7 +60,7 @@ greet();
 ### Output
 
 ```js
-Dilkhush
+JavaScript
 ```
 
 ---
@@ -85,7 +81,7 @@ Scope helps:
 - Organize memory efficiently
 - Improve security
 
-Without scope:
+Without scope, everything would collide globally.
 
 ```js
 var count = 1;
@@ -93,7 +89,7 @@ var count = 2;
 var count = 1000;
 ```
 
-Everything would collide globally.
+Every reassignment overwrites previous value.
 
 ---
 
@@ -124,26 +120,15 @@ function showCity() {
 showCity();
 ```
 
----
-
-### Global Variables
-
-Accessible everywhere.
+### Output
 
 ```js
-var a = 10;
-
-function test() {
-  console.log(a);
-}
-
-test();
-console.log(a);
+Mumbai
 ```
 
 ---
 
-### Problem with Globals
+### Global Variables Problem
 
 Too many global variables can:
 
@@ -170,14 +155,14 @@ function test() {
 }
 
 test();
-
 console.log(age);
 ```
 
 ### Output
 
 ```js
-ReferenceError
+25
+ReferenceError: age is not defined
 ```
 
 ---
@@ -195,7 +180,7 @@ console.log(x);
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: x is not defined
 ```
 
 ---
@@ -224,13 +209,13 @@ console.log(b);
 ### Output
 
 ```js
-ReferenceError
-ReferenceError
+ReferenceError: a is not defined
+ReferenceError: b is not defined
 ```
 
 ---
 
-### var ignores block scope
+### var Ignores Block Scope
 
 ```js
 {
@@ -261,7 +246,7 @@ console.log(message);
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: message is not defined
 ```
 
 ---
@@ -277,8 +262,14 @@ console.log(i);
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: i is not defined
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -312,7 +303,7 @@ outer();
 
 ---
 
-### Reverse is NOT possible
+### Reverse is NOT Possible
 
 Outer function cannot access inner variables.
 
@@ -331,7 +322,7 @@ outer();
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: secret is not defined
 ```
 
 ---
@@ -345,10 +336,6 @@ JavaScript searches variables in order:
 3. Global scope
 
 This process is called Scope Chain.
-
----
-
-### Example
 
 ```js
 let globalVar = "Global";
@@ -369,6 +356,20 @@ function outer() {
 
 outer();
 ```
+
+### Output
+
+```js
+Inner
+Outer
+Global
+```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -398,6 +399,12 @@ function one() {
 one();
 ```
 
+### Output
+
+```js
+1 2 3
+```
+
 ---
 
 ## 10. Variable Shadowing
@@ -409,7 +416,6 @@ let name = "Global";
 
 function test() {
   let name = "Local";
-
   console.log(name);
 }
 
@@ -441,7 +447,6 @@ function demo() {
 }
 
 demo();
-
 console.log(a);
 ```
 
@@ -452,6 +457,12 @@ console.log(a);
 2
 1
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -470,7 +481,7 @@ let a = 10;
 ### Output
 
 ```js
-SyntaxError
+SyntaxError: Identifier 'a' has already been declared
 ```
 
 ---
@@ -504,10 +515,6 @@ TDZ is the time between:
 
 Accessing variable during TDZ causes error.
 
----
-
-### Example
-
 ```js
 console.log(a);
 
@@ -517,7 +524,7 @@ let a = 10;
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ---
@@ -525,10 +532,6 @@ ReferenceError
 ### Why TDZ Exists
 
 To prevent accidental access before initialization.
-
----
-
-### const and TDZ
 
 ```js
 console.log(pi);
@@ -539,8 +542,14 @@ const pi = 3.14;
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'pi' before initialization
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -562,7 +571,7 @@ console.log(a);
 var a = 10;
 ```
 
-Internally:
+Internally becomes:
 
 ```js
 var a;
@@ -597,7 +606,7 @@ let a = 10;
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ---
@@ -606,10 +615,6 @@ ReferenceError
 
 They are hoisted but kept inside TDZ.
 
----
-
-### const must be initialized
-
 ```js
 const a;
 ```
@@ -617,8 +622,14 @@ const a;
 ### Output
 
 ```js
-SyntaxError
+SyntaxError: Missing initializer in const declaration
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -655,7 +666,7 @@ var sayHi = function () {
 ### Output
 
 ```js
-TypeError
+TypeError: sayHi is not a function
 ```
 
 ---
@@ -687,7 +698,7 @@ const hello = () => {
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'hello' before initialization
 ```
 
 ---
@@ -705,8 +716,14 @@ class Person {}
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'Person' before initialization
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -716,10 +733,6 @@ Priority order:
 
 1. Function declarations
 2. Variable declarations
-
----
-
-### Example
 
 ```js
 var a = 1;
@@ -741,9 +754,7 @@ console.log(a);
 
 ## 21. Scope in Loops
 
----
-
-### var in loops
+### var in Loops
 
 ```js
 for (var i = 0; i < 3; i++) {
@@ -763,7 +774,7 @@ for (var i = 0; i < 3; i++) {
 
 ---
 
-### let in loops
+### let in Loops
 
 ```js
 for (let i = 0; i < 3; i++) {
@@ -780,6 +791,12 @@ for (let i = 0; i < 3; i++) {
 1
 2
 ```
+
+---
+
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -825,12 +842,12 @@ x = 10;
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: x is not defined
 ```
 
 ---
 
-### Without strict mode
+### Without Strict Mode
 
 ```js
 x = 10;
@@ -880,6 +897,12 @@ undefined
 
 ---
 
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
+
+---
+
 ## 25. Execution Context and Scope
 
 Execution context contains:
@@ -905,10 +928,6 @@ Before execution:
 - functions stored
 - scope chain created
 
----
-
-### Example
-
 ```js
 console.log(a);
 
@@ -917,18 +936,22 @@ var a = 5;
 function test() {}
 ```
 
-Memory phase:
+Memory phase creates:
 
 ```js
 a = undefined
 test = function
 ```
 
+### Output
+
+```js
+undefined
+```
+
 ---
 
 ## 27. Common Interview Edge Cases
-
----
 
 ### Edge Case 1
 
@@ -967,7 +990,7 @@ let a = 1;
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ---
@@ -1011,122 +1034,14 @@ test();
 ### Output
 
 ```js
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ---
 
-### Edge Case 5
-
-```js
-var a = 10;
-
-function a() {}
-
-console.log(typeof a);
-```
-
-### Output
-
-```js
-number
-```
-
----
-
-### Edge Case 6
-
-```js
-function demo() {
-  console.log(x);
-
-  x = 10;
-}
-
-demo();
-```
-
-### Output
-
-```js
-ReferenceError
-```
-
----
-
-### Edge Case 7
-
-```js
-{
-  function test() {
-    console.log("Hello");
-  }
-}
-
-test();
-```
-
-Behavior may differ between environments.
-
----
-
-### Edge Case 8
-
-```js
-let a = 10;
-
-function test() {
-  console.log(a);
-
-  let a = 20;
-}
-
-test();
-```
-
-### Output
-
-```js
-ReferenceError
-```
-
----
-
-### Edge Case 9
-
-```js
-const obj = {
-  name: "JS"
-};
-
-obj.name = "JavaScript";
-
-console.log(obj.name);
-```
-
-### Output
-
-```js
-JavaScript
-```
-
----
-
-### Edge Case 10
-
-```js
-const arr = [1, 2];
-
-arr.push(3);
-
-console.log(arr);
-```
-
-### Output
-
-```js
-[1, 2, 3]
-```
+<p align="right">
+  <a href="#table-of-contents">⬆ Back to Top</a>
+</p>
 
 ---
 
@@ -1135,6 +1050,11 @@ console.log(arr);
 ### Prefer let and const
 
 Avoid `var`.
+
+```js
+let x = 10;
+const y = 20;
+```
 
 ---
 
@@ -1173,10 +1093,17 @@ Can create confusion.
 | Function Scope | var is function scoped |
 | Block Scope | let/const are block scoped |
 | Lexical Scope | Inner accesses outer |
-| Hoisting | Declarations moved to top |
-| TDZ | let/const inaccessible before init |
-| Closures | Functions remember scope |
 | Scope Chain | JS searches parent scopes |
+| Hoisting | Declarations moved to top |
+| var Hoisting | Initialized with undefined |
+| let/const Hoisting | In Temporal Dead Zone |
+| Function Hoisting | Fully hoisted |
+| Function Expression | Hoisted as var (undefined) |
+| Class Hoisting | In Temporal Dead Zone |
+| TDZ | Block-level scoped variables inaccessible before init |
+| Variable Shadowing | Inner hides outer variable |
+| Illegal Shadowing | Cannot shadow let with var |
+| Closures | Functions remember scope |
 
 ---
 

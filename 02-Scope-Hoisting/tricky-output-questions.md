@@ -98,7 +98,7 @@ console.log(a);
 
 ### Explanation
 
-`var` is NOT block scoped.
+`var` is NOT block scoped. Block modifies global `a`.
 
 </details>
 
@@ -124,12 +124,12 @@ console.log(x);
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: x is not defined
 ```
 
 ### Explanation
 
-`x` is function scoped.
+`x` is function scoped, not accessible outside.
 
 </details>
 
@@ -160,7 +160,7 @@ test();
 
 ### Explanation
 
-`var` ignores block scope.
+`var` ignores block scope, hoists to function scope.
 
 </details>
 
@@ -186,12 +186,12 @@ test();
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: a is not defined
 ```
 
 ### Explanation
 
-`let` is block scoped.
+`let` is block scoped, not accessible outside block.
 
 </details>
 
@@ -219,8 +219,8 @@ console.log(b);
 ### Output
 
 ```txt
-ReferenceError
-ReferenceError
+ReferenceError: a is not defined
+ReferenceError: b is not defined
 ```
 
 ### Explanation
@@ -291,7 +291,7 @@ console.log(a);
 
 ### Explanation
 
-Each block creates separate scope.
+Each block creates separate scope, innermost `a` shadows outer.
 
 </details>
 
@@ -315,7 +315,7 @@ let a = 10;
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ### Explanation
@@ -345,7 +345,7 @@ undefined
 
 ### Explanation
 
-`var` gets initialized with `undefined`.
+`var` gets initialized with `undefined` during hoisting.
 
 </details>
 
@@ -367,7 +367,7 @@ undefined
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ### Explanation
@@ -429,6 +429,10 @@ a = 10;
 undefined
 ```
 
+### Explanation
+
+Declaration without initialization is `undefined`.
+
 </details>
 
 ---
@@ -447,8 +451,12 @@ const a = 100;
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
+
+### Explanation
+
+`const` hoisting doesn't initialize.
 
 </details>
 
@@ -501,12 +509,12 @@ var sayHi = function () {
 ### Output
 
 ```txt
-TypeError
+TypeError: sayHi is not a function
 ```
 
 ### Explanation
 
-`sayHi` becomes `undefined`.
+`sayHi` becomes `undefined` due to hoisting.
 
 </details>
 
@@ -528,7 +536,7 @@ let hello = function () {
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'hello' before initialization
 ```
 
 ### Explanation
@@ -555,8 +563,12 @@ const test = () => {
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'test' before initialization
 ```
+
+### Explanation
+
+Arrow functions assigned to `const` are in TDZ.
 
 </details>
 
@@ -624,6 +636,10 @@ console.log(a);
 10
 ```
 
+### Explanation
+
+`let` in block shadows `var` globally.
+
 </details>
 
 ---
@@ -646,12 +662,12 @@ let a = 10;
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ### Explanation
 
-Local `a` enters TDZ.
+Local `a` enters TDZ before initialization.
 
 </details>
 
@@ -684,7 +700,7 @@ for (var i = 0; i < 3; i++) {
 
 ### Explanation
 
-All callbacks share same `i`.
+All callbacks share same `i`. By the time they execute, `i` is 3.
 
 </details>
 
@@ -744,7 +760,7 @@ for (var i = 1; i <= 3; i++) {
 
 ### Explanation
 
-IIFE creates separate closure.
+IIFE creates separate closure for each iteration.
 
 </details>
 
@@ -779,7 +795,7 @@ undefined
 
 ### Explanation
 
-Local `x` is hoisted inside function.
+Local `x` is hoisted inside function. Global `x` is shadowed.
 
 </details>
 
@@ -813,7 +829,7 @@ console.log(x);
 
 ### Explanation
 
-No local variable exists, so global variable is modified.
+No local variable exists, so global `x` is modified.
 
 </details>
 
@@ -842,6 +858,10 @@ test();
 undefined
 10
 ```
+
+### Explanation
+
+`a` is hoisted with `undefined`, then assigned 10.
 
 </details>
 
@@ -905,7 +925,7 @@ undefined
 
 ### Explanation
 
-`var a` is hoisted to function scope.
+`var a` is hoisted to function scope before if block.
 
 </details>
 
@@ -931,12 +951,12 @@ test();
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ### Explanation
 
-`a` inside block enters TDZ.
+`a` inside block enters TDZ, shadowing global.
 
 </details>
 
@@ -962,12 +982,12 @@ test();
 ### Output
 
 ```txt
-ReferenceError
+ReferenceError: Cannot access 'a' before initialization
 ```
 
 ### Explanation
 
-Inner `a` shadows outer `a` and stays in TDZ.
+Inner `a` shadows outer `a` and is in TDZ.
 
 </details>
 
@@ -996,7 +1016,7 @@ Behavior may differ between environments
 
 ### Explanation
 
-Block-level function declarations behave differently in browsers and strict mode.
+Block-level function declarations behave differently in browsers vs strict mode.
 
 </details>
 
@@ -1034,7 +1054,7 @@ undefined
 
 ### Explanation
 
-Local `a` is hoisted inside `outer`.
+Local `a` hoisted in `outer`. Inner function accesses hoisted `a`.
 
 </details>
 
@@ -1060,6 +1080,36 @@ undefined
 ### Explanation
 
 `x` exists during hoisting with value `undefined`.
+
+</details>
+
+---
+
+### Q36. What will be the output?
+
+```js
+let x = 1;
+
+{
+  x = 2;
+  let x = 3;
+}
+
+console.log(x);
+```
+
+<details>
+<summary><strong>Show Output & Explanation</strong></summary>
+
+### Output
+
+```txt
+ReferenceError: Cannot access 'x' before initialization
+```
+
+### Explanation
+
+`x = 2` tries to access `x` while it's in TDZ.
 
 </details>
 
